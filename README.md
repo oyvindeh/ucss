@@ -54,7 +54,11 @@ ucss.analyze(css, html, whitelist, auth, function(result) {
     };);
 ```
 
-### Logging in
+### Setting up a spec file
+
+If you want to do more fancy stuff than visiting one URL/file at a time, you can specify a spec file. It will let you visit several URLs/files in one go, as well as fetch CSS from several file. You can also perform login, and white list rules. See the examples folder for an example spec file.
+
+#### Logging in
 
 You can specify own login function in the spec file:
 
