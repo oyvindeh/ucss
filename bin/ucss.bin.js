@@ -112,7 +112,7 @@ function main() {
             result, argv.used, !argv.nosummary, argv.duplicates);
     };
 
-    ucss.analyze(css, html, whitelist, null, done);
+    ucss.analyze(css, html, whitelist, auth, done);
 }
 
 
