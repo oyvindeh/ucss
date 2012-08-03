@@ -1,0 +1,28 @@
+* { /* match */
+    color: blue;
+}
+.foo { /* match */
+    color: red;
+}
+.bar { /* match */
+    background: blue;
+}
+.foo .bar { /* no match */
+    float: left;
+}
+.bar #baz { /* match */
+}
+.qux { /* match */
+} /* comment here used to break things */
+.quux { /* no match */
+}
+span[dir="ltr"] { /* match */
+    float: left;
+}
+.bar span[dir="ltr"] { /* match */
+    float: right;
+}
+.foo span[dir="ltr"] { /* no match */
+    float: right;
+}
+/* comment at end used to break things */

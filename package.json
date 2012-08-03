@@ -1,0 +1,33 @@
+{
+    "author": "Øyvind Håkestad <oyvindeh@opera.com> (https://github.com/oyvindeh)",
+    "contributors": [
+    ],
+    "name": "ucss",
+    "description": "Find unused CSS rules",
+    "version": "0.0.1",
+    "homepage": "https://github.com/operasoftware/ucss",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:operasoftware/ucss"
+    },
+    "main": "./lib/ucss.js",
+    "bin": {
+        "ucss": "bin/ucss.bin.js",
+    },
+    "keywords": [
+        "css",
+        "unused"
+    ],
+    "dependencies": {
+        "optimist": "0.3.x",
+        "jsdom": "0.2.x",
+        "jquery": "1.7.x",
+        "async": "0.1.x"
+    },
+
+    "devDependencies": {
+        "buster": "0.4.x",
+        "sinon": "1.3.x"
+    },
+    "license": "BSD"
+}
