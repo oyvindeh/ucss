@@ -78,7 +78,7 @@ You can specify own login function in the spec file:
 ...or you can just specify a login helper:
 
 ```
-    "loginFunc": "djangoLogin" {
+    "loginFunc": "djangoLogin"
 ```
 
 ### Custom output
