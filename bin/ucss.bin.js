@@ -95,10 +95,11 @@ function main() {
         console.log("Either a spec file, or HTML and CSS files are required.\n");
     }
 
-    var css, html, auth;
+    var css, html, whitelist, auth;
     if (spec) {
         css = spec.css;
         html = spec.html;
+        whitelist = spec.whitelist;
         auth = spec.auth;
     } else {
         css = argv.css;
@@ -111,7 +112,7 @@ function main() {
             result, argv.used, !argv.nosummary, argv.duplicates);
     };
 
-    ucss.analyze(css, html, null, done);
+    ucss.analyze(css, html, whitelist, null, done);
 }
 
 

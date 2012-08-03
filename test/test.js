@@ -23,7 +23,7 @@ buster.testCase("Functional tests:", {
 
         var expected = {};
 
-        lib.analyze(css, markup, null, function(result) {
+        lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -35,7 +35,7 @@ buster.testCase("Functional tests:", {
 
         var expected = {};
 
-        lib.analyze(css, markup, null, function(result) {
+        lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -49,7 +49,7 @@ buster.testCase("Functional tests:", {
         expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
         expected.duplicates = {".foo": 3, ".bar": 2};
 
-        lib.analyze(css, markup, null, function(result) {
+        lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -72,10 +72,40 @@ buster.testCase("Functional tests:", {
         expected.used['span[dir="ltr"]'] = 1;
         expected.used['.bar span[dir="ltr"]'] = 1;
         expected.used['.foo span[dir="ltr"]'] = 0;
+        expected.used['.foo .qux .bar'] = 0;
+        expected.used['.foo .qux .bar .baz'] = 0;
 
         expected.duplicates = {};
 
-        lib.analyze(css, markup, null, function(result) {
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "find unused rules, with whitelist": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = fs.readFileSync("fixtures/rules.css").toString();
+
+        var expected = {};
+        expected.used = {};
+        expected.used['*'] = 9;
+        expected.used['.foo'] = 1;
+        expected.used['.bar'] = 1;
+        expected.used['.foo .bar'] = 0;
+        expected.used['.bar #baz'] = 1;
+        expected.used['.qux'] = 1;
+        expected.used['.quux'] = 0;
+        expected.used['span[dir="ltr"]'] = 1;
+        expected.used['.bar span[dir="ltr"]'] = 1;
+        expected.used['.foo span[dir="ltr"]'] = 0;
+
+        expected.duplicates = {};
+
+        var whitelist = ['.foo .qux .bar', '.foo .qux .bar .baz'];
+
+        lib.analyze(css, markup, whitelist, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -98,8 +128,10 @@ buster.testCase("Functional tests:", {
         expected['span[dir="ltr"]'] = 2;
         expected['.bar span[dir="ltr"]'] = 2;
         expected['.foo span[dir="ltr"]'] = 1;
+        expected['.foo .qux .bar'] = 0;
+        expected['.foo .qux .bar .baz'] = 0;
 
-        lib.analyze(css, markup, null, function(result) {
+        lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result.used, expected);
             done();
         });
@@ -123,6 +155,8 @@ buster.testCase("Functional tests:", {
         expected['span[dir="ltr"]'] = 4;
         expected['.bar span[dir="ltr"]'] = 4;
         expected['.foo span[dir="ltr"]'] = 2;
+        expected['.foo .qux .bar'] = 0;
+        expected['.foo .qux .bar .baz'] = 0;
 
         var auth = {
             "username": "foo",
@@ -133,7 +167,7 @@ buster.testCase("Functional tests:", {
             }
         };
 
-        lib.analyze(css, markup, auth, function(result) {
+        lib.analyze(css, markup, null, auth, function(result) {
             assert.equals(result.used, expected);
             done();
         });
