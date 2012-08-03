@@ -57,14 +57,25 @@ function main() {
     var spec = null;
 
     var openSpec = function(filename) {
+        var spec;
         try {
-            return JSON.parse(fs.readFileSync(filename).toString());
+            spec = fs.readFileSync(filename).toString();
         } catch (e) {
-            optimist.showHelp();
-            console.log("Either a spec file, or HTML and CSS files are required.\n");
-            console.log("The spec file '" + filename + "' could not be found\n");
+            console.log("Problems reading file '" + filename + "'.");
+            console.log(e.name + ": " + e.message);
+            console.log("Please check that the file exists, and has the correct permissions.");
             process.exit(1);
         }
+
+        try {
+            spec = JSON.parse(spec);
+        } catch (e) {
+            console.log("Problems parsing file '" + filename + "'.");
+            console.log(e.name + ": " + e.message);
+            console.log("Please check the formatting of the file.");
+            process.exit(1);
+        }
+        return spec;
     };
 
     // Either HTML and CSS, or spec is required
