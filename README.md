@@ -1,16 +1,16 @@
 ## uCSS library
-Find unused CSS, as well as duplicate CSS. Also, you can get an overview of how many times each rule has been used.
+Find unused CSS, as well as duplicate CSS. Also, you can get an overview of how many times each rule has been used in your markup.
 
 Key features:
-* Find unused CSS selectors in a HTML code base
-* See how many times each CSS selector has been used
-* Find duplicate CSS selectors
+* Find unused CSS selectors in a HTML code base.
+* See how many times each CSS selector has been used.
+* Find duplicate CSS selectors.
 
-But wait, there's more! By creating a small JSON file with some specs, you can also:
-* Visit several URLs/HTML files in one go
-* Use several CSS files at once
-* Do login, and visit all pages both as a logged in user and logged out
-* Whitelist CSS rules to be ignored
+But wait, there's more! By creating setting up a spec file, uCSS can also:
+* Visit several URLs/HTML files in one go.
+* Use several CSS files at once.
+* Do login, and visit all pages both as a logged in and logged out user.
+* Whitelist CSS rules that should be ignored.
 
 The library is written for Node (http://www.nodejs.org/). However, it should be easy to use it in other contexts as well.
 
@@ -24,7 +24,7 @@ uCSS can also be used as a command line tool.
 
 ```
 $ ucss --help
-Find out if CSS rules are used or not.
+Check if CSS selectors matches anything in given HTML.
 Usage: ucss [OPTION]...
 
 Options:
@@ -50,13 +50,36 @@ var whitelist = [".baz"];
 var auth = null;
 ucss.analyze(css, html, whitelist, auth, function(result) {
     require('../lib/helpers/output').standard(
-        result, argv.used, !argv.nosummary, argv.duplicates);
+        result, false, false, false);
     };);
 ```
 
 ### Logging in
 
-Specify your own login function in spec file.
+You can specify own login function in the spec file:
+
+```
+{
+    ...,
+    auth: {
+        "username": "foo",
+        "password": "bar",
+        "loginUrl": "http://example.com/login/",
+        "loginFunc": function(url, username, password, callback) {
+            // Do login, get cookie
+            var cookie = "sessionid:1234"
+            callback(cookie);
+        }
+   },
+   ...
+}
+
+```
+...or you can just specify a login helper:
+
+```
+    "loginFunc": "djangoLogin" {
+```
 
 ### Custom output
 

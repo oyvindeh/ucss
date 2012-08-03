@@ -11,7 +11,7 @@ var optimist = require('optimist');
  * Main.
  */
 function main() {
-    var argv = optimist.usage('Find out if CSS rules are used or not.\n'
+    var argv = optimist.usage('Check if CSS selectors matches anything in given HTML.\n'
                             + 'Usage: $0 [OPTION]...')
         .options({
             help: {
