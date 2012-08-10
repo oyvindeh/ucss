@@ -71,7 +71,7 @@ A config file will let you visit several URLs/files in one go, as well as fetch 
 
 You can specify several config files, either one for each of your projects, or several for one project, if needed.
 
-Please see the [example config file](https://github.com/operasoftware/ucss/blob/master/examples/ucss.json).
+Please see the [example config file](https://github.com/operasoftware/ucss/blob/master/examples/ucss.json). If you want to write a custom login function, see below.
 
 #### Logging in
 Login requires you to set up a config file. In the config file, you can specify your own login function:
