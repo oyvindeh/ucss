@@ -56,6 +56,23 @@ buster.testCase("Functional tests:", {
         });
     },
 
+    "handles pseudo elements": function(done) {
+        var markup = "<html><head></head><body class='foo'></body></html>";
+        var css = ".foo::link{} .bar:lang(nb){} .foo::link{}"
+                + ".foo{} .foo{} .bar{} .baz:after{}";
+
+        var expected = {};
+        expected.used = { ".bar": 0, ".bar:lang(nb)": 0, ".baz:after": 0,
+                          ".foo": 1, ".foo::link": 1 };
+        expected.duplicates = { ".foo": 2, ".foo::link": 2 };
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
     "find unused rules": function(done) {
         var markup = fs.readFileSync("fixtures/markup.html").toString();
         var css = fs.readFileSync("fixtures/rules.css").toString();
