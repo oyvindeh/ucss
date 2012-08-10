@@ -33,7 +33,8 @@ Options:
   --nosummary, -n   Output summary.                                           [default: false]
   --duplicates, -d  Show duplicates.                                          [default: false]
 
-Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS will look for a ucss.json file in the current directory.
+Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS
+will look for a ucss.json file in the current directory.
 ```
 So, to check a web page you could write
 ```
@@ -43,11 +44,11 @@ Note that the CSS file has to be stored locally (for the time being). To check m
 ```
 $ ucss -d -u -h http://example.com/foo.html -h http://example.com/bar.html -c foo.css
 ```
-To use a config file, simply run
+To use a config file ("ucss.json") that you have created in the current folder, simply run
 ```
 $ ucss
 ```
-or specify a config file using the -g option. For more info on the config file, see below.
+or specify another file name using the -g option. For more info on the config file, see below.
 
 ### Usage (as library)
 
