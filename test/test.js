@@ -1,5 +1,5 @@
 /* jshint: */
-/*global setTimeout public_functions assert require flipcss fs:true sinon:true */
+/*global setTimeout public_functions assert require fs:true sinon:true */
 
 fs = require("fs");
 sinon = require("sinon");
