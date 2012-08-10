@@ -79,8 +79,8 @@ function main() {
     };
 
     // Either HTML and CSS, or spec is required
-    var htmlSet = (typeof argv.html === "string") ? true : false;
-    var cssSet  = (typeof argv.css  === "string") ? true : false;
+    var htmlSet = typeof argv.html === "string";
+    var cssSet  = typeof argv.css  === "string";
     if (htmlSet && cssSet) {
         // Do stuff with html & css
         argv.spec = false;
