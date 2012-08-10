@@ -55,9 +55,9 @@ ucss.analyze(css, html, whitelist, auth, function(result) {
 
 If you want to do more fancy stuff than visiting one URL/file at a time, you can specify a config file.
 
-A config file will let you visit several URLs/files in one go, as well as fetch CSS from several files. You can also perform login, and white list rules. See the examples folder for an example config file.
+A config file will let you visit several URLs/files in one go, as well as fetch CSS from several files. You can also perform login, and white list rules that should be ignored. See the examples folder for an example config file.
 
-You can specify several config files, either one for each of your projects, or several for one project.
+You can specify several config files, either one for each of your projects, or several for one project, if needed.
 #### Logging in
 Login requires you to set up a config file. In the config file, you can specify your own login function:
 
