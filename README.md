@@ -64,12 +64,15 @@ ucss.analyze(css, html, whitelist, auth, function(result) {
 ```
 
 ### Setting up a config file
+uCSS allows multiple HTML files/URLs as argument, but it soon gets tiresome to write (and remember) them all. By creating a small config file, you can set up uCSS to automatically visit a set of URLs when you run it.
 
-If you want to do more fancy stuff than visiting one URL/file at a time, you can specify a config file.
+In addition to this, you can also specify a function that uCSS can use for login. uCSS will then visit each of the URLs in your config file both as a logged in and logged out user.
 
-A config file will let you visit several URLs/files in one go, as well as fetch CSS from several files. You can also perform login, and white list rules that should be ignored. See the examples folder for an example config file.
+Furthermore, you can create a white list of selectors that should be ignored. This is useful if you have e.g. classes that are toggled by JavaScript and thus might not be visible when uCSS visits the page, or if you have special styling for various error situations that is tricky to trigger.
 
-You can specify several config files, either one for each of your projects, or several for one project, if needed.
+As well as using several html files, uCSS can also combine CSS from several files, which can also be specified in your config file.
+
+If you name your config file "ucss.json", it will automatically be picked up by ucss. You can also name your config file something else, and use the -g option to point to it.
 
 Please see the [example config file](https://github.com/operasoftware/ucss/blob/master/examples/ucss.json). If you want to write a custom login function, see below.
 
