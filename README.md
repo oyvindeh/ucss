@@ -35,8 +35,19 @@ Options:
 
 Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS will look for a ucss.json file in the current directory.
 ```
-
-For examples on writing a config file, please see the examples folder.
+So, to check a web page you could write
+```
+$ ucss -h http://example.com/foo.html -c foo.css
+```
+Note that the CSS file has to be stored locally (for the time being). To check multiple pages, and also output duplicates as well as all used and unused rules, you can do
+```
+$ ucss -d -u -h http://example.com/foo.html -h http://example.com/bar.html -c foo.css
+```
+To use a config file, simply run
+```
+$ ucss
+```
+or specify a config file using the -g option. For more info on the config file, see below.
 
 ### Usage (as library)
 
@@ -58,6 +69,9 @@ If you want to do more fancy stuff than visiting one URL/file at a time, you can
 A config file will let you visit several URLs/files in one go, as well as fetch CSS from several files. You can also perform login, and white list rules that should be ignored. See the examples folder for an example config file.
 
 You can specify several config files, either one for each of your projects, or several for one project, if needed.
+
+There is an example config file in the the examples folder.
+
 #### Logging in
 Login requires you to set up a config file. In the config file, you can specify your own login function:
 
