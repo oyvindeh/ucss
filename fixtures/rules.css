@@ -29,4 +29,4 @@ span[dir="ltr"] { /* match */
 }
 .foo .qux .bar .baz {
 }
-/* comment at end used to break things */
+/* This comment should not make tests fail (it used to) */
