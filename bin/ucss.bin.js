@@ -11,6 +11,13 @@ var optimist = require('optimist');
  * Main.
  */
 function main() {
+    var showHelp = function() {
+        optimist.showHelp();
+        console.log("Either a config file, or HTML and CSS files are required. "
+                    + "If no arguments are specified, uCSS will look for a "
+                    + "ucss.json file in the current directory.");
+    };
+
     var argv = optimist.usage('Check if CSS selectors matches anything in given HTML.\n'
                             + 'Usage: $0 [OPTION]...')
         .options({
@@ -25,9 +32,9 @@ function main() {
                 alias : 'c',
                 description : 'CSS to load.'
             },
-            spec: {
-                alias : 's',
-                description : 'Spec file to use.',
+            config: {
+                alias : 'g',
+                description : 'Config file to use.',
                 "default": true
             },
             used: {
@@ -49,17 +56,16 @@ function main() {
         }).argv;
 
     if (argv.help) {
-        optimist.showHelp();
-        console.log("Either a spec file, or HTML and CSS files are required.\n");
+        showHelp();
         process.exit(0);
     }
 
-    var spec = null;
+    var config = null;
 
-    var openSpec = function(filename) {
-        var spec;
+    var openConfig = function(filename) {
+        var config;
         try {
-            spec = fs.readFileSync(filename).toString();
+            config = fs.readFileSync(filename).toString();
         } catch (e) {
             console.log("Problems reading file '" + filename + "'.");
             console.log(e.name + ": " + e.message);
@@ -68,39 +74,38 @@ function main() {
         }
 
         try {
-            spec = JSON.parse(spec);
+            config = JSON.parse(config);
         } catch (e) {
             console.log("Problems parsing file '" + filename + "'.");
             console.log(e.name + ": " + e.message);
             console.log("Please check the formatting of the file.");
             process.exit(1);
         }
-        return spec;
+        return config;
     };
 
-    // Either HTML and CSS, or spec is required
+    // Either HTML and CSS, or config is required
     var htmlSet = typeof argv.html === "string";
     var cssSet  = typeof argv.css  === "string";
     if (htmlSet && cssSet) {
         // Do stuff with html & css
-        argv.spec = false;
-    } else if (typeof argv.spec  === "string") {
-        // Use spec file
-        spec = openSpec(argv.spec);
-    } else if (argv.spec === true) {
-        // Search for spec.json
-        spec = openSpec("spec.json");
+        argv.config = false;
+    } else if (typeof argv.config  === "string") {
+        // Use config file
+        config = openConfig(argv.config);
+    } else if (argv.config === true) {
+        // Search for config.json
+        config = openConfig("ucss.json");
     } else {
-        optimist.showHelp();
-        console.log("Either a spec file, or HTML and CSS files are required.\n");
+        showHelp();
     }
 
     var css, html, whitelist, auth;
-    if (spec) {
-        css = spec.css;
-        html = spec.html;
-        whitelist = spec.whitelist;
-        auth = spec.auth;
+    if (config) {
+        css = config.css;
+        html = config.html;
+        whitelist = config.whitelist;
+        auth = config.auth;
     } else {
         css = argv.css;
         html = argv.html;

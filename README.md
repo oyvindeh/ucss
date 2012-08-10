@@ -6,7 +6,7 @@ Key features:
 * See how many times each CSS selector has been used.
 * Find duplicate CSS selectors.
 
-But wait, there's more! By creating setting up a spec file, uCSS can also:
+But wait, there's more! By creating setting up a config file, uCSS can also:
 * Visit several URLs/HTML files in one go.
 * Use several CSS files at once.
 * Do login, and visit all pages both as a logged in and logged out user.
@@ -24,22 +24,21 @@ uCSS can also be used as a command line tool.
 
 ```
 $ ucss --help
-Check if CSS selectors matches anything in given HTML.
 Usage: ucss [OPTION]...
 
 Options:
   --help            This help text.                                         
   --html, -h        HTML to load.                                           
   --css, -c         CSS to load.                                            
-  --spec, -s        Spec file to use.                                         [default: true]
+  --config, -g      Config file to use.                                       [default: true]
   --used, -u        Show numbers on used rules, in addition to unused rules.  [default: false]
   --nosummary, -n   Output summary.                                           [default: false]
   --duplicates, -d  Show duplicates.                                          [default: false]
 
-Either a spec file, or HTML and CSS files are required.
+Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS will look for a ucss.json file in the current directory.
 ```
 
-For examples on writing a spec file, please see the examples folder.
+For examples on writing a config file, please see the examples folder.
 
 ### Usage (as library)
 
@@ -54,13 +53,15 @@ ucss.analyze(css, html, whitelist, auth, function(result) {
     };);
 ```
 
-### Setting up a spec file
+### Setting up a config file
 
-If you want to do more fancy stuff than visiting one URL/file at a time, you can specify a spec file. It will let you visit several URLs/files in one go, as well as fetch CSS from several file. You can also perform login, and white list rules. See the examples folder for an example spec file.
+If you want to do more fancy stuff than visiting one URL/file at a time, you can specify a config file.
 
+A config file will let you visit several URLs/files in one go, as well as fetch CSS from several files. You can also perform login, and white list rules. See the examples folder for an example config file.
+
+You can specify several config files, either one for each of your projects, or several for one project.
 #### Logging in
-
-You can specify own login function in the spec file:
+Login requires you to set up a config file. In the config file, you can specify your own login function:
 
 ```
 {
@@ -84,7 +85,8 @@ You can specify own login function in the spec file:
 ```
     "loginFunc": "djangoLogin"
 ```
+There is currently only one login helper available, for Django.
 
 ### Custom output
 
-Specify your own output function (currently only available when using as library, not from command line/spec)
+If you use uCSS as a library, you can specify a custom output function.
