@@ -1,5 +1,5 @@
 ## uCSS library
-Find unused CSS, as well as duplicate CSS. Also, you can get an overview of how many times each rule has been used in your markup.
+Find unused CSS selectors, as well as duplicate selectors. Also, you can get an overview of how many matches there are for each rule in your markup.
 
 Key features:
 * Find unused CSS selectors in a HTML code base.
@@ -9,7 +9,7 @@ Key features:
 But wait, there's more! By setting up a config file, uCSS can also:
 * Visit several URLs/HTML files in one go.
 * Use several CSS files at once.
-* Do login, and visit all pages both as a logged in and logged out user.
+* Do login, and visit pages both as a logged in and logged out user.
 * Whitelist CSS rules that should be ignored.
 
 uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
