@@ -1,4 +1,4 @@
-## uCSS library
+## uCSS library (v 0.1.0-beta)
 Find unused CSS selectors, as well as duplicate selectors. Also, you can get an overview of how many matches there are for each rule in your markup.
 
 Key features:
@@ -13,6 +13,8 @@ But wait, there's more! By setting up a config file, uCSS can also:
 * Whitelist CSS rules that should be ignored.
 
 uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
+
+Please note: uCSS is currently in beta.
 
 ### Installation
 
@@ -102,7 +104,3 @@ Login requires you to set up a config file. In the config file, you can specify 
     "loginFunc": "djangoLogin"
 ```
 There is currently only one login helper available, for Django.
-
-### Custom output
-
-If you use uCSS as a library, you can specify a custom output function.
