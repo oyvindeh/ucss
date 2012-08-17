@@ -2,7 +2,6 @@
 /*global setTimeout public_functions assert require fs:true sinon:true */
 
 fs = require("fs");
-sinon = require("sinon");
 
 if (typeof require !== "undefined") {
     var buster = require("buster");
