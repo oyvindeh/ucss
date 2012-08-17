@@ -59,11 +59,11 @@ buster.testCase("Functional tests:", {
     "handles pseudo elements": function(done) {
         var markup = "<html><head></head><body class='foo'></body></html>";
         var css = ".foo::link{} .bar:lang(nb){} .foo::link{}"
-                + ".foo{} .foo{} .bar{} .baz:after{}";
+                + ".foo{} .foo{} .bar{} .baz:after{} input:invalid{}";
 
         var expected = {};
         expected.used = { ".bar": 0, ".bar:lang(nb)": 0, ".baz:after": 0,
-                          ".foo": 1, ".foo::link": 1 };
+                          ".foo": 1, ".foo::link": 1, "input:invalid": 0 };
         expected.duplicates = { ".foo": 2, ".foo::link": 2 };
 
         lib.analyze(css, markup, null, null, function(result) {
