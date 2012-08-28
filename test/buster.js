@@ -10,3 +10,4 @@ config["My tests"] = {
         "test/test.js"
     ]
 };
+// TODO add config for test-server.js, currently called via `node test/test-server.js`
