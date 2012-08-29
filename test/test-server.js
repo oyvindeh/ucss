@@ -13,8 +13,8 @@ buster.testCase("Functional tests with server:", {
 		var port = 9988;
 		var middleware = rs.resourceMiddleware.create(virtualDocRoot);
 		var sett = rs.resourceSet.create();
-		sett.addResource({ path: "/rules.css", content: fs.readFileSync("fixtures/rules.css").toString() });
-		sett.addResource({ path: "/rules-2.css", content: fs.readFileSync("fixtures/rules-2.css").toString() });
+		sett.addResource({ path: "/rules-remote-1.css", content: fs.readFileSync("fixtures/rules-remote-1.css").toString() });
+		sett.addResource({ path: "/rules-remote-2.css", content: fs.readFileSync("fixtures/rules-remote-2.css").toString() });
 		middleware.mount("/", sett);
 
 		this.server = http.createServer(function (req, res) {
@@ -28,14 +28,47 @@ buster.testCase("Functional tests with server:", {
 		this.server.close();
     },
 	
-	"load css from url": function(done) {
+	"load css from url - multiple files": function(done) {
 		var markup = "<html><head></head><body></body></html>";
-        var css = this.docRoot + "rules.css";
-        var expected = {};
+        var css = [ this.docRoot + "rules-remote-1.css" , this.docRoot + "rules-remote-2.css" ];
+        var expected = {
+			total: 6+6
+		};
+		var oSize = function(obj) {
+				var size = 0, key;
+				for (key in obj) {
+					if (obj.hasOwnProperty(key)) size++;
+				}
+				return size;
+		};
 
         lib.analyze(css, markup, null, null, function(result) {
-            assert.equals(result.duplicates, expected);
+			var total = oSize(result.used);
+		
+            assert.equals(total, expected.total);
             done();
         });
-	}
+	},
+	
+	"load css from url - same files": function(done) {
+		var markup = "<html><head></head><body></body></html>";
+        var css = [ this.docRoot + "rules-remote-1.css" , this.docRoot + "rules-remote-1.css" ];
+        var expected = {
+			total: 6
+		};
+		var oSize = function(obj) {
+				var size = 0, key;
+				for (key in obj) {
+					if (obj.hasOwnProperty(key)) size++;
+				}
+				return size;
+		};
+
+        lib.analyze(css, markup, null, null, function(result) {
+			var total = oSize(result.used);
+		
+            assert.equals(total, expected.total);
+            done();
+        });
+	}	
 });
