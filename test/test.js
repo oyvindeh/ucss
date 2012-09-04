@@ -28,6 +28,20 @@ buster.testCase("Functional tests:", {
         });
     },
 
+    "works with several css instances": function(done) {
+        var markup = "<html><head></head><body class='foo bar'></body></html>";
+        var css = [".foo {}", ".bar {}"];
+
+        var expected = {};
+        expected.used = { ".foo": 1, ".bar": 1 };
+        expected.duplicates = {};
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
     "works with empty CSS": function(done) {
         var markup = "<html></html>";
         var css = "";
