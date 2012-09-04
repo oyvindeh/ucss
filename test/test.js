@@ -9,7 +9,7 @@ if (typeof require !== "undefined") {
 }
 
 
-buster.testCase("Functional tests:", {
+buster.testCase("uCSS", {
     setUp: function () {
     },
 
@@ -86,24 +86,23 @@ buster.testCase("Functional tests:", {
         });
     },
 
-    "find unused rules": function(done) {
+    "finds unused rules": function(done) {
         var markup = fs.readFileSync("fixtures/markup.html").toString();
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
         var expected = {};
-        expected.used = {};
-        expected.used['*'] = 9;
-        expected.used['.foo'] = 1;
-        expected.used['.bar'] = 1;
-        expected.used['.foo .bar'] = 0;
-        expected.used['.bar #baz'] = 1;
-        expected.used['.qux'] = 1;
-        expected.used['.quux'] = 0;
-        expected.used['span[dir="ltr"]'] = 1;
-        expected.used['.bar span[dir="ltr"]'] = 1;
-        expected.used['.foo span[dir="ltr"]'] = 0;
-        expected.used['.foo .qux .bar'] = 0;
-        expected.used['.foo .qux .bar .baz'] = 0;
+        expected.used = {'*': 9,
+                         '.foo': 1,
+                         '.bar': 1,
+                         '.foo .bar': 0,
+                         '.bar #baz': 1,
+                         '.qux': 1,
+                         '.quux': 0,
+                         'span[dir="ltr"]': 1,
+                         '.bar span[dir="ltr"]': 1,
+                         '.foo span[dir="ltr"]': 0,
+                         '.foo .qux .bar': 0,
+                         '.foo .qux .bar .baz': 0 };
 
         expected.duplicates = {};
 
@@ -114,7 +113,7 @@ buster.testCase("Functional tests:", {
         });
     },
 
-    "find unused rules, with whitelist": function(done) {
+    "finds unused rules, with whitelist": function(done) {
         var markup = fs.readFileSync("fixtures/markup.html").toString();
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
@@ -142,7 +141,7 @@ buster.testCase("Functional tests:", {
         });
     },
 
-    "find unused rules in several files": function(done) {
+    "finds unused rules in several files": function(done) {
         var markup = [fs.readFileSync("fixtures/markup.html").toString(),
                       fs.readFileSync("fixtures/markup2.html").toString()];
         var css = fs.readFileSync("fixtures/rules.css").toString();
@@ -169,7 +168,7 @@ buster.testCase("Functional tests:", {
 
     // Doesn't do actual login, but checks that occurences are doubled, since
     // every page is checked twice (once with cookie set, and once without).
-    "find unused rules in several files (with login)": function(done) {
+    "finds unused rules in several files (with login)": function(done) {
         var markup = [fs.readFileSync("fixtures/markup.html").toString(),
                       fs.readFileSync("fixtures/markup2.html").toString()];
         var css = fs.readFileSync("fixtures/rules.css").toString();
