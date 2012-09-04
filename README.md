@@ -14,6 +14,8 @@ But wait, there's more! By setting up a config file, uCSS can also:
 
 uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
 
+Want to contribute? Please read below.
+
 Please note: uCSS is currently in beta.
 
 ### Installation
@@ -104,3 +106,11 @@ Login requires you to set up a config file. In the config file, you can specify 
     "loginFunc": "djangoLogin"
 ```
 There is currently only one login helper available, for Django.
+
+### I want to contribute!
+
+Great! Feel free to pick one of the issues, or submit a bug/feature you would want to work on.
+
+Please be tidy in your commits. Also, try to touch as small parts of the code as possible. This makes it easier to review and manage pull requests.
+
+If you plan to do big changes or refactorings, please notify me first, so that we can discuss this in advance.
