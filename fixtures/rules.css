@@ -1,9 +1,6 @@
 * { /* match */
     color: blue;
 }
-@media all and (min-width: 500px) {
-    color: blue;
-}
 .foo { /* match */
     color: red;
 }
