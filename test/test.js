@@ -200,7 +200,36 @@ buster.testCase("uCSS", {
             assert.equals(result.used, expected);
             done();
         });
+    },
+
+    "catches nested selectors": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = ".foo { color: red; } @media all and (min-width: 500px) { .bar { background: blue; } }";
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = { ".foo": 1, ".bar": 1};
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "catches selectors succeding nested selectors": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = ".foo { color: red; } @media all and (min-width: 500px) { .bar { background: blue; } } .qux { float: left; }";
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = { ".foo": 1, ".bar": 1, ".qux": 1};
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
     }
+
 });
 
 
