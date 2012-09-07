@@ -228,8 +228,21 @@ buster.testCase("uCSS", {
             assert.equals(result, expected);
             done();
         });
-    }
+    },
 
+    "handles comma separated rules": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = ".foo, .bar { color: red; }";
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = { ".foo": 1, ".bar": 1 };
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    }
 });
 
 
