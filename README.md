@@ -44,9 +44,9 @@ So, to check a web page you could write
 ```
 $ ucss -h http://example.com/foo.html -c foo.css
 ```
-Note that the CSS file has to be stored locally (for the time being). To check multiple pages, and also output duplicates as well as all used and unused rules, you can do
+Note that the CSS file has to be stored locally (for the time being). To output duplicates as well as all used and unused rules, you can do
 ```
-$ ucss -d -u -h http://example.com/foo.html -h http://example.com/bar.html -c foo.css
+$ ucss -d -u -h http://example.com/foo.html -c foo.css
 ```
 To use a config file ("ucss.json") that you have created in the current folder, simply run
 ```
