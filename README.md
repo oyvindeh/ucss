@@ -54,11 +54,6 @@ $ ucss
 ```
 or specify another file name using the -g option. For more info on the config file, see below.
 
-### What is missing?
-uCSS can (currently) NOT:
-* Look for internal style sheets, or inline styles.
-* Capture classes etc. that is switched on/off using JavaScript in a browser.
-
 ### Usage (as library)
 
 ```
@@ -111,6 +106,11 @@ Login requires you to set up a config file. In the config file, you can specify 
     "loginFunc": "djangoLogin"
 ```
 There is currently only one login helper available, for Django.
+
+### What is missing?
+uCSS can (currently) NOT:
+* Look for internal style sheets, or inline styles.
+* Capture classes etc. that is switched on/off using JavaScript in a browser.
 
 ### I want to contribute!
 
