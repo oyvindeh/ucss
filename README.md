@@ -9,7 +9,7 @@ Key features:
 But wait, there's more! By setting up a config file, uCSS can also:
 * Visit several URLs/HTML files in one go.
 * Use several CSS files at once.
-* Do login, and visit pages both as a logged in and logged out user.
+* Do login (Django only, at the moment), and visit pages both as a logged in and logged out user.
 * Whitelist CSS rules that should be ignored.
 
 uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
@@ -44,20 +44,15 @@ So, to check a web page you could write
 ```
 $ ucss -h http://example.com/foo.html -c foo.css
 ```
-Note that the CSS file has to be stored locally (for the time being). To check multiple pages, and also output duplicates as well as all used and unused rules, you can do
+Note that the CSS file has to be stored locally (for the time being). To output duplicates as well as all used and unused rules, you can do
 ```
-$ ucss -d -u -h http://example.com/foo.html -h http://example.com/bar.html -c foo.css
+$ ucss -d -u -h http://example.com/foo.html -c foo.css
 ```
 To use a config file ("ucss.json") that you have created in the current folder, simply run
 ```
 $ ucss
 ```
 or specify another file name using the -g option. For more info on the config file, see below.
-
-### What is missing?
-uCSS can (currently) NOT:
-* Look for internal style sheets, or inline styles.
-* Capture classes etc. that is switched on/off using JavaScript in a browser.
 
 ### Usage (as library)
 
@@ -95,22 +90,18 @@ Login requires you to set up a config file. In the config file, you can specify 
         "username": "foo",
         "password": "bar",
         "loginUrl": "http://example.com/login/",
-        "loginFunc": function(url, username, password, callback) {
-            // Do login, get cookie
-            var cookie = "sessionid:1234"
-            callback(cookie);
-        }
+        "loginFunc": "djangoLogin"
    },
    ...
 }
 
 ```
-...or you can just specify a login helper:
-
-```
-    "loginFunc": "djangoLogin"
-```
 There is currently only one login helper available, for Django.
+
+### What is missing?
+uCSS can (currently) NOT:
+* Look for internal style sheets, or inline styles.
+* Capture classes etc. that is switched on/off using JavaScript in a browser.
 
 ### I want to contribute!
 
