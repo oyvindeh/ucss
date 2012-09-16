@@ -65,7 +65,7 @@ function main() {
     var openConfig = function(filename) {
         var config;
         try {
-            config = fs.readFileSync(filename).toString();
+            config = require(filename);
         } catch (e) {
             console.log("Problems reading file '" + filename + "'.");
             console.log(e.name + ": " + e.message);
@@ -73,14 +73,6 @@ function main() {
             process.exit(1);
         }
 
-        try {
-            config = JSON.parse(config);
-        } catch (e) {
-            console.log("Problems parsing file '" + filename + "'.");
-            console.log(e.name + ": " + e.message);
-            console.log("Please check the formatting of the file.");
-            process.exit(1);
-        }
         return config;
     };
 
@@ -95,7 +87,7 @@ function main() {
         config = openConfig(argv.config);
     } else if (argv.config === true) {
         // Search for config.json
-        config = openConfig("ucss.json");
+        config = openConfig(process.cwd() + "/config_ucss.js");
     } else {
         showHelp();
     }
