@@ -9,7 +9,7 @@ Key features:
 But wait, there's more! By setting up a config file, uCSS can also:
 * Visit several URLs/HTML files in one go.
 * Use several CSS files at once.
-* Do login (Django only, at the moment), and visit pages both as a logged in and logged out user.
+* Do login, and visit pages both as a logged in and logged out user.
 * Whitelist CSS rules that should be ignored.
 
 uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
@@ -48,7 +48,7 @@ Note that the CSS file has to be stored locally (for the time being). To output 
 ```
 $ ucss -d -u -h http://example.com/foo.html -c foo.css
 ```
-To use a config file ("ucss.json") that you have created in the current folder, simply run
+To use a config file ("config_ucss.js") that you have created in the current folder, simply run
 ```
 $ ucss
 ```
@@ -84,13 +84,17 @@ Please see the [example config file](https://github.com/operasoftware/ucss/blob/
 Login requires you to set up a config file. In the config file, you can specify your own login function:
 
 ```
-{
+module.exports = {
     ...,
     auth: {
         "username": "foo",
         "password": "bar",
         "loginUrl": "http://example.com/login/",
-        "loginFunc": "djangoLogin"
+        "loginFunc": function(url, username, password, callback) {
+            // Do login, get cookie
+            var cookie = "sessionid:1234"
+            callback(cookie);
+        }
    },
    ...
 }
