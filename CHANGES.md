@@ -1,3 +1,10 @@
+## 2012.09.17, Version 0.2.0-beta
+*   Changes:
+    - Change config file format from JSON to Node module
+      NOTE: This breaks backwards compability.
+*   Bug fixes:
+    - Fix custom login functions to work.
+
 ## 2012.09.10, Version 0.1.2-beta
 
 *   Features:

@@ -1,4 +1,4 @@
-## uCSS (v0.1.2-beta)
+## uCSS (v0.2.0-beta)
 Find unused CSS selectors, as well as duplicate selectors. Also, you can get an overview of how many matches there are for each rule in your markup.
 
 Key features:
@@ -38,7 +38,7 @@ Options:
   --duplicates, -d  Show duplicates.                                          [default: false]
 
 Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS
-will look for a ucss.json file in the current directory.
+will look for a config_ucss.js file in the current directory.
 ```
 So, to check a web page you could write
 ```
@@ -76,9 +76,9 @@ Furthermore, you can create a white list of selectors that should be ignored. Th
 
 As well as using several html files, uCSS can also combine CSS from several files, which can also be specified in your config file.
 
-If you name your config file "ucss.json", it will automatically be picked up by ucss. You can also name your config file something else, and use the -g option to point to it.
+If you name your config file "config_ucss.js", it will automatically be picked up by ucss. You can also name your config file something else, and use the -g option to point to it.
 
-Please see the [example config file](https://github.com/operasoftware/ucss/blob/master/examples/ucss.json). If you want to write a custom login function, see below.
+Please see the [example config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js). If you want to write a custom login function, see below.
 
 #### Logging in
 Login requires you to set up a config file. In the config file, you can specify your own login function:
@@ -100,7 +100,7 @@ module.exports = {
 }
 
 ```
-There is currently only one login helper available, for Django.
+If you use Django, you can use the supplied Django login helper (see [example config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
 ### What is missing?
 uCSS can (currently) NOT:
