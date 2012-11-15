@@ -12,7 +12,7 @@ But wait, there's more! By setting up a config file, uCSS can also:
 * Do login, and visit pages both as a logged in and logged out user.
 * Whitelist CSS rules that should be ignored.
 
-uCSS is written for Node (http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
+uCSS is written for [Node](http://www.nodejs.org/). It can be used both as a library and as a command line tool. With a little tweaking, it should also be easy to use it in other contexts as well.
 
 Want to contribute? Please read below.
 
