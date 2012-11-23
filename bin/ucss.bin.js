@@ -34,8 +34,7 @@ function main() {
             },
             config: {
                 alias : 'g',
-                description : 'Config file to use.',
-                "default": true
+                description : 'Config file to use.'
             },
             used: {
                 alias : 'u',
@@ -58,6 +57,10 @@ function main() {
     if (argv.help) {
         showHelp();
         process.exit(0);
+    }
+
+    if(undefined === argv.config) {
+        argv.config = true;
     }
 
     var config = null;
