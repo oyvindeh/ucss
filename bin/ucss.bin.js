@@ -67,10 +67,14 @@ function main() {
         try {
             config = require(filename);
         } catch (e) {
-            console.log("Problems reading file '" + filename + "'.");
-            console.log(e.name + ": " + e.message);
-            console.log("Please check that the file exists, and has the correct permissions.");
-            process.exit(1);
+            try {
+                config = require(process.cwd() + "/" + filename);
+            } catch (e) {
+                console.log("Problems reading file '" + filename + "'.");
+                console.log(e.name + ": " + e.message);
+                console.log("Please check that the file exists, and has the correct permissions.");
+                process.exit(1);
+            }
         }
 
         return config;
