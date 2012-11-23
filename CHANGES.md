@@ -1,3 +1,7 @@
+## 2012.11.23, Version 0.2.1-beta
+*   Bug fixes:
+    - Fix loading of config from relative paths.
+
 ## 2012.09.17, Version 0.2.0-beta
 *   Changes:
     - Change config file format from JSON to Node module
