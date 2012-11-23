@@ -44,7 +44,7 @@ function main() {
             },
             nosummary: {
                 alias : 'n',
-                description : 'Output summary.',
+                description : 'Do not output summary.',
                 "default": false
             },
             duplicates: {

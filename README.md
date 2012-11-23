@@ -32,10 +32,10 @@ Options:
   --help            This help text.                                         
   --html, -h        HTML to load.                                           
   --css, -c         CSS to load.                                            
-  --config, -g      Config file to use.                                       [default: true]
-  --used, -u        Show numbers on used rules, in addition to unused rules.  [default: false]
-  --nosummary, -n   Output summary.                                           [default: false]
-  --duplicates, -d  Show duplicates.                                          [default: false]
+  --config, -g      Config file to use.
+  --used, -u        Show numbers on used rules, in addition to unused rules.
+  --nosummary, -n   Do not output summary.
+  --duplicates, -d  Show duplicates.
 
 Either a config file, or HTML and CSS files are required. If no arguments are specified, uCSS
 will look for a config_ucss.js file in the current directory.
