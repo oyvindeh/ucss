@@ -39,7 +39,7 @@ function main() {
             used: {
                 alias : 'u',
                 description :
-                    'Show numbers on used rules, in addition to unused rules.',
+                    'Show number of matches for each rule.',
                 "default": false
             },
             nosummary: {
