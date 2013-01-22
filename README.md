@@ -33,7 +33,7 @@ Options:
   --html, -h        HTML to load.                                           
   --css, -c         CSS to load.                                            
   --config, -g      Config file to use.
-  --used, -u        Show numbers on used rules, in addition to unused rules.
+  --used, -u        Show number of matches for each rule.
   --nosummary, -n   Do not output summary.
   --duplicates, -d  Show duplicates.
 
