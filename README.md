@@ -1,4 +1,4 @@
-## uCSS (v0.2.0-beta)
+## uCSS (v0.2.1-beta)
 Find unused CSS selectors, as well as duplicate selectors. Also, you can get an overview of how many matches there are for each rule in your markup.
 
 Key features:
@@ -42,12 +42,14 @@ will look for a config_ucss.js file in the current directory.
 ```
 So, to check a web page you could write
 ```
-$ ucss -h http://example.com/foo.html -c foo.css
+$ ucss -h http://example.com/foo.html -c http://example.com/foo.css
 ```
-Note that the CSS file has to be stored locally (for the time being). To output duplicates as well as all used and unused rules, you can do
+To output duplicates as well as all used and unused rules, you can do
 ```
-$ ucss -d -u -h http://example.com/foo.html -c foo.css
+$ ucss -d -u -h foo.html -c foo.css
 ```
+As you can see in the examples above, files can be stored locally as well as on the web.
+
 To use a config file ("config_ucss.js") that you have created in the current folder, simply run
 ```
 $ ucss
