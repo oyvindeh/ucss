@@ -35,6 +35,7 @@ buster.testCase("uCSS", {
         var expected = {};
         expected.used = { ".foo": 1, ".bar": 1 };
         expected.duplicates = {};
+        expected.ignored = {};
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
@@ -104,7 +105,7 @@ buster.testCase("uCSS", {
                          '.foo .qux .bar': 0,
                          '.foo .qux .bar .baz': 0 };
 
-        expected.duplicates = {};
+        expected.duplicates = {'.bar': 2};
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result.used, expected.used);
@@ -130,7 +131,7 @@ buster.testCase("uCSS", {
         expected.used['.bar span[dir="ltr"]'] = 1;
         expected.used['.foo span[dir="ltr"]'] = 0;
 
-        expected.duplicates = {};
+        expected.duplicates = {'.bar': 2};
 
         var whitelist = ['.foo .qux .bar', '.foo .qux .bar .baz'];
 
@@ -209,6 +210,7 @@ buster.testCase("uCSS", {
         var expected = {};
         expected.duplicates = {};
         expected.used = { ".foo": 1, ".bar": 1};
+        expected.ignored = {};
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
@@ -223,9 +225,48 @@ buster.testCase("uCSS", {
         var expected = {};
         expected.duplicates = {};
         expected.used = { ".foo": 1, ".bar": 1, ".qux": 1};
+        expected.ignored = {};
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "handles (ignores) @font-face syntax": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = "@font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}";
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = {};
+        expected.ignored = {
+            "@font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}":1
+        };
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.used, expected.used);
+            assert.match(JSON.stringify(result.ignored), '@font-face');
+            done();
+        });
+    },
+
+    "handles (ignores) @keyframe syntax": function(done) {
+        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var css = "@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}";
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = {};
+        expected.ignored = {
+            '@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}':1
+        };
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.used, expected.used);
+            assert.match(JSON.stringify(result.ignored), '@keyframes');
             done();
         });
     },
@@ -237,6 +278,7 @@ buster.testCase("uCSS", {
         var expected = {};
         expected.duplicates = {};
         expected.used = { ".foo": 1, ".bar": 1 };
+        expected.ignored = {};
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result, expected);
