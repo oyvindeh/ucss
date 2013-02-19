@@ -234,7 +234,7 @@ buster.testCase("uCSS", {
     },
 
     "handles (ignores) @font-face syntax": function(done) {
-        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var markup = "<html><head></head><body class='foo'></body></html>";
         var css = "@font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}";
 
         var expected = {};
@@ -253,7 +253,7 @@ buster.testCase("uCSS", {
     },
 
     "handles (ignores) @keyframe syntax": function(done) {
-        var markup = fs.readFileSync("fixtures/markup.html").toString();
+        var markup = "<html><head></head><body class='foo'></body></html>";
         var css = "@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}";
 
         var expected = {};
