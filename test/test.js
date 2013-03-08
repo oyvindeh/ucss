@@ -241,38 +241,60 @@ buster.testCase("uCSS", {
 
     "handles (ignores) @font-face syntax": function(done) {
         var markup = "<html><head></head><body class='foo'></body></html>";
-        var css = "@font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}";
+        var css = ["@font-face {font-family: 'MyWebFont'; ",
+                   "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
+                   "format('embedded-opentype'), url('webfont.woff') ",
+                   "format('woff'), url('webfont.ttf') format('truetype'), ",
+                   "url('webfont.svg#svgFontName') format('svg');}"].join("");
 
         var expected = {};
         expected.duplicates = {};
         expected.used = {};
         expected.ignored = {
-            "@font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}":1
+            "@font-face": 1
         };
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result.duplicates, expected.duplicates);
             assert.equals(result.used, expected.used);
-            assert.match(JSON.stringify(result.ignored), '@font-face');
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
 
     "handles (ignores) @keyframe syntax": function(done) {
         var markup = "<html><head></head><body class='foo'></body></html>";
-        var css = "@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}";
+        var css = ["@-webkit-keyframes progress-bar-stripes{",
+                     "from{background-position:40px 0}",
+                     "to{background-position:0 0}",
+                   "}@-moz-keyframes progress-bar-stripes{",
+                     "from{background-position:40px 0}",
+                     "to{background-position:0 0}",
+                   "}@-ms-keyframes progress-bar-stripes{",
+                     "from{background-position:40px 0}",
+                     "to{background-position:0 0}",
+                   "}@-o-keyframes progress-bar-stripes{",
+                     "from{background-position:0 0}",
+                     "to{background-position:40px 0}",
+                   "}@keyframes progress-bar-stripes{",
+                     "from{background-position:40px 0}",
+                     "to{background-position:0 0}}"].join("");
 
         var expected = {};
         expected.duplicates = {};
         expected.used = {};
         expected.ignored = {
-            '@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}':1
+            '@-webkit-keyframes progress-bar-stripes': 1,
+            '@-moz-keyframes progress-bar-stripes': 1,
+            '@-ms-keyframes progress-bar-stripes': 1,
+            '@-o-keyframes progress-bar-stripes': 1,
+            '@keyframes progress-bar-stripes': 1
         };
 
         lib.analyze(css, markup, null, null, function(result) {
             assert.equals(result.duplicates, expected.duplicates);
             assert.equals(result.used, expected.used);
-            assert.match(JSON.stringify(result.ignored), '@keyframes');
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
