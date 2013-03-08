@@ -205,7 +205,10 @@ buster.testCase("uCSS", {
 
     "catches nested selectors": function(done) {
         var markup = fs.readFileSync("fixtures/markup.html").toString();
-        var css = ".foo { color: red; } @media all and (min-width: 500px) { .bar { background: blue; } }";
+        var css = [".foo { color: red; } ",
+                   "@media all and (min-width: 500px) {",
+                     ".bar { background: blue; }",
+                   " }"].join("");
 
         var expected = {};
         expected.duplicates = {};
@@ -220,7 +223,10 @@ buster.testCase("uCSS", {
 
     "catches selectors succeding nested selectors": function(done) {
         var markup = fs.readFileSync("fixtures/markup.html").toString();
-        var css = ".foo { color: red; } @media all and (min-width: 500px) { .bar { background: blue; } } .qux { float: left; }";
+        var css = [".foo { color: red; } ",
+                   "@media all and (min-width: 500px) ",
+                     "{ .bar { background: blue; } ",
+                   "} .qux { float: left; }"].join("");
 
         var expected = {};
         expected.duplicates = {};
