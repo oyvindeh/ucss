@@ -1,4 +1,13 @@
+@charset "UTF-8";
 @font-face {font-family: 'MyWebFont'; src: url('webfont.eot'); src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff') format('woff'), url('webfont.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');}
+@import url("print.css") print;
+
+/*
+TODO: @document
+TODO: @supports
+TODO: Conditionals
+*/
+
 * { /* match */
     color: blue;
 }
@@ -29,6 +38,9 @@ span[dir="ltr"] { /* match */
     float: right;
 }
 .foo .qux .bar .baz {
+}
+@page {
+  margin: 2in;
 }
 @-webkit-keyframes progress-bar-stripes {
         from { background-position: 40px 0 }
