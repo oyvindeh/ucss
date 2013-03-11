@@ -1,3 +1,7 @@
+## 2013.03.11, Version 0.2.2-beta
+*   Bug fixes:
+    - Make sure @keyframe and @font-face does not crash uCSS (issues #15, #16)
+
 ## 2012.11.23, Version 0.2.1-beta
 *   Bug fixes:
     - Fix loading of config from relative paths.
