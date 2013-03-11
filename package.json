@@ -1,7 +1,8 @@
 {
     "author": "Øyvind Håkestad <oyvindeh@opera.com> (https://github.com/oyvindeh)",
     "contributors": [
-        "Hans S. Tømmerholt <hanst@opera.com> (https://github.com/hanssto)"
+        "Hans S. Tømmerholt <hanst@opera.com> (https://github.com/hanssto)",
+        "Crow Norlander <crowjonah@gmail.com> (https://github.com/crowjonah)"
     ],
     "name": "ucss",
     "description": "Find unused CSS rules",
