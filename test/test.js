@@ -312,7 +312,54 @@ buster.testCase("uCSS", {
             assert.equals(result, expected);
             done();
         });
+    },
+
+    "handles @supports": function(done) {
+        var markup = "<html><head></head><body class='foo baz'></body></html>";
+        var css = [".foo { background: blue } ",
+                   "@supports (box-shadow: 2px 2px 2px black) { ",
+                   ".bar { box-shadow: 2px 2px 2px black; }} ",
+                   "@-prefix-supports (box-shadow: 2px 2px 2px black) { ",
+                   ".bar { box-shadow: 2px 2px 2px black; }} ",
+                   ".baz { background: red }"].join("");
+
+
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = { ".foo": 1, ".baz": 1 };
+        expected.ignored = {};
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "handles @document": function(done) {
+        var markup = "<html><head></head><body class='foo baz'></body></html>";
+        var css = [".foo { background: blue } ",
+                   "@document url(http://www.example.com/), ",
+                     "url-prefix(http://www.example.com/Style/), ",
+                     "domain(example.com),  regexp('https:.*') { ",
+                       "body { color: red; background: blue; }}",
+                   "@-prefix-document url(http://www.example.com/), ",
+                     "url-prefix(http://www.example.com/Style/), ",
+                     "domain(example.com),  regexp('https:.*') { ",
+                       "body { color: red; background: blue; }}",
+                   ".baz { background: red }"].join("");
+
+        var expected = {};
+        expected.duplicates = {};
+        expected.used = { ".foo": 1, ".baz": 1 };
+        expected.ignored = {};
+
+        lib.analyze(css, markup, null, null, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
     }
+
 });
 
 

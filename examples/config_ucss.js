@@ -1,11 +1,11 @@
 module.exports = {
-    "auth": {
+    "auth": { // Want to do login?
         "username": "foo",
         "password": "bar",
         "loginUrl": "http://localhost:8000/accounts/login/",
-        "loginFunc": "djangoLogin"
+        "loginFunc": "djangoLogin" // You may specify your own function here
     },
-    "html": [
+    "html": [ // HTML files/URLs to check
         "http://localhost:8000/",
         "http://localhost:8000/article/1",
         "http://localhost:8000/login/",
@@ -13,8 +13,8 @@ module.exports = {
         "http://localhost:8000/en/search/?query=",
         "http://localhost:8000/en/search/?query=foo"
     ],
-    "css": [
+    "css": [ // CSS files to check
         "base.css"
     ],
-    "whitelist": [".foo", ".bar"]
-}
+    "whitelist": [".foo", ".bar"] // CSS rules to ignore
+};
