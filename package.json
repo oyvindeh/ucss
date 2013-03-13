@@ -22,10 +22,9 @@
     ],
     "dependencies": {
         "optimist": "0.3.x",
-        "jsdom": "0.2.x",
-        "jquery": "1.7.x",
         "async": "0.1.x",
-        "cssom": "0.2.x"
+        "cssom": "0.2.x",
+        "cheerio": "0.10.x"
     },
     "devDependencies": {
         "buster": "0.6.x",
