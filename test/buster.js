@@ -7,6 +7,8 @@ config["My tests"] = {
         "fixtures/*.css"
     ],
     tests: [
-        "test/test.js"
+        "test/general.js",
+        "test/http.js",
+        "test/selectors.js"
     ]
 };
