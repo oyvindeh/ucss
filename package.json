@@ -22,7 +22,7 @@
     ],
     "dependencies": {
         "optimist": "0.3.x",
-        "async": "0.1.x",
+        "async": "0.2.x",
         "cssom": "0.2.x",
         "cheerio": "0.10.x",
         "request": "2.10.x"

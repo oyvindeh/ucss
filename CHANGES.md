@@ -1,3 +1,7 @@
+##
+*   Replace jsdom and jQuery with Cheerio.
+*   Use request module instead of http/https
+
 ## 2013.03.11, Version 0.2.2-beta
 *   Bug fixes:
     - Make sure @keyframe and @font-face does not crash uCSS (issues #15, #16)

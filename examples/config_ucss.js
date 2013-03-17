@@ -5,6 +5,7 @@ module.exports = {
         "loginUrl": "http://localhost:8000/accounts/login/",
         "loginFunc": "djangoLogin" // You may specify your own function here
     },
+    "crawl": "http://localhost:8000/",
     "html": [ // HTML files/URLs to check
         "http://localhost:8000/",
         "http://localhost:8000/article/1",

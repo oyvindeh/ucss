@@ -9,6 +9,7 @@ config["My tests"] = {
     tests: [
         "test/general.js",
         "test/http.js",
-        "test/selectors.js"
+        "test/selectors.js",
+        "test/crawler.js"
     ]
 };
