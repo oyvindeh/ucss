@@ -148,41 +148,5 @@ buster.testCase("uCSS", {
             assert.equals(result.used, expected);
             done();
         });
-    },
-
-    // Doesn't do actual login, but checks that occurences are doubled, since
-    // every page is checked twice (once with cookie set, and once without).
-    "finds unused rules in several files (with 'login')": function(done) {
-        var markup = [fs.readFileSync("fixtures/markup.html").toString(),
-                      fs.readFileSync("fixtures/markup2.html").toString()];
-        var css = fs.readFileSync("fixtures/rules.css").toString();
-
-        var expected = {};
-        expected['*'] = 36;
-        expected['.foo'] = 6;
-        expected['.bar'] = 4;
-        expected['.foo .bar'] = 0;
-        expected['.bar #baz'] = 4;
-        expected['.qux'] = 4;
-        expected['.quux'] = 0;
-        expected['span[dir="ltr"]'] = 4;
-        expected['.bar span[dir="ltr"]'] = 4;
-        expected['.foo span[dir="ltr"]'] = 2;
-        expected['.foo .qux .bar'] = 0;
-        expected['.foo .qux .bar .baz'] = 0;
-
-        var auth = {
-            "username": "foo",
-            "password": "bar",
-            "loginUrl": "http://example.com/login/",
-            "loginFunc": function(url, username, password, callback) {
-                callback("1234");
-            }
-        };
-
-        lib.analyze(css, markup, null, auth, function(result) {
-            assert.equals(result.used, expected);
-            done();
-        });
     }
 });
