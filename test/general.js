@@ -1,7 +1,7 @@
 /* jshint: */
 /*global setTimeout public_functions assert require fs:true sinon:true */
 
-fs = require("fs");
+var fs = require("fs");
 
 if (typeof require !== "undefined") {
     var buster = require("buster");
@@ -17,53 +17,61 @@ buster.testCase("uCSS", {
     },
 
     "works with empty markup": function(done) {
-        var markup = "";
-        var css = ".foo {}";
+        var context = {
+            html: "",
+            css: ".foo {}"
+        };
 
         var expected = {};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "works with several css instances": function(done) {
-        var markup = "<html><head></head><body class='foo bar'></body></html>";
-        var css = [".foo {}", ".bar {}"];
+        var context = {
+            html: "<html><head></head><body class='foo bar'></body></html>",
+            css: [".foo {}", ".bar {}"]
+        };
 
         var expected = {};
         expected.used = { ".foo": 1, ".bar": 1 };
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "works with empty CSS": function(done) {
-        var markup = "<html></html>";
-        var css = "";
+        var context = {
+            html: "<html></html>",
+            css: ""
+        };
 
         var expected = {};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "finds duplicates": function(done) {
-        var markup = "<html><head></head><body class='foo'></body></html>";
-        var css = ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}";
+        var context = {
+            html: "<html><head></head><body class='foo'></body></html>",
+            css: ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}"
+        };
 
         var expected = {};
         expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
         expected.duplicates = {".foo": 3, ".bar": 2};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -71,8 +79,10 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules": function(done) {
-        var markup = fs.readFileSync("fixtures/markup.html").toString();
-        var css = fs.readFileSync("fixtures/rules.css").toString();
+        var context = {
+            html: fs.readFileSync("fixtures/markup.html").toString(),
+            css: fs.readFileSync("fixtures/rules.css").toString()
+        };
 
         var expected = {};
         expected.used = {'*': 9,
@@ -90,7 +100,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -98,8 +108,11 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules, with whitelist": function(done) {
-        var markup = fs.readFileSync("fixtures/markup.html").toString();
-        var css = fs.readFileSync("fixtures/rules.css").toString();
+        var context = {
+            html: fs.readFileSync("fixtures/markup.html").toString(),
+            css: fs.readFileSync("fixtures/rules.css").toString(),
+            whitelist: ['.foo .qux .bar', '.foo .qux .bar .baz']
+        };
 
         var expected = {};
         expected.used = {};
@@ -116,9 +129,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        var whitelist = ['.foo .qux .bar', '.foo .qux .bar .baz'];
-
-        lib.analyze(css, markup, whitelist, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -126,9 +137,11 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules in several files": function(done) {
-        var markup = [fs.readFileSync("fixtures/markup.html").toString(),
-                      fs.readFileSync("fixtures/markup2.html").toString()];
-        var css = fs.readFileSync("fixtures/rules.css").toString();
+        var context = {
+            html: [fs.readFileSync("fixtures/markup.html").toString(),
+                      fs.readFileSync("fixtures/markup2.html").toString()],
+            css: fs.readFileSync("fixtures/rules.css").toString()
+        };
 
         var expected = {};
         expected['*'] = 18;
@@ -144,7 +157,7 @@ buster.testCase("uCSS", {
         expected['.foo .qux .bar'] = 0;
         expected['.foo .qux .bar .baz'] = 0;
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected);
             done();
         });

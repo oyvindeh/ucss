@@ -1,7 +1,7 @@
 /* jshint: */
 /*global setTimeout public_functions assert require fs:true sinon:true */
 
-fs = require("fs");
+var fs = require("fs");
 
 if (typeof require !== "undefined") {
     var buster = require("buster");
@@ -34,10 +34,12 @@ buster.testCase("uCSS (using http)", {
     },
 
     "can load and process resources": function(done) {
-        var markup = ["http://127.0.0.1:9988/markup1.html",
-                      "http://127.0.0.1:9988/markup2.html"];
-        var css = ["http://127.0.0.1:9988/rules1.css",
-                   "http://127.0.0.1:9988/rules2.css"];
+        var context = {
+            html: ["http://127.0.0.1:9988/markup1.html",
+                   "http://127.0.0.1:9988/markup2.html"],
+            css: ["http://127.0.0.1:9988/rules1.css",
+                  "http://127.0.0.1:9988/rules2.css"]
+        };
 
         var expected = {};
         expected.used = {};
@@ -46,7 +48,7 @@ buster.testCase("uCSS (using http)", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -56,26 +58,27 @@ buster.testCase("uCSS (using http)", {
     // Doesn't do actual login, but checks that occurences are doubled, since
     // every page is checked twice (once with cookie set, and once without).
     "finds unused rules in several files (with 'login')": function(done) {
-        var markup = ["http://127.0.0.1:9988/markup1.html",
-                      "http://127.0.0.1:9988/markup2.html"];
-        var css = ["http://127.0.0.1:9988/rules1.css",
-                   "http://127.0.0.1:9988/rules2.css"];
+        var context = {
+            html: ["http://127.0.0.1:9988/markup1.html",
+                   "http://127.0.0.1:9988/markup2.html"],
+            css: ["http://127.0.0.1:9988/rules1.css",
+                  "http://127.0.0.1:9988/rules2.css"],
+            auth: {
+                "username": "foo",
+                "password": "bar",
+                "loginUrl": "http://example.com/login/",
+                "loginFunc": function(url, username, password, callback) {
+                    callback("1234");
+                }
+            }
+        };
 
         var expected = {};
         expected[".bar"] = 2;
         expected[".baz"] = 0;
         expected[".foo"] = 2;
 
-        var auth = {
-            "username": "foo",
-            "password": "bar",
-            "loginUrl": "http://example.com/login/",
-            "loginFunc": function(url, username, password, callback) {
-                callback("1234");
-            }
-        };
-
-        lib.analyze(css, markup, null, auth, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected);
             done();
         });

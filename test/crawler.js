@@ -1,7 +1,7 @@
 /* jshint: */
 /*global setTimeout public_functions assert require fs:true sinon:true */
 
-fs = require("fs");
+var fs = require("fs");
 
 if (typeof require !== "undefined") {
     var buster = require("buster");
@@ -115,8 +115,10 @@ buster.testCase("uCSS crawler", {
     },
 
     "can crawl webpages": function(done) {
-        var markup = ["http://127.0.0.1:9988/markup1.html"];
-        var css = ["http://127.0.0.1:9988/rules1.css"];
+        var context = {
+            html: ["http://127.0.0.1:9988/markup1.html"],
+            css: ["http://127.0.0.1:9988/rules1.css"]
+        };
 
         var expected = {};
         expected.used = {};
@@ -124,13 +126,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        var context = {
-            css: css,
-            html: "http://127.0.0.1:9988/markup.html",
-            crawl: true
-        };
-
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -138,8 +134,10 @@ buster.testCase("uCSS crawler", {
     },
 
     "does not go outside given domain": function(done) {
-        var markup = ["http://127.0.0.1:9988/external_links.html"];
-        var css = ["http://127.0.0.1:9988/rules1.css"];
+        var context = {
+            html: ["http://127.0.0.1:9988/external_links.html"],
+            css: ["http://127.0.0.1:9988/rules1.css"]
+        };
 
         var expected = {};
         expected.used = {};
@@ -147,13 +145,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        var context = {
-            css: css,
-            html: "http://127.0.0.1:9988/markup.html",
-            crawl: true
-        };
-
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -161,8 +153,10 @@ buster.testCase("uCSS crawler", {
     },
 
     "handles relative paths": function(done) {
-        var markup = ["http://127.0.0.1:9988/path1/relative_paths.html"];
-        var css = ["http://127.0.0.1:9988/rules2.css"];
+        var context = {
+            html: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+            css: ["http://127.0.0.1:9988/rules2.css"]
+        };
 
         var expected = {};
         expected.used = {};
@@ -172,17 +166,10 @@ buster.testCase("uCSS crawler", {
         expected.used[".qux"] = 1;
         expected.duplicates = {};
 
-        var context = {
-            css: css,
-            html: "http://127.0.0.1:9988/markup.html",
-            crawl: true
-        };
-
-        lib.analyze(css, markup, null, null, function(result) {
+        lib.analyze(context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
         });
     }
-
 });
