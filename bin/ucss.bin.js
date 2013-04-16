@@ -114,7 +114,14 @@ function main() {
             result, argv.used, !argv.nosummary, argv.duplicates);
     };
 
-    ucss.analyze(css, html, whitelist, auth, done);
+    var context = {
+        css: css,
+        html: html,
+        whitelist: whitelist,
+        auth: auth
+    };
+
+    ucss.analyze(context, done);
 }
 
 
