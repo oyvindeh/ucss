@@ -1,9 +1,7 @@
 #!/usr/bin/env node
-/* jshint: */
-/*global module console process assert require fs:true sinon:true */
+/* global module */
 
 var ucss = require('../lib/ucss');
-var fs = require('fs');
 var optimist = require('optimist');
 
 

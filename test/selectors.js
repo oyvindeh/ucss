@@ -1,5 +1,4 @@
-/* jshint: */
-/*global setTimeout public_functions assert require fs:true sinon:true */
+/* global assert:true */
 
 var fs = require("fs");
 
