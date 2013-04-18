@@ -10,6 +10,7 @@ if (typeof require !== "undefined") {
 var pageSetOne = {
     "/rules1.css": ".foo {} .bar {}",
     "/rules2.css": ".foo {} .bar {} .baz {} .qux {}",
+    "/rules3.css": ".foo {} .bar {} .baz {} .qux {} .quux {}",
     "/markup1.html":
             ["<html>",
             "  <head>",
@@ -75,6 +76,13 @@ var pageSetOne = {
             "  </head>",
             "  <body class='qux'>",
             "  </body>",
+            "</html>"].join(""),
+    "/not_linked_to.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='quux'>",
+            "  </body>",
             "</html>"].join("")
 };
 
@@ -114,7 +122,9 @@ buster.testCase("uCSS crawler", {
 
     "can crawl webpages": function(done) {
         var context = {
-            html: ["http://127.0.0.1:9988/markup1.html"],
+            pages: {
+                crawl: ["http://127.0.0.1:9988/markup1.html"]
+            },
             css: ["http://127.0.0.1:9988/rules1.css"]
         };
 
@@ -133,7 +143,9 @@ buster.testCase("uCSS crawler", {
 
     "does not go outside given domain": function(done) {
         var context = {
-            html: ["http://127.0.0.1:9988/external_links.html"],
+            pages: {
+                crawl: ["http://127.0.0.1:9988/external_links.html"]
+            },
             css: ["http://127.0.0.1:9988/rules1.css"]
         };
 
@@ -152,7 +164,9 @@ buster.testCase("uCSS crawler", {
 
     "handles relative paths": function(done) {
         var context = {
-            html: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+            pages: {
+                crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"]
+            },
             css: ["http://127.0.0.1:9988/rules2.css"]
         };
 
@@ -169,5 +183,59 @@ buster.testCase("uCSS crawler", {
             assert.equals(result.duplicates, expected.duplicates);
             done();
         });
+    },
+
+    "handles includes": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+                include: ["http://127.0.0.1:9988/not_linked_to.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules3.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 1;
+        expected.used[".bar"] = 1;
+        expected.used[".baz"] = 1;
+        expected.used[".qux"] = 1;
+        expected.used[".quux"] = 1;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "handles excludes": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+                exclude: ["http://127.0.0.1:9988/path1/relative1.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules3.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 0;
+        expected.used[".bar"] = 1;
+        expected.used[".baz"] = 1;
+        expected.used[".qux"] = 1;
+        expected.used[".quux"] = 0;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "// Does not follow links in includes": function() {
+
     }
 });

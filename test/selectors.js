@@ -22,7 +22,9 @@ buster.testCase("CSS Selectors:", {
 
     "Class": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo'></body></html>"]
+            },
             css: ".foo {}"
         };
 
@@ -39,7 +41,9 @@ buster.testCase("CSS Selectors:", {
 
     "Id": function(done) {
         var context = {
-            html: "<html><head></head><body id='foo'></body></html>",
+            pages: {
+                include: ["<html><head></head><body id='foo'></body></html>"]
+            },
             css: "#foo {}"
         };
 
@@ -56,7 +60,9 @@ buster.testCase("CSS Selectors:", {
 
     "All": function(done) {
         var context = {
-            html: "<html><head></head><body><div></div></body></html>",
+            pages: {
+                include: ["<html><head></head><body><div></div></body></html>"]
+            },
             css: "* {}"
         };
 
@@ -73,7 +79,9 @@ buster.testCase("CSS Selectors:", {
 
     "Element": function(done) {
         var context = {
-            html: "<html><head></head><body><div></div></body></html>",
+            pages: {
+                include: ["<html><head></head><body><div></div></body></html>"]
+            },
             css: "div {}"
         };
 
@@ -90,7 +98,9 @@ buster.testCase("CSS Selectors:", {
 
     "Element, element": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
+            },
             css: ".foo, .bar { color: red; }"
         };
 
@@ -107,7 +117,9 @@ buster.testCase("CSS Selectors:", {
 
     "Element + element": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
+            },
             css: ".foo + .bar { color: red; }"
         };
 
@@ -124,7 +136,9 @@ buster.testCase("CSS Selectors:", {
 
     "[attribute=value]": function(done) {
         var context = {
-            html: "<html><head></head><body><div dir='rtl'></div></body></html>",
+            pages: {
+                include: ["<html><head></head><body><div dir='rtl'></div></body></html>"]
+            },
             css: "div[dir='rtl'] {}"
         };
 
@@ -141,7 +155,9 @@ buster.testCase("CSS Selectors:", {
 
     "Element1~element2": function(done) {
         var context = {
-            html: "<html><head></head><body><div></div><br/><p><br/><div></div><br/></body></html>",
+            pages: {
+                include: ["<html><head></head><body><div></div><br/><p><br/><div></div><br/></body></html>"]
+            },
             css: "div~br {}"
         };
 
@@ -159,7 +175,9 @@ buster.testCase("CSS Selectors:", {
 
     "handles pseudo elements": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo'></body></html>"]
+            },
             css: [".foo::link{} .bar:lang(nb){} .foo::link{}",
                   ".foo{} .foo{} .bar{} .baz:after{} input:invalid{}"].join("")
         };
@@ -192,7 +210,9 @@ buster.testCase("CSS @-rules:", {
 
     "Nested selectors (@media)": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
+            },
             css: [".foo { color: red; } ",
                    "@media all and (min-width: 500px) {",
                      ".bar { background: blue; }",
@@ -212,7 +232,9 @@ buster.testCase("CSS @-rules:", {
 
     "Selectors succeding nested selectors (@media)": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
+            },
             css: [".foo { color: red; } ",
                    "@media all and (min-width: 500px) ",
                      "{ .bar { background: blue; } ",
@@ -232,7 +254,9 @@ buster.testCase("CSS @-rules:", {
 
     "Ignores @font-face": function(done) {
         var context = {
-                html: "<html><head></head><body class='foo'></body></html>",
+                pages: {
+                    include: ["<html><head></head><body class='foo'></body></html>"]
+                },
                 css: ["@font-face {font-family: 'MyWebFont'; ",
                    "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
                    "format('embedded-opentype'), url('webfont.woff') ",
@@ -257,7 +281,9 @@ buster.testCase("CSS @-rules:", {
 
     "Ignores @keyframe": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo'></body></html>"]
+            },
             css: ["@-webkit-keyframes progress-bar-stripes{",
                      "from{background-position:40px 0}",
                      "to{background-position:0 0}",
@@ -296,7 +322,9 @@ buster.testCase("CSS @-rules:", {
 
     "Handles @supports": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo baz'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo baz'></body></html>"]
+            },
             css: [".foo { background: blue } ",
                    "@supports (box-shadow: 2px 2px 2px black) { ",
                    ".bar { box-shadow: 2px 2px 2px black; }} ",
@@ -320,7 +348,9 @@ buster.testCase("CSS @-rules:", {
 
     "Handles @document": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo baz'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo baz'></body></html>"]
+            },
             css: [".foo { background: blue } ",
                    "@document url(http://www.example.com/), ",
                      "url-prefix(http://www.example.com/Style/), ",

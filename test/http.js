@@ -33,8 +33,10 @@ buster.testCase("uCSS (using http)", {
 
     "can load and process resources": function(done) {
         var context = {
-            html: ["http://127.0.0.1:9988/markup1.html",
-                   "http://127.0.0.1:9988/markup2.html"],
+            pages: {
+                include: ["http://127.0.0.1:9988/markup1.html",
+                       "http://127.0.0.1:9988/markup2.html"]
+            },
             css: ["http://127.0.0.1:9988/rules1.css",
                   "http://127.0.0.1:9988/rules2.css"]
         };
@@ -57,8 +59,10 @@ buster.testCase("uCSS (using http)", {
     // every page is checked twice (once with cookie set, and once without).
     "finds unused rules in several files (with 'login')": function(done) {
         var context = {
-            html: ["http://127.0.0.1:9988/markup1.html",
-                   "http://127.0.0.1:9988/markup2.html"],
+            pages: {
+                include: ["http://127.0.0.1:9988/markup1.html",
+                          "http://127.0.0.1:9988/markup2.html"]
+            },
             css: ["http://127.0.0.1:9988/rules1.css",
                   "http://127.0.0.1:9988/rules2.css"],
             auth: {

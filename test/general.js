@@ -15,9 +15,11 @@ buster.testCase("uCSS", {
     tearDown: function () {
     },
 
-    "works with empty markup": function(done) {
+    "handles empty markup": function(done) {
         var context = {
-            html: "",
+            pages: {
+                include: [""]
+            },
             css: ".foo {}"
         };
 
@@ -31,7 +33,9 @@ buster.testCase("uCSS", {
 
     "works with several css instances": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo bar'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo bar'></body></html>"]
+            },
             css: [".foo {}", ".bar {}"]
         };
 
@@ -46,9 +50,11 @@ buster.testCase("uCSS", {
         });
     },
 
-    "works with empty CSS": function(done) {
+    "handles empty CSS": function(done) {
         var context = {
-            html: "<html></html>",
+            pages: {
+                include: ["<html></html>"]
+            },
             css: ""
         };
 
@@ -62,7 +68,9 @@ buster.testCase("uCSS", {
 
     "finds duplicates": function(done) {
         var context = {
-            html: "<html><head></head><body class='foo'></body></html>",
+            pages: {
+                include: ["<html><head></head><body class='foo'></body></html>"]
+            },
             css: ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}"
         };
 
@@ -79,7 +87,9 @@ buster.testCase("uCSS", {
 
     "finds unused rules": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                html: fs.readFileSync("fixtures/markup.html").toString()
+            },
             css: fs.readFileSync("fixtures/rules.css").toString()
         };
 
@@ -108,7 +118,9 @@ buster.testCase("uCSS", {
 
     "finds unused rules, with whitelist": function(done) {
         var context = {
-            html: fs.readFileSync("fixtures/markup.html").toString(),
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
+            },
             css: fs.readFileSync("fixtures/rules.css").toString(),
             whitelist: ['.foo .qux .bar', '.foo .qux .bar .baz']
         };
@@ -137,8 +149,10 @@ buster.testCase("uCSS", {
 
     "finds unused rules in several files": function(done) {
         var context = {
-            html: [fs.readFileSync("fixtures/markup.html").toString(),
-                      fs.readFileSync("fixtures/markup2.html").toString()],
+            pages: {
+                include: [fs.readFileSync("fixtures/markup.html").toString(),
+                          fs.readFileSync("fixtures/markup2.html").toString()]
+            },
             css: fs.readFileSync("fixtures/rules.css").toString()
         };
 
