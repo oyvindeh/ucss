@@ -255,7 +255,7 @@ buster.testCase("CSS @-rules:", {
     "Ignores @font-face": function(done) {
         var context = {
                 pages: {
-                    include: ["<html><head></head><body class='foo'></body></html>"]
+             include: ["<html><head></head><body class='foo'></body></html>"]
                 },
                 css: ["@font-face {font-family: 'MyWebFont'; ",
                    "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
