@@ -15,12 +15,56 @@ buster.testCase("uCSS", {
     tearDown: function () {
     },
 
-    "handles empty markup": function(done) {
+    "handles no markup given": function(done) {
         var context = {
             pages: {
-                include: [""]
             },
             css: ".foo {}"
+        };
+
+        var expected = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "//handles empty markup": function(done) {
+        var context = {
+            pages: {
+            },
+            css: ".foo {}"
+        };
+
+        var expected = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "handles no CSS given": function(done) {
+        var context = {
+            pages: {
+                include: ["<html></html>"]
+            }
+        };
+
+        var expected = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "//handles empty CSS": function(done) {
+        var context = {
+            pages: {
+                include: ["<html></html>"]
+            }
         };
 
         var expected = {};
@@ -50,22 +94,6 @@ buster.testCase("uCSS", {
         });
     },
 
-    "handles empty CSS": function(done) {
-        var context = {
-            pages: {
-                include: ["<html></html>"]
-            },
-            css: ""
-        };
-
-        var expected = {};
-
-        lib.analyze(context, function(result) {
-            assert.equals(result, expected);
-            done();
-        });
-    },
-
     "finds duplicates": function(done) {
         var context = {
             pages: {
@@ -88,7 +116,7 @@ buster.testCase("uCSS", {
     "finds unused rules": function(done) {
         var context = {
             pages: {
-                html: fs.readFileSync("fixtures/markup.html").toString()
+                include: [fs.readFileSync("fixtures/markup.html").toString()]
             },
             css: fs.readFileSync("fixtures/rules.css").toString()
         };
@@ -174,5 +202,8 @@ buster.testCase("uCSS", {
             assert.equals(result.used, expected);
             done();
         });
-    }
+    },
+
+    "//checks that strings works as params": function() {},
+    "//checks that lists works as params": function() {}
 });
