@@ -1,4 +1,4 @@
-## uCSS (v0.2.1-beta)
+## uCSS (v0.2.2-beta)
 Find unused CSS selectors, as well as duplicate selectors. Also, you can get an overview of how many matches there are for each rule in your markup.
 
 Key features:
