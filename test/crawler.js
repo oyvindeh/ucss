@@ -84,6 +84,15 @@ var pageSetOne = {
             "  <body class='quux'>",
             "  </body>",
             "</html>"].join(""),
+    "/deadlink.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo'>",
+            "    <a href='markup1.html'>markup1.html</a>",
+            "    <a href='not_existing.html'>not_existing.html</a>",
+            "  </body>",
+            "</html>"].join(""),
     "/subdomain_links.html":
             ["<html>",
             "  <head>",
@@ -250,6 +259,27 @@ buster.testCase("uCSS crawler", {
         expected.used[".baz"] = 1;
         expected.used[".qux"] = 1;
         expected.used[".quux"] = 0;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "handles dead links": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/deadlink.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules1.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 2;
+        expected.used[".bar"] = 1;
         expected.duplicates = {};
 
         lib.analyze(context, function(result) {
