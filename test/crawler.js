@@ -83,6 +83,30 @@ var pageSetOne = {
             "  </head>",
             "  <body class='quux'>",
             "  </body>",
+            "</html>"].join(""),
+    "/subdomain_links.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo'>",
+            "    <a href='markup1.html'>markup1.html</a>",
+            "    <a href='subdomain/doc1.html'>doc1.html</a>",
+            "    <a href='subdomain/doc2.html'>doc2.html</a>",
+            "  </body>",
+            "</html>"].join(""),
+    "/subdomain/doc1.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo'>",
+            "  </body>",
+            "</html>"].join(""),
+    "/subdomain/doc2.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='bar'>",
+            "  </body>",
             "</html>"].join("")
 };
 
@@ -235,7 +259,74 @@ buster.testCase("uCSS crawler", {
         });
     },
 
-    "// Does not follow links in includes": function() {
+    "handles exclude (given as string)": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+                exclude: "http://127.0.0.1:9988/path1/relative1.html"
+            },
+            css: ["http://127.0.0.1:9988/rules3.css"]
+        };
 
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 0;
+        expected.used[".bar"] = 1;
+        expected.used[".baz"] = 1;
+        expected.used[".qux"] = 1;
+        expected.used[".quux"] = 0;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "handles exclude of subdomain": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/subdomain_links.html"],
+                exclude: ["http://127.0.0.1:9988/subdomain/*"]
+            },
+            css: ["http://127.0.0.1:9988/rules1.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 2;
+        expected.used[".bar"] = 1;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "Does not follow links in includes": function(done) {
+        var context = {
+            pages: {
+                include: ["http://127.0.0.1:9988/path1/relative_paths.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules3.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".foo"] = 0;
+        expected.used[".bar"] = 0;
+        expected.used[".baz"] = 0;
+        expected.used[".qux"] = 0;
+        expected.used[".quux"] = 0;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
     }
 });

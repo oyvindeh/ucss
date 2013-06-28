@@ -30,7 +30,7 @@ buster.testCase("uCSS", {
         });
     },
 
-    "//handles empty markup": function(done) {
+    "handles empty markup": function(done) {
         var context = {
             pages: {
             },
@@ -60,7 +60,7 @@ buster.testCase("uCSS", {
         });
     },
 
-    "//handles empty CSS": function(done) {
+    "handles empty CSS": function(done) {
         var context = {
             pages: {
                 include: ["<html></html>"]
@@ -204,6 +204,41 @@ buster.testCase("uCSS", {
         });
     },
 
-    "//checks that strings works as params": function() {},
-    "//checks that lists works as params": function() {}
+    "checks that lists works as params": function(done) {
+        var context = {
+            pages: {
+                include: ["<html><head></head><body class='foo bar'></body></html>"]
+            },
+            css: [".foo {}"]
+        };
+
+        var expected = {};
+        expected.used = { ".foo": 1};
+        expected.duplicates = {};
+        expected.ignored = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    },
+
+    "checks that strings works as params": function(done) {
+        var context = {
+            pages: {
+                include: "<html><head></head><body class='foo bar'></body></html>"
+            },
+            css: ".foo {}"
+        };
+
+        var expected = {};
+        expected.used = { ".foo": 1};
+        expected.duplicates = {};
+        expected.ignored = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result, expected);
+            done();
+        });
+    }
 });
