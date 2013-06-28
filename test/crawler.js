@@ -358,5 +358,34 @@ buster.testCase("uCSS crawler", {
             assert.equals(result.duplicates, expected.duplicates);
             done();
         });
+    },
+
+    "can crawl webpages that requires login": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/markup1.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules1.css"],
+            auth: {
+                "username": "foo",
+                "password": "bar",
+                "loginUrl": "http://example.com/login/",
+                "loginFunc": function(url, username, password, callback) {
+                    callback("1234");
+                }
+            }
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".bar"] = 2;
+        expected.used[".foo"] = 2;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
     }
 });
