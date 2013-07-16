@@ -19,5 +19,5 @@ module.exports = {
     "css": [ // CSS files to check
         "base.css"
     ],
-    "whitelist": [".foo", ".bar"] // CSS rules to ignore
+    "whitelist": [".foo", ".bar"] // CSS rules to ignore, e.g. ones added by JavaScript
 };
