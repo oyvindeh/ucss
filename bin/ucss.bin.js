@@ -97,15 +97,15 @@ function main() {
         showHelp();
     }
 
-    var css, html, whitelist, auth;
+    var css, pages, whitelist, auth;
     if (config) {
         css = config.css;
-        html = config.html;
+        pages = config.pages;
         whitelist = config.whitelist;
         auth = config.auth;
     } else {
         css = argv.css;
-        html = argv.html;
+        pages = { "crawl": argv.html };
     }
 
     // Custom output function
@@ -116,7 +116,7 @@ function main() {
 
     var context = {
         css: css,
-        html: html,
+        pages: pages,
         whitelist: whitelist,
         auth: auth
     };
