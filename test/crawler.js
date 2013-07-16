@@ -35,7 +35,7 @@ var pageSetOne = {
             "  <body class='bar'>",
             "    <a href='http://127.0.0.1:9989/index.html'>index.html</a>",
             "    <a href='http://127.0.0.1:9988/markup1.html'>markup1</a>",
-            "    <a href='/markup2.html'>markup1</a>",
+            "    <a href='/markup2.html'>markup2</a>",
             "  </body>",
             "</html>"].join(""),
     "/path1/relative_paths.html":
@@ -43,7 +43,7 @@ var pageSetOne = {
             "  <head>",
             "  </head>",
             "  <body>",
-            "    <a href='relative1.html'>index.html</a>",
+            "    <a href='http://127.0.0.1:9988/path1/relative1.html'>index.html</a>",
             "    <a href='../relative2.html'>markup1</a>",
             "    <a href='/relative3.html'>markup1</a>",
             "    <a href='../path2/relative4.html'>markup1</a>",
@@ -97,10 +97,10 @@ var pageSetOne = {
             ["<html>",
             "  <head>",
             "  </head>",
-            "  <body class='foo'>",
-            "    <a href='markup1.html'>markup1.html</a>",
-            "    <a href='subdomain/doc1.html'>doc1.html</a>",
-            "    <a href='subdomain/doc2.html'>doc2.html</a>",
+            "  <body class='foo bar'>",
+            "    <a href='no_links.html'>no_links.html</a>",
+            "    <a href='/subdomain/doc1.html'>doc1.html</a>",
+            "    <a href='http://127.0.0.1:9988/subdomain/doc2.html'>doc3.html</a>",
             "  </body>",
             "</html>"].join(""),
     "/subdomain/doc1.html":
@@ -116,7 +116,39 @@ var pageSetOne = {
             "  </head>",
             "  <body class='bar'>",
             "  </body>",
+            "</html>"].join(""),
+    "/parameters.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo'>",
+            "    <a href='no_links.html?foo'>markup1</a>",
+            "    <a href='no_links.html?bar'>markup1</a>",
+            "  </body>",
+            "</html>"].join(""),
+    "/no_links.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='bar'>",
+            "  </body>",
+            "</html>"].join(""),
+    "/no_links.html?foo":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='bar'>",
+            "  </body>",
+            "</html>"].join(""),
+    "/no_links.html?bar":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='bar'>",
+            "  </body>",
             "</html>"].join("")
+
+
 };
 
 
@@ -325,8 +357,8 @@ buster.testCase("uCSS crawler", {
 
         var expected = {};
         expected.used = {};
-        expected.used[".foo"] = 2;
-        expected.used[".bar"] = 1;
+        expected.used[".foo"] = 1;
+        expected.used[".bar"] = 2;
         expected.duplicates = {};
 
         lib.analyze(context, function(result) {
@@ -380,6 +412,27 @@ buster.testCase("uCSS crawler", {
         expected.used = {};
         expected.used[".bar"] = 2;
         expected.used[".foo"] = 2;
+        expected.duplicates = {};
+
+        lib.analyze(context, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "does not revisit URLs with parameters": function(done) {
+        var context = {
+            pages: {
+                crawl: ["http://127.0.0.1:9988/parameters.html"]
+            },
+            css: ["http://127.0.0.1:9988/rules1.css"]
+        };
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".bar"] = 1;
+        expected.used[".foo"] = 1;
         expected.duplicates = {};
 
         lib.analyze(context, function(result) {
