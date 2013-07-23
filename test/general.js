@@ -16,97 +16,81 @@ buster.testCase("uCSS", {
     },
 
     "handles no markup given": function(done) {
-        var context = {
-            pages: {
-            },
-            css: ".foo {}"
-        };
+        var pages = {};
+        var css = ".foo {}";
 
         var expected = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
-
     "handles empty markup": function(done) {
-        var context = {
-            pages: {
-            },
-            css: ".foo {}"
-        };
+        var pages = {};
+        var css = ".foo {}";
 
         var expected = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "handles no CSS given": function(done) {
-        var context = {
-            pages: {
+        var pages = {
                 include: ["<html></html>"]
-            }
         };
 
         var expected = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
-
     "handles empty CSS": function(done) {
-        var context = {
-            pages: {
-                include: ["<html></html>"]
-            }
+        var pages = {
+            include: ["<html></html>"]
         };
 
         var expected = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "works with several css instances": function(done) {
-        var context = {
-            pages: {
-                include: ["<html><head></head><body class='foo bar'></body></html>"]
-            },
-            css: [".foo {}", ".bar {}"]
+        var pages = {
+            include: ["<html><head></head><body class='foo bar'></body></html>"]
         };
+        var css = [".foo {}", ".bar {}"];
 
         var expected = {};
         expected.used = { ".foo": 1, ".bar": 1 };
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "finds duplicates": function(done) {
-        var context = {
-            pages: {
-                include: ["<html><head></head><body class='foo'></body></html>"]
-            },
-            css: ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}"
+        var pages = {
+            include: ["<html><head></head><body class='foo'></body></html>"]
         };
+        var css = ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}";
 
         var expected = {};
         expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
         expected.duplicates = {".foo": 3, ".bar": 2};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -114,12 +98,10 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules": function(done) {
-        var context = {
-            pages: {
-                include: [fs.readFileSync("fixtures/markup.html").toString()]
-            },
-            css: fs.readFileSync("fixtures/rules.css").toString()
+        var pages = {
+            include: [fs.readFileSync("fixtures/markup.html").toString()]
         };
+        var css = fs.readFileSync("fixtures/rules.css").toString();
 
         var expected = {};
         expected.used = {'*': 9,
@@ -137,7 +119,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -145,11 +127,11 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules, with whitelist": function(done) {
+        var pages = {
+            include: [fs.readFileSync("fixtures/markup.html").toString()]
+        };
+        var css = fs.readFileSync("fixtures/rules.css").toString();
         var context = {
-            pages: {
-                include: [fs.readFileSync("fixtures/markup.html").toString()]
-            },
-            css: fs.readFileSync("fixtures/rules.css").toString(),
             whitelist: ['.foo .qux .bar', '.foo .qux .bar .baz']
         };
 
@@ -168,7 +150,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, context, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -176,13 +158,11 @@ buster.testCase("uCSS", {
     },
 
     "finds unused rules in several files": function(done) {
-        var context = {
-            pages: {
-                include: [fs.readFileSync("fixtures/markup.html").toString(),
-                          fs.readFileSync("fixtures/markup2.html").toString()]
-            },
-            css: fs.readFileSync("fixtures/rules.css").toString()
+        var pages = {
+            include: [fs.readFileSync("fixtures/markup.html").toString(),
+                      fs.readFileSync("fixtures/markup2.html").toString()]
         };
+        var css = fs.readFileSync("fixtures/rules.css").toString();
 
         var expected = {};
         expected['*'] = 18;
@@ -198,45 +178,41 @@ buster.testCase("uCSS", {
         expected['.foo .qux .bar'] = 0;
         expected['.foo .qux .bar .baz'] = 0;
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result.used, expected);
             done();
         });
     },
 
     "checks that lists works as params": function(done) {
-        var context = {
-            pages: {
-                include: ["<html><head></head><body class='foo bar'></body></html>"]
-            },
-            css: [".foo {}"]
+        var pages = {
+            include: ["<html><head></head><body class='foo bar'></body></html>"]
         };
+        var css = [".foo {}"];
 
         var expected = {};
         expected.used = { ".foo": 1};
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result, expected);
             done();
         });
     },
 
     "checks that strings works as params": function(done) {
-        var context = {
-            pages: {
-                include: "<html><head></head><body class='foo bar'></body></html>"
-            },
-            css: ".foo {}"
+        var pages = {
+            include: "<html><head></head><body class='foo bar'></body></html>"
         };
+        var css = ".foo {}";
 
         var expected = {};
         expected.used = { ".foo": 1};
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result, expected);
             done();
         });

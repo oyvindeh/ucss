@@ -32,14 +32,12 @@ buster.testCase("uCSS (using http)", {
     },
 
     "can load and process resources": function(done) {
-        var context = {
-            pages: {
-                include: ["http://127.0.0.1:9988/markup1.html",
-                       "http://127.0.0.1:9988/markup2.html"]
-            },
-            css: ["http://127.0.0.1:9988/rules1.css",
-                  "http://127.0.0.1:9988/rules2.css"]
+        var pages = {
+            include: ["http://127.0.0.1:9988/markup1.html",
+                      "http://127.0.0.1:9988/markup2.html"]
         };
+        var css = ["http://127.0.0.1:9988/rules1.css",
+                   "http://127.0.0.1:9988/rules2.css"];
 
         var expected = {};
         expected.used = {};
@@ -48,7 +46,7 @@ buster.testCase("uCSS (using http)", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -58,13 +56,14 @@ buster.testCase("uCSS (using http)", {
     // Doesn't do actual login, but checks that occurences are doubled, since
     // every page is checked twice (once with cookie set, and once without).
     "finds unused rules in several files (with 'login')": function(done) {
+        var pages = {
+            include: ["http://127.0.0.1:9988/markup1.html",
+                      "http://127.0.0.1:9988/markup2.html"]
+        };
+        var css = ["http://127.0.0.1:9988/rules1.css",
+                  "http://127.0.0.1:9988/rules2.css"];
+
         var context = {
-            pages: {
-                include: ["http://127.0.0.1:9988/markup1.html",
-                          "http://127.0.0.1:9988/markup2.html"]
-            },
-            css: ["http://127.0.0.1:9988/rules1.css",
-                  "http://127.0.0.1:9988/rules2.css"],
             auth: {
                 "username": "foo",
                 "password": "bar",
@@ -80,7 +79,7 @@ buster.testCase("uCSS (using http)", {
         expected[".baz"] = 0;
         expected[".foo"] = 2;
 
-        lib.analyze(context, function(result) {
+        lib.analyze(pages, css, context, function(result) {
             assert.equals(result.used, expected);
             done();
         });

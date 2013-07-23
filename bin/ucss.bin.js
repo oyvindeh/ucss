@@ -115,13 +115,11 @@ function main() {
     };
 
     var context = {
-        css: css,
-        pages: pages,
         whitelist: whitelist,
         auth: auth
     };
 
-    ucss.analyze(context, done);
+    ucss.analyze(pages, css, context, done);
 }
 
 
