@@ -7,16 +7,16 @@ module.exports = {
     },
     "pages": {
         "crawl": "http://localhost:8000/",
-        "include": [ // HTML files/URLs to check
-            "http://localhost:8001/unlinked_articles/1",
-            "http://localhost:8001/unlinked_articles/2"
-        ],
-        "exclude": [ // HTML files/URLs to check
+        "exclude": [ // List of HTML files/URLs to check
             "http://localhost:8000/admin/*",
             "http://localhost:8000/foo/"
+        ],
+        "include": [ // List of HTML files/URLs to check
+            "http://localhost:8001/unlinked_articles/1",
+            "http://localhost:8001/unlinked_articles/2"
         ]
     },
-    "css": [ // CSS files to check
+    "css": [ // List of CSS files to check
         "base.css"
     ],
     "whitelist": [".foo", ".bar"] // CSS rules to ignore, e.g. ones added by JavaScript
