@@ -37,18 +37,15 @@ function main() {
             used: {
                 alias : 'u',
                 description :
-                    'Show number of matches for each rule.',
-                "default": false
+                    'Show number of matches for each rule.'
             },
             nosummary: {
                 alias : 'n',
-                description : 'Do not output summary.',
-                "default": false
+                description : 'Do not output summary, only list of unused rules.'
             },
             duplicates: {
                 alias : 'd',
-                description : 'Show duplicates.',
-                "default": false
+                description : 'Show duplicates.'
             }
         }).argv;
 
@@ -60,6 +57,16 @@ function main() {
     if(undefined === argv.config) {
         argv.config = true;
     }
+    if(undefined === argv.used) {
+        argv.used = false;
+    }
+    if(undefined === argv.nosummary) {
+        argv.nosummary = false;
+    }
+    if(undefined === argv.duplicates) {
+        argv.duplicates = false;
+    }
+
 
     var config = null;
 
