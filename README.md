@@ -5,17 +5,17 @@ Basic features:
 * Find unused CSS selectors in a HTML code base.
 * Find duplicate CSS selectors.
 * Count matches for each rule.
-* Follows links (crawl) within the given domain.
+* Follows links (crawl), within the given domain.
 
 But wait, there's more! By setting up a config file, uCSS can also:
 * Do login, and visit pages both as a logged in and logged out user.
-* Exclude certain pages and/or subdomains when following links.
-* Visit individual pages instead of, or in addition to, following links.
-* White list CSS rules to be ignored (e.g. rules toggled by JavaScript).
+* Exclude specific pages and/or subdomains (when crawling).
+* Visit individual pages instead of, or in addition to, crawling.
+* White list CSS rules to be ignored (e.g. those toggled by JavaScript).
 
 uCSS is written for [Node](http://www.nodejs.org/). It can be used both as a
-library and as a command line tool. With a little tweaking, it should also be
-easy to use it in other contexts as well.
+library and as a command line tool. With a little tweaking, it should be easy
+to use it in other contexts as well.
 
 Want to contribute? Please read below.
 
@@ -83,23 +83,22 @@ uCSS follows links by default. But there may be specific files, or whole
 subdomains, that you don't want to check. Those can be listed inside
 pages.exclude. If you want to exclude a whole subdomain, use a wildcard ("*")
 at the end of the url (please see [example config
-file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js).
+file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
-In other cases, you want to visit just a single file, or there are files that
+In other cases, you may want to visit just a single file, or there are files that
 the crawler cannot reach (e.g. because they are not linked to). Those can be
 added to pages.include. Also, if you want to visit certain pages under an
 excluded subdomain, you can add those to pages.include. Note that pages.include
 does not support wildcards.
 
-In addition to managing what pages to visit (and not to visit) you can also
-check pages both as a regular visitor and as a logged in user. This is done by
-specifying a function which logs in, returning a cookie for uCSS to use for
-identifying itself to the server.
+In addition to managing what pages to visit (and not to visit), you can check
+pages both as a regular visitor and as a logged in user. This is done by
+specifying a function that performs a log in, and then returns a session cookie
+for uCSS to use for identifying itself to the server.
 
 Furthermore, you can create a white list of selectors to be ignored. This is
-useful if you e.g. have classes toggled by JavaScript, which are not in use
-when uCSS visits pages, or if you have special styling for various error
-situations that is tricky to trigger.
+useful if you e.g. have classes toggled by JavaScript, or if you have special
+styling for various error situations that is tricky to trigger.
 
 As well as checking several html files, uCSS can also combine CSS from several
 files. You can specify a list of CSS files in your config file.
@@ -136,24 +135,26 @@ module.exports = {
 If you use Django, you can use the supplied Django login helper (see [example
 config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
-### Pages not reachable by crawler
-Some pages are not accessible when following links:
+### Things to be aware of
+
+#### Pages not reachable by crawler
+Some pages are not accessible when crawling:
 * Pages that are only accessible by posting a form will not be checked. You may
-add them to pages.include if they are possible to reach without posting data.
+add them to pages.include if they reachable without posting data.
 * All parameters in links are stripped away, so pages that are only accessible
 through giving parameters will not be checked.
-* Pages that are not linked to in other pages will not be checked. You may add them to pages.include.
+* Pages that are not linked to will not be checked. You may add them to pages.include.
+
+#### At-rules
+All at-rules are ignored, except @media: All the content inside media queries
+is read as if there were no media query.
 
 ### What features are missing?
 uCSS can (currently) NOT:
 * Look for internal style sheets, or inline styles.
-* Capture classes etc. that is switched on/off using JavaScript in a browser.
+* Capture rules that are switched on using JavaScript after page load.
 
 These features may, or may not, be added in the future.
-
-### At-rules
-All at-rules are ignored, except @media: All the content inside media queries
-is read as if there were no media query.
 
 ### I want to contribute!
 
