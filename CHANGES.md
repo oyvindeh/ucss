@@ -1,16 +1,26 @@
-##
-*   Replace jsdom and jQuery with Cheerio.
-*   Use request module instead of http/https
+## 2013.07.26, Version 0.3.0-beta
+
+*   Features
+    - Follow links/crawl (#3)
+
+*   Other:
+    - Replace jsdom and jQuery with Cheerio.
+    - Use request module instead of http/https (except in helpers/login.js).
+    - Major refactoring, which includes introducing the promises pattern for
+      managing callbacks (using Q).
 
 ## 2013.03.11, Version 0.2.2-beta
+
 *   Bug fixes:
     - Make sure @keyframe and @font-face does not crash uCSS (issues #15, #16)
 
 ## 2012.11.23, Version 0.2.1-beta
+
 *   Bug fixes:
     - Fix loading of config from relative paths.
 
 ## 2012.09.17, Version 0.2.0-beta
+
 *   Changes:
     - Change config file format from JSON to Node module
       NOTE: This breaks backwards compability.
