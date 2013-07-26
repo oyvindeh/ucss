@@ -24,11 +24,11 @@ function main() {
             },
             html: {
                 alias : 'h',
-                description : 'HTML to load.'
+                description : 'HTML to load (local file or URL).'
             },
             css: {
                 alias : 'c',
-                description : 'CSS to load.'
+                description : 'CSS to load (local file or URL).'
             },
             config: {
                 alias : 'g',
