@@ -1,7 +1,8 @@
 ## 2013.07.26, Version 0.3.0-beta
 
 *   Features
-    - Follow links/crawl (#3)
+    - Follow links/crawl (#3).
+      When running from command line, crawling is the new default.
 
 *   Other:
     - Replace jsdom and jQuery with Cheerio.
