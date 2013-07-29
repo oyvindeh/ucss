@@ -119,6 +119,7 @@ function main() {
     var done = function(result) {
         require('../lib/helpers/output').standard(
             result, argv.used, !argv.nosummary, argv.duplicates);
+        process.exit(0);
     };
 
     var context = {
