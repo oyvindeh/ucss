@@ -60,13 +60,14 @@ function main() {
     if(undefined === argv.used) {
         argv.used = false;
     }
-    if(undefined === argv.nosummary) {
-        argv.nosummary = false;
-    }
     if(undefined === argv.duplicates) {
         argv.duplicates = false;
     }
 
+    var summary = false;
+    if(undefined === argv.nosummary) {
+        summary = true;
+    }
 
     var config = null;
 
@@ -118,7 +119,7 @@ function main() {
     // Custom output function
     var done = function(result) {
         require('../lib/helpers/output').standard(
-            result, argv.used, !argv.nosummary, argv.duplicates);
+            result, argv.used, summary, argv.duplicates);
         process.exit(0);
     };
 
