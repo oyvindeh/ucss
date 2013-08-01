@@ -104,13 +104,13 @@ function main() {
     } else {
         showHelp();
     }
-
-    var css, pages, whitelist, auth;
+    var css, pages, whitelist, auth, timeout;
     if (config) {
         css = config.css;
         pages = config.pages;
         whitelist = config.whitelist;
         auth = config.auth;
+        timeout = config.timeout;
     } else {
         css = argv.css;
         pages = { "crawl": argv.html };
@@ -125,7 +125,8 @@ function main() {
 
     var context = {
         whitelist: whitelist,
-        auth: auth
+        auth: auth,
+        timeout: timeout
     };
 
     ucss.analyze(pages, css, context, done);

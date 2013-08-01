@@ -19,5 +19,6 @@ module.exports = {
     "css": [ // List of CSS files to check
         "base.css"
     ],
-    "whitelist": [".foo", ".bar"] // CSS rules to ignore, e.g. ones added by JavaScript
+    "whitelist": [".foo", ".bar"], // CSS rules to ignore, e.g. ones added by JavaScript
+    "timeout": 4000 // Timeout for HTTP requests (default is 4000ms).
 };
