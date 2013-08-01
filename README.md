@@ -141,9 +141,11 @@ config file](https://github.com/operasoftware/ucss/blob/master/examples/config_u
 Some pages are not accessible when crawling:
 * Pages that are only accessible by posting a form will not be checked. You may
 add them to pages.include if they reachable without posting data.
-* All parameters in links are stripped away, so pages that are only accessible
-through giving parameters will not be checked.
-* Pages that are not linked to will not be checked. You may add them to pages.include.
+* All parameters in links are normally stripped away when crawling, which may
+have side effects for the rendering of some pages. If you want an URL to be
+visited with specific parameters, you have to include it in pages.include.
+* When crawling, pages that are not linked to in other pages will not be
+checked. You may add them to pages.include.
 
 #### At-rules
 All at-rules are ignored, except @media: All the content inside media queries

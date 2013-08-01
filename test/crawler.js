@@ -117,13 +117,13 @@ var pageSetOne = {
             "  <body class='bar'>",
             "  </body>",
             "</html>"].join(""),
-    "/parameters.html":
+    "/links_with_parameters.html":
             ["<html>",
             "  <head>",
             "  </head>",
             "  <body class='foo'>",
-            "    <a href='no_links.html?foo'>markup1</a>",
-            "    <a href='no_links.html?bar'>markup1</a>",
+            "    <a href='no_links.html?foo=1'>markup1</a>",
+            "    <a href='no_links.html?bar=1'>markup1</a>",
             "  </body>",
             "</html>"].join(""),
     "/no_links.html":
@@ -133,29 +133,33 @@ var pageSetOne = {
             "  <body class='bar'>",
             "  </body>",
             "</html>"].join(""),
-    "/no_links.html?foo":
+    "/no_links.html?foo=1":
             ["<html>",
             "  <head>",
             "  </head>",
             "  <body class='bar'>",
             "  </body>",
             "</html>"].join(""),
-    "/no_links.html?bar":
+    "/no_links.html?bar=1":
             ["<html>",
             "  <head>",
             "  </head>",
             "  <body class='bar'>",
             "  </body>",
+            "</html>"].join(""),
+    "/has_parameters.html?foo=1":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo bar'>",
+            "  </body>",
             "</html>"].join("")
-
-
 };
 
 
 var pageSetTwo = {
     "/index.html": "<html><head></head><body class='baz'></body></html>"
 };
-
 
 buster.testCase("uCSS crawler", {
     setUp: function () {
@@ -404,9 +408,28 @@ buster.testCase("uCSS crawler", {
         });
     },
 
-    "does not revisit URLs with parameters": function(done) {
+    "strips away parameters, and visits URL only once": function(done) {
         var pages = {
-            crawl: ["http://127.0.0.1:9988/parameters.html"]
+            crawl: ["http://127.0.0.1:9988/links_with_parameters.html"]
+        };
+        var css = ["http://127.0.0.1:9988/rules1.css"];
+
+        var expected = {};
+        expected.used = {};
+        expected.used[".bar"] = 1;
+        expected.used[".foo"] = 1;
+        expected.duplicates = {};
+
+        lib.analyze(pages, css, null, function(result) {
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            done();
+        });
+    },
+
+    "does not strip away parameters from links in include list": function(done) {
+        var pages = {
+            include: ["http://127.0.0.1:9988/has_parameters.html?foo=1"]
         };
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
