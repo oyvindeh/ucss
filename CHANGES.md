@@ -1,6 +1,16 @@
+## 2013.08.01, Version 0.3.1-beta
+*   Bugs/issues fixed:
+    - Parameters are now kept for links in pages.include (but removed from
+      links found by the crawler).
+    - Request pooling disabled, to avoid hangs
+      (see https://github.com/mikeal/request/issues/465).
+    - Added (configurable) timeout for requests.
+    - Improved logging and error handling.
+    - Handles links without href attributes.
+
 ## 2013.07.26, Version 0.3.0-beta
 
-*   Features
+*   Features:
     - Follow links/crawl (#3).
       When running from command line, crawling is the new default.
 
