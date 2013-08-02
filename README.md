@@ -151,9 +151,10 @@ checked. You may add them to pages.include.
 All at-rules are ignored, except @media: All the content inside media queries
 is read as if there were no media query.
 
-### What features are missing?
-uCSS can (currently) NOT:
-* Look for internal style sheets, or inline styles.
+### What uCSS don't do
+uCSS does NOT:
+* Look for style sheet URLs, internal style sheets, or inline styles in HTML
+  code.
 * Capture rules that are switched on using JavaScript after page load.
 
 These features may, or may not, be added in the future.
