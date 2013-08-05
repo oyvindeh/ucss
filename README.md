@@ -138,9 +138,9 @@ module.exports = {
 If you use Django, you can use the supplied Django login helper (see [example
 config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
-### Things to be aware of
+### Nice to know
 
-#### Pages not reachable by crawler
+#### Some pages are not reachable by crawler
 Some pages are not accessible when crawling:
 * Pages that are only accessible by posting a form will not be checked. You may
 add them to pages.include if they reachable without posting data.
