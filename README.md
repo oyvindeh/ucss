@@ -46,6 +46,9 @@ specified, uCSS will look for a config_ucss.js file in the current directory.
 So, to check a web page you could write
 ```
 $ ucss -h http://example.com/foo.html -c http://example.com/foo.css
+
+Note that if you use a selector both inside and outside a media query, it will
+be counted as a duplicate.
 ```
 To output duplicates as well as all used and unused rules, you can do
 ```
