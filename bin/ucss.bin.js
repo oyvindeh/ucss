@@ -141,11 +141,10 @@ function main() {
     var context = {
         whitelist: whitelist,
         auth: auth,
-        timeout: timeout,
-        logger: logger
+        timeout: timeout
     };
 
-    ucss.analyze(pages, css, context, done);
+    ucss.analyze(pages, css, context, logger, done);
 }
 
 if (require.main === module) {

@@ -201,7 +201,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -220,7 +220,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -241,7 +241,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".qux"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -264,7 +264,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".quux"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -287,7 +287,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".quux"] = 0;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -306,7 +306,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".bar"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -329,7 +329,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".quux"] = 0;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -349,7 +349,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".bar"] = 2;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -371,7 +371,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".quux"] = 0;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -401,7 +401,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 2;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, context, function(result) {
+        lib.analyze(pages, css, context, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -420,7 +420,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -439,7 +439,7 @@ buster.testCase("uCSS crawler", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();

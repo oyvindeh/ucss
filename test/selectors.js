@@ -31,7 +31,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -48,7 +48,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -65,7 +65,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -82,7 +82,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -99,7 +99,7 @@ buster.testCase("CSS Selectors:", {
         expected.used = { ".foo": 1, ".bar": 1 };
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -116,7 +116,7 @@ buster.testCase("CSS Selectors:", {
         expected.used = { ".foo + .bar": 1 };
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -133,7 +133,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -150,7 +150,7 @@ buster.testCase("CSS Selectors:", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -169,7 +169,7 @@ buster.testCase("CSS Selectors:", {
                           ".foo": 1, ".foo::link": 1, "input:invalid": 0 };
         expected.duplicates = { ".foo": 2, ".foo::link": 2 };
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -204,7 +204,7 @@ buster.testCase("CSS @-rules:", {
         expected.used = { ".foo": 1, ".bar": 1};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -224,7 +224,7 @@ buster.testCase("CSS @-rules:", {
         expected.used = { ".foo": 1, ".bar": 1, ".qux": 1};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -247,7 +247,7 @@ buster.testCase("CSS @-rules:", {
             "@font-face": 1
         };
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.duplicates, expected.duplicates);
             assert.equals(result.used, expected.used);
             assert.equals(result.ignored, expected.ignored);
@@ -286,7 +286,7 @@ buster.testCase("CSS @-rules:", {
             '@keyframes progress-bar-stripes': 1
         };
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.duplicates, expected.duplicates);
             assert.equals(result.used, expected.used);
             assert.equals(result.ignored, expected.ignored);
@@ -312,7 +312,7 @@ buster.testCase("CSS @-rules:", {
         expected.used = { ".foo": 1, ".baz": 1 };
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -338,7 +338,7 @@ buster.testCase("CSS @-rules:", {
         expected.used = { ".foo": 1, ".baz": 1 };
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });

@@ -46,7 +46,7 @@ buster.testCase("uCSS (using http)", {
         expected.used[".foo"] = 1;
         expected.duplicates = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -79,7 +79,7 @@ buster.testCase("uCSS (using http)", {
         expected[".baz"] = 0;
         expected[".foo"] = 2;
 
-        lib.analyze(pages, css, context, function(result) {
+        lib.analyze(pages, css, context, null, function(result) {
             assert.equals(result.used, expected);
             done();
         });

@@ -21,7 +21,7 @@ buster.testCase("uCSS", {
 
         var expected = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -32,7 +32,7 @@ buster.testCase("uCSS", {
 
         var expected = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -45,7 +45,7 @@ buster.testCase("uCSS", {
 
         var expected = {};
 
-        lib.analyze(pages, null, null, function(result) {
+        lib.analyze(pages, null, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -57,7 +57,7 @@ buster.testCase("uCSS", {
 
         var expected = {};
 
-        lib.analyze(pages, null, null, function(result) {
+        lib.analyze(pages, null, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -74,7 +74,7 @@ buster.testCase("uCSS", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -90,7 +90,7 @@ buster.testCase("uCSS", {
         expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
         expected.duplicates = {".foo": 3, ".bar": 2};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -119,7 +119,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -150,7 +150,7 @@ buster.testCase("uCSS", {
 
         expected.duplicates = {'.bar': 2};
 
-        lib.analyze(pages, css, context, function(result) {
+        lib.analyze(pages, css, context, null, function(result) {
             assert.equals(result.used, expected.used);
             assert.equals(result.duplicates, expected.duplicates);
             done();
@@ -178,7 +178,7 @@ buster.testCase("uCSS", {
         expected['.foo .qux .bar'] = 0;
         expected['.foo .qux .bar .baz'] = 0;
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result.used, expected);
             done();
         });
@@ -195,7 +195,7 @@ buster.testCase("uCSS", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
@@ -212,7 +212,7 @@ buster.testCase("uCSS", {
         expected.duplicates = {};
         expected.ignored = {};
 
-        lib.analyze(pages, css, null, function(result) {
+        lib.analyze(pages, css, null, null, function(result) {
             assert.equals(result, expected);
             done();
         });
