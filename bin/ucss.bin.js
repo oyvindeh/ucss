@@ -6,6 +6,28 @@ var optimist = require('optimist');
 
 
 /**
+ * Read configuration file
+ */
+function openConfig(filename) {
+    var config;
+    try {
+        config = require(filename);
+    } catch (e) {
+        try {
+            config = require(process.cwd() + "/" + filename);
+        } catch (e) {
+            console.log("Problems reading file '" + filename + "'.");
+            console.log(e.name + ": " + e.message);
+            console.log("Please check that the file exists, and has the correct permissions.");
+            process.exit(1);
+        }
+    }
+
+    return config;
+}
+
+
+/**
  * Main.
  */
 function main() {
@@ -16,6 +38,7 @@ function main() {
                     + "ucss.json file in the current directory.");
     };
 
+    // Arguments parsing
     var argv = optimist.usage('Check if CSS selectors matches anything in given HTML.\n'
                             + 'Usage: $0 [OPTION]...')
         .options({
@@ -69,27 +92,8 @@ function main() {
         summary = true;
     }
 
+    // Either HTML and CSS arguments, or config file, is required
     var config = null;
-
-    var openConfig = function(filename) {
-        var config;
-        try {
-            config = require(filename);
-        } catch (e) {
-            try {
-                config = require(process.cwd() + "/" + filename);
-            } catch (e) {
-                console.log("Problems reading file '" + filename + "'.");
-                console.log(e.name + ": " + e.message);
-                console.log("Please check that the file exists, and has the correct permissions.");
-                process.exit(1);
-            }
-        }
-
-        return config;
-    };
-
-    // Either HTML and CSS, or config is required
     var htmlSet = typeof argv.html === "string";
     var cssSet  = typeof argv.css  === "string";
     if (htmlSet && cssSet) {
