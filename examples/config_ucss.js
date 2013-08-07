@@ -20,5 +20,10 @@ module.exports = {
         "base.css"
     ],
     "whitelist": [".foo", ".bar"], // CSS rules to ignore, e.g. ones added by JavaScript
-    "timeout": 4000 // Timeout for HTTP requests (default is 4000ms).
+    "timeout": 4000, // Timeout for HTTP requests (default is 4000ms).
+    "output": {
+        "logger": function(res, originalUrl, loggedIn) { // Can be null, for no output.
+            console.log("Visited: ", originalUrl);
+        }
+    }
 };

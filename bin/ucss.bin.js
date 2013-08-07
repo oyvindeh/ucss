@@ -108,16 +108,27 @@ function main() {
     } else {
         showHelp();
     }
-    var css, pages, whitelist, auth, timeout;
+
+    // Read from config, if it was found
+    var css, pages, whitelist, auth, timeout, logger;
     if (config) {
         css = config.css;
         pages = config.pages;
         whitelist = config.whitelist;
         auth = config.auth;
         timeout = config.timeout;
-    } else {
+
+        if (config.output && undefined !== config.output.logger) {
+            logger = config.output.logger;
+        }
+    } else { // No config, using CSS and HTML arguments
         css = argv.css;
         pages = { "crawl": argv.html };
+    }
+
+    // Set up logger (custom, or default)
+    if (typeof logger === "undefined") {
+        logger = require('../lib/helpers/output').logger;
     }
 
     // Custom output function
@@ -130,12 +141,12 @@ function main() {
     var context = {
         whitelist: whitelist,
         auth: auth,
-        timeout: timeout
+        timeout: timeout,
+        logger: logger
     };
 
     ucss.analyze(pages, css, context, done);
 }
-
 
 if (require.main === module) {
     main();
