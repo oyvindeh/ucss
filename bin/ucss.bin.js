@@ -110,7 +110,7 @@ function main() {
     }
 
     // Read from config, if it was found
-    var css, pages, whitelist, auth, timeout, logger;
+    var css, pages, whitelist, auth, timeout, logger, resultHandler;
     if (config) {
         css = config.css;
         pages = config.pages;
@@ -118,8 +118,13 @@ function main() {
         auth = config.auth;
         timeout = config.timeout;
 
-        if (config.output && undefined !== config.output.logger) {
-            logger = config.output.logger;
+        if (config.output) {
+            if (undefined !== config.output.logger) {
+                logger = config.output.logger;
+            }
+            if (undefined !== config.output.result) {
+                resultHandler = config.output.result;
+            }
         }
     } else { // No config, using CSS and HTML arguments
         css = argv.css;
@@ -131,12 +136,18 @@ function main() {
         logger = require('../lib/helpers/output').logger;
     }
 
+    var done;
+    if (typeof resultHandler === "undefined") {
+        done = function(result) {
+            require('../lib/helpers/output').standard(
+                result, argv.used, summary, argv.duplicates);
+            process.exit(0);
+        };
+    } else {
+        done = resultHandler;
+    }
+
     // Custom output function
-    var done = function(result) {
-        require('../lib/helpers/output').standard(
-            result, argv.used, summary, argv.duplicates);
-        process.exit(0);
-    };
 
     var context = {
         whitelist: whitelist,
