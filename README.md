@@ -12,6 +12,7 @@ But wait, there's more! By setting up a config file, uCSS can also:
 * Exclude specific pages and/or subdomains (when crawling).
 * Visit individual pages instead of, or in addition to, crawling.
 * White list CSS rules to be ignored (e.g. those toggled by JavaScript).
+* Customizable output.
 
 uCSS is written for [Node](http://www.nodejs.org/). It can be used both as a
 library and as a command line tool. With a little tweaking, it should be easy
@@ -27,6 +28,7 @@ Please note: uCSS is currently in beta.
 
 ### Usage (command line)
 
+For basic usage, you can use the command line options:
 ```
 $ ucss --help
 Usage: ucss [OPTION]...
@@ -64,6 +66,8 @@ $ ucss
 ```
 or specify another file name using the -g option. For more info on the config
 file, see below.
+
+For advanced usage, please see the sections about config files.
 
 ### Usage (as library)
 
@@ -130,13 +134,56 @@ module.exports = {
             var cookie = "sessionid:1234"
             callback(cookie);
         }
-   },
+    },
    ...
 }
 
 ```
 If you use Django, you can use the supplied Django login helper (see [example
 config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
+
+### Customizable output
+You can configure uCSS to do logging and handle the result differently from
+what's default. Do this by adding an "output" property in the config, which can
+contain two functions, named "logger" and "result".
+
+module.exports = {
+    ...,
+    "output": {
+        "logger": function(res, originalUrl, loggedIn) {
+            // Do some logging here, e.g. using console.log.
+        },
+        "result": function(result) {
+            // Do something with the result object, e.g. printing it to console
+            // formatted the way you prefer.
+        }
+   },
+   ...
+}
+
+```
+
+#### Logging
+The "logger" function is called every time there is a response to a request. It
+takes three parameters: "res" is a response object, as returned by
+[request](https://github.com/mikeal/request). "originalUrl" is a string that
+points to the HTML instance being visited. "loggedIn" is a boolean that is true
+if uCSS has sent an authentication cookie in the request header.
+
+This function is normally used for logging, but you can make it do whatever you
+want. Just note that it is triggered by an event, so uCSS will not wait for it
+to return.
+
+Setting "logger" to null will silence logging.
+
+#### Result
+The "result" function is called when uCSS is done. It recieves an object with
+three properties: "used", "duplicates" and "ignored". "used" shows all CSS
+rules that has been matched in the HTML (including how many times).
+"duplicates" shows all duplicate CSS rules, including how many times they've
+been found. "ignored" shows all ignored rules.
+
+This function can also whatever you want, e.g. write the result to a file.
 
 ### Nice to know
 

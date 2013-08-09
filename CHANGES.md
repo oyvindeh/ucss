@@ -1,4 +1,10 @@
+## ???, Version 0.3.2-beta
+
+*   Features:
+    - Added possibility to use custom logger and custom result handler.
+
 ## 2013.08.01, Version 0.3.1-beta
+
 *   Bugs/issues fixed:
     - Parameters are now kept for links in pages.include (but removed from
       links found by the crawler).
