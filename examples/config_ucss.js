@@ -32,6 +32,6 @@ module.exports = {
             // Use null for if you want it to be silent.
             console.log("Visited: ", originalUrl);
         },
-        "result": function(result) { console.log(result); }
+        "result": function(result) { console.log(result); } // (Optional)
     }
 };
