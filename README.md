@@ -10,7 +10,7 @@ Basic features:
 But wait, there's more! By setting up a config file, uCSS can also:
 * Do login, and visit pages both as a logged in and logged out user.
 * Exclude specific pages and/or subdomains (when crawling).
-* Visit individual pages instead of, or in addition to, crawling.
+* Visit specific pages instead of, or in addition to, crawling.
 * White list CSS rules to be ignored (e.g. those toggled by JavaScript).
 * Customizable output.
 
