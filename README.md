@@ -147,6 +147,7 @@ You can configure uCSS to do logging and handle the result differently from
 what's default. Do this by adding an "output" property in the config, which can
 contain two functions, named "logger" and "result".
 
+```
 module.exports = {
     ...,
     "output": {
