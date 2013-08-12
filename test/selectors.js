@@ -32,7 +32,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -49,7 +51,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -66,7 +70,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -83,7 +89,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -100,7 +108,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -117,7 +127,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -134,7 +146,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -151,7 +165,9 @@ buster.testCase("CSS Selectors:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -205,7 +221,9 @@ buster.testCase("CSS @-rules:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -225,7 +243,9 @@ buster.testCase("CSS @-rules:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -313,7 +333,9 @@ buster.testCase("CSS @-rules:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -339,7 +361,9 @@ buster.testCase("CSS @-rules:", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     }

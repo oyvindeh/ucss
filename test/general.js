@@ -75,7 +75,9 @@ buster.testCase("uCSS", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -84,7 +86,8 @@ buster.testCase("uCSS", {
         var pages = {
             include: ["<html><head></head><body class='foo'></body></html>"]
         };
-        var css = ".foo {} .bar{} .foo{} .foo{} .bar{} .baz{}";
+        var css = [".foo {} .bar{} .foo{} .foo{}",
+                   ".bar{} .baz{}"];
 
         var expected = {};
         expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
@@ -196,7 +199,9 @@ buster.testCase("uCSS", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     },
@@ -213,7 +218,9 @@ buster.testCase("uCSS", {
         expected.ignored = {};
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result, expected);
+            assert.equals(result.used, expected.used);
+            assert.equals(result.duplicates, expected.duplicates);
+            assert.equals(result.ignored, expected.ignored);
             done();
         });
     }
