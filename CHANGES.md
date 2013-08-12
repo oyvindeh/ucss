@@ -1,4 +1,4 @@
-## ???, Version 0.3.2-beta
+## 2013.08.12, Version 0.3.2-beta
 
 *   Features:
     - Added possibility to use custom logger and custom result handler.
