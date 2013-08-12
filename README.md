@@ -2,7 +2,7 @@
 Crawl website to find unused CSS selectors, as well as duplicate selectors.
 
 Basic features:
-* Find unused CSS selectors in a HTML code base.
+* Find unused CSS selectors, given a HTML code base.
 * Find duplicate CSS selectors.
 * Count matches for each rule.
 * Follows links (crawl), within the given domain.
