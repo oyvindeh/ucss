@@ -142,6 +142,21 @@ module.exports = {
 If you use Django, you can use the supplied Django login helper (see [example
 config file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
+### Understanding the output
+While crawling, uCSS will output all URLs it visits, with response status code.
+If logged in, it will say so. It will also output a hash of the response body,
+which may be useful if you want to make sure that uCSS was successfully logged
+in (compare the hash of the logged in and the logged out visit).
+
+When the crawling is done, you will get a list of all unused selectors. If
+you've asked for a list of duplicates, that will be printed as well.
+
+Lastly, a summary will be printed. This contains the total amount of CSS
+selectors found, and how many used, unused and duplicates there were.
+
+If the output doesn't suit your needs, and you know some JavaScript, you may
+customize it.
+
 ### Customizable output
 You can configure uCSS to do logging and handle the result differently from
 what's default. Do this by adding an "output" property in the config, which can
