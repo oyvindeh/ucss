@@ -26,6 +26,7 @@ buster.testCase("uCSS", {
             done();
         });
     },
+
     "handles empty markup": function(done) {
         var pages = {};
         var css = ".foo {}";
@@ -69,15 +70,21 @@ buster.testCase("uCSS", {
         };
         var css = [".foo {}", ".bar {}"];
 
-        var expected = {};
-        expected.used = { ".foo": 1, ".bar": 1 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 }
+            },
+            total_used: 2,
+            total_unused: 0,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -89,13 +96,23 @@ buster.testCase("uCSS", {
         var css = [".foo {} .bar{} .foo{} .foo{}",
                    ".bar{} .baz{}"];
 
-        var expected = {};
-        expected.used = { ".bar": 0, ".foo": 1, ".baz": 0 };
-        expected.duplicates = {".foo": 3, ".bar": 2};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 3 },
+                ".bar": {
+                    "matches_html": 0, "occurences_css": 2 },
+                ".baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 2,
+            total_ignored: 0,
+            total_duplicates: 2
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
+            assert.match(result, expected);
             done();
         });
     },
@@ -106,25 +123,41 @@ buster.testCase("uCSS", {
         };
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
-        var expected = {};
-        expected.used = {'*': 9,
-                         '.foo': 1,
-                         '.bar': 1,
-                         '.foo .bar': 0,
-                         '.bar #baz': 1,
-                         '.qux': 1,
-                         '.quux': 0,
-                         'span[dir="ltr"]': 1,
-                         '.bar span[dir="ltr"]': 1,
-                         '.foo span[dir="ltr"]': 0,
-                         '.foo .qux .bar': 0,
-                         '.foo .qux .bar .baz': 0 };
-
-        expected.duplicates = {'.bar': 2};
+        var expected = {
+            foundSelectors: {
+                "*": {
+                    "matches_html": 9, "occurences_css": 1 },
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 2 },
+                ".foo .bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".bar #baz": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".qux": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".quux": {
+                    "matches_html": 0, "occurences_css": 1 },
+                "span[dir=\"ltr\"]": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar span[dir=\"ltr\"]": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".foo span[dir=\"ltr\"]": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".foo .qux .bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".foo .qux .bar .baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 7,
+            total_unused: 5,
+            total_ignored: 8,
+            total_duplicates: 1
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
+            assert.match(result, expected);
             done();
         });
     },
@@ -138,24 +171,37 @@ buster.testCase("uCSS", {
             whitelist: ['.foo .qux .bar', '.foo .qux .bar .baz']
         };
 
-        var expected = {};
-        expected.used = {};
-        expected.used['*'] = 9;
-        expected.used['.foo'] = 1;
-        expected.used['.bar'] = 1;
-        expected.used['.foo .bar'] = 0;
-        expected.used['.bar #baz'] = 1;
-        expected.used['.qux'] = 1;
-        expected.used['.quux'] = 0;
-        expected.used['span[dir="ltr"]'] = 1;
-        expected.used['.bar span[dir="ltr"]'] = 1;
-        expected.used['.foo span[dir="ltr"]'] = 0;
-
-        expected.duplicates = {'.bar': 2};
+        var expected = {
+            foundSelectors: {
+                "*": {
+                    "matches_html": 9, "occurences_css": 1 },
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 2 },
+                ".foo .bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".bar #baz": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".qux": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".quux": {
+                    "matches_html": 0, "occurences_css": 1 },
+                "span[dir=\"ltr\"]": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar span[dir=\"ltr\"]": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".foo span[dir=\"ltr\"]": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 7,
+            total_unused: 5,
+            total_ignored: 8,
+            total_duplicates: 1
+        };
 
         lib.analyze(pages, css, context, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
+            assert.match(result, expected);
             done();
         });
     },
@@ -167,22 +213,41 @@ buster.testCase("uCSS", {
         };
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
-        var expected = {};
-        expected['*'] = 18;
-        expected['.foo'] = 3;
-        expected['.bar'] = 2;
-        expected['.foo .bar'] = 0;
-        expected['.bar #baz'] = 2;
-        expected['.qux'] = 2;
-        expected['.quux'] = 0;
-        expected['span[dir="ltr"]'] = 2;
-        expected['.bar span[dir="ltr"]'] = 2;
-        expected['.foo span[dir="ltr"]'] = 1;
-        expected['.foo .qux .bar'] = 0;
-        expected['.foo .qux .bar .baz'] = 0;
+        var expected = {
+            foundSelectors: {
+                "*": {
+                    "matches_html": 18, "occurences_css": 1 },
+                ".foo": {
+                    "matches_html": 3, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 2, "occurences_css": 2 },
+                ".foo .bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".bar #baz": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".qux": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".quux": {
+                    "matches_html": 0, "occurences_css": 1 },
+                "span[dir=\"ltr\"]": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".bar span[dir=\"ltr\"]": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".foo span[dir=\"ltr\"]": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".foo .qux .bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".foo .qux .bar .baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 8,
+            total_unused: 4,
+            total_ignored: 8,
+            total_duplicates: 1
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected);
+            assert.match(result, expected);
             done();
         });
     },
@@ -193,15 +258,19 @@ buster.testCase("uCSS", {
         };
         var css = [".foo {}"];
 
-        var expected = {};
-        expected.used = { ".foo": 1};
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 0,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -212,15 +281,19 @@ buster.testCase("uCSS", {
         };
         var css = ".foo {}";
 
-        var expected = {};
-        expected.used = { ".foo": 1};
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 0,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     }

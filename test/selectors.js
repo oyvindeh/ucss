@@ -26,15 +26,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = ".foo {}";
 
-        var expected = {};
-        expected.used = { ".foo": 1 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -45,15 +45,16 @@ buster.testCase("CSS Selectors:", {
         };
         var css = "#foo {}";
 
-        var expected = {};
-        expected.used = { "#foo": 1 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                "#foo": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
+
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -64,15 +65,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = "* {}";
 
-        var expected = {};
-        expected.used = { "*": 4 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                "*": {
+                    "matches_html": 4, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -83,15 +84,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = "div {}";
 
-        var expected = {};
-        expected.used = { "div": 1 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                "div": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -102,15 +103,19 @@ buster.testCase("CSS Selectors:", {
         };
         var css = ".foo, .bar { color: red; }";
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo": 1, ".bar": 1 };
-        expected.ignored = {};
+
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 }
+
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -121,15 +126,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = ".foo + .bar { color: red; }";
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo + .bar": 1 };
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo + .bar": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -140,15 +145,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = "div[dir='rtl'] {}";
 
-        var expected = {};
-        expected.used = { "div[dir='rtl']": 1 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                "div[dir='rtl']": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -159,15 +164,15 @@ buster.testCase("CSS Selectors:", {
         };
         var css = "div~br {}";
 
-        var expected = {};
-        expected.used = { "div~br": 2 };
-        expected.duplicates = {};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                "div~br": {
+                    "matches_html": 2, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -180,14 +185,25 @@ buster.testCase("CSS Selectors:", {
         var css = [".foo::link{} .bar:lang(nb){} .foo::link{}",
                   ".foo{} .foo{} .bar{} .baz:after{} input:invalid{}"].join("");
 
-        var expected = {};
-        expected.used = { ".bar": 0, ".bar:lang(nb)": 0, ".baz:after": 0,
-                          ".foo": 1, ".foo::link": 1, "input:invalid": 0 };
-        expected.duplicates = { ".foo": 2, ".foo::link": 2 };
+        var expected = {
+            foundSelectors: {
+                ".bar": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".bar:lang(nb)": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".baz:after": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 2 },
+                ".foo::link": {
+                    "matches_html": 1, "occurences_css": 2 },
+                "input:invalid": {
+                    "matches_html": 0, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
+            assert.match(result, expected);
             done();
         });
     }
@@ -215,15 +231,17 @@ buster.testCase("CSS @-rules:", {
                      ".bar { background: blue; }",
                    " }"].join("");
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo": 1, ".bar": 1};
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -237,15 +255,20 @@ buster.testCase("CSS @-rules:", {
                      "{ .bar { background: blue; } ",
                    "} .qux { float: left; }"].join("");
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo": 1, ".bar": 1, ".qux": 1};
-        expected.ignored = {};
+
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".qux": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -260,17 +283,15 @@ buster.testCase("CSS @-rules:", {
                    "format('woff'), url('webfont.ttf') format('truetype'), ",
                    "url('webfont.svg#svgFontName') format('svg');}"].join("");
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = {};
-        expected.ignored = {
-            "@font-face": 1
+        var expected = {
+            foundSelectors: {
+                "@font-face": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true }
+            }
         };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.used, expected.used);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -295,21 +316,25 @@ buster.testCase("CSS @-rules:", {
                      "from{background-position:40px 0}",
                      "to{background-position:0 0}}"].join("");
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = {};
-        expected.ignored = {
-            '@-webkit-keyframes progress-bar-stripes': 1,
-            '@-moz-keyframes progress-bar-stripes': 1,
-            '@-ms-keyframes progress-bar-stripes': 1,
-            '@-o-keyframes progress-bar-stripes': 1,
-            '@keyframes progress-bar-stripes': 1
+        var expected = {
+            foundSelectors: {
+                "@-webkit-keyframes progress-bar-stripes": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true },
+                "@-moz-keyframes progress-bar-stripes": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true },
+                "@-ms-keyframes progress-bar-stripes": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true },
+                "@-o-keyframes progress-bar-stripes": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true },
+                "@keyframes progress-bar-stripes": {
+                    "matches_html": 0, "occurences_css": 1, ignored: true }
+            },
+            total_used: 0,
+            total_ignored: 5
         };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.used, expected.used);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -325,17 +350,17 @@ buster.testCase("CSS @-rules:", {
                    ".bar { box-shadow: 2px 2px 2px black; }} ",
                    ".baz { background: red }"].join("");
 
-
-
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo": 1, ".baz": 1 };
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     },
@@ -355,15 +380,17 @@ buster.testCase("CSS @-rules:", {
                        "body { color: red; background: blue; }}",
                    ".baz { background: red }"].join("");
 
-        var expected = {};
-        expected.duplicates = {};
-        expected.used = { ".foo": 1, ".baz": 1 };
-        expected.ignored = {};
+        var expected = {
+            foundSelectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 1, "occurences_css": 1 }
+            }
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
-            assert.equals(result.ignored, expected.ignored);
+            assert.match(result, expected);
             done();
         });
     }
