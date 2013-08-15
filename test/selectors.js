@@ -27,7 +27,7 @@ buster.testCase("CSS Selectors:", {
         var css = ".foo {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 }
             }
@@ -46,7 +46,7 @@ buster.testCase("CSS Selectors:", {
         var css = "#foo {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "#foo": {
                     "matches_html": 1, "occurences_css": 1 }
             }
@@ -66,7 +66,7 @@ buster.testCase("CSS Selectors:", {
         var css = "* {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "*": {
                     "matches_html": 4, "occurences_css": 1 }
             }
@@ -85,7 +85,7 @@ buster.testCase("CSS Selectors:", {
         var css = "div {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "div": {
                     "matches_html": 1, "occurences_css": 1 }
             }
@@ -105,7 +105,7 @@ buster.testCase("CSS Selectors:", {
 
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -127,7 +127,7 @@ buster.testCase("CSS Selectors:", {
         var css = ".foo + .bar { color: red; }";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo + .bar": {
                     "matches_html": 1, "occurences_css": 1 }
             }
@@ -146,7 +146,7 @@ buster.testCase("CSS Selectors:", {
         var css = "div[dir='rtl'] {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "div[dir='rtl']": {
                     "matches_html": 1, "occurences_css": 1 }
             }
@@ -165,7 +165,7 @@ buster.testCase("CSS Selectors:", {
         var css = "div~br {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "div~br": {
                     "matches_html": 2, "occurences_css": 1 }
             }
@@ -186,7 +186,7 @@ buster.testCase("CSS Selectors:", {
                   ".foo{} .foo{} .bar{} .baz:after{} input:invalid{}"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".bar": {
                     "matches_html": 0, "occurences_css": 1 },
                 ".bar:lang(nb)": {
@@ -232,7 +232,7 @@ buster.testCase("CSS @-rules:", {
                    " }"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -257,7 +257,7 @@ buster.testCase("CSS @-rules:", {
 
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -284,7 +284,7 @@ buster.testCase("CSS @-rules:", {
                    "url('webfont.svg#svgFontName') format('svg');}"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "@font-face": {
                     "matches_html": 0, "occurences_css": 1, ignored: true }
             }
@@ -317,7 +317,7 @@ buster.testCase("CSS @-rules:", {
                      "to{background-position:0 0}}"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "@-webkit-keyframes progress-bar-stripes": {
                     "matches_html": 0, "occurences_css": 1, ignored: true },
                 "@-moz-keyframes progress-bar-stripes": {
@@ -351,7 +351,7 @@ buster.testCase("CSS @-rules:", {
                    ".baz { background: red }"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".baz": {
@@ -381,7 +381,7 @@ buster.testCase("CSS @-rules:", {
                    ".baz { background: red }"].join("");
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".baz": {

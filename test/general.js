@@ -71,7 +71,7 @@ buster.testCase("uCSS", {
         var css = [".foo {}", ".bar {}"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -97,7 +97,7 @@ buster.testCase("uCSS", {
                    ".bar{} .baz{}"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 3 },
                 ".bar": {
@@ -124,7 +124,7 @@ buster.testCase("uCSS", {
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "*": {
                     "matches_html": 9, "occurences_css": 1 },
                 ".foo": {
@@ -172,7 +172,7 @@ buster.testCase("uCSS", {
         };
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "*": {
                     "matches_html": 9, "occurences_css": 1 },
                 ".foo": {
@@ -214,7 +214,7 @@ buster.testCase("uCSS", {
         var css = fs.readFileSync("fixtures/rules.css").toString();
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 "*": {
                     "matches_html": 18, "occurences_css": 1 },
                 ".foo": {
@@ -259,7 +259,7 @@ buster.testCase("uCSS", {
         var css = [".foo {}"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 }
             },
@@ -282,7 +282,7 @@ buster.testCase("uCSS", {
         var css = ".foo {}";
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 }
             },

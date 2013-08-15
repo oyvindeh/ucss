@@ -204,7 +204,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -229,7 +229,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -254,7 +254,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules2.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -284,7 +284,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules3.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -316,7 +316,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules3.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 0, "occurences_css": 1 },
                 ".bar": {
@@ -347,7 +347,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 2, "occurences_css": 1 },
                 ".bar": {
@@ -373,7 +373,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules3.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 0, "occurences_css": 1 },
                 ".bar": {
@@ -405,7 +405,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -430,7 +430,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules3.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 0, "occurences_css": 1 },
                 ".bar": {
@@ -472,7 +472,7 @@ buster.testCase("uCSS crawler", {
         };
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 2, "occurences_css": 1 },
                 ".bar": {
@@ -497,7 +497,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
@@ -522,7 +522,7 @@ buster.testCase("uCSS crawler", {
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
-            foundSelectors: {
+            selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
