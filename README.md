@@ -20,7 +20,8 @@ to use it in other contexts as well.
 
 Want to contribute? Please read below.
 
-Please note: uCSS is currently in beta.
+Please note: uCSS is currently in beta. There will be bugs, docs may be
+outdated, and functionality may change.
 
 ### Installation
 
