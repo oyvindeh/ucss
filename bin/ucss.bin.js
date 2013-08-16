@@ -34,8 +34,8 @@ function main() {
     var showHelp = function() {
         optimist.showHelp();
         console.log("Either a config file, or HTML and CSS files are required. "
-                    + "If no arguments are specified, uCSS will look for a "
-                    + "ucss.json file in the current directory.");
+                    + "If no arguments are\nspecified, uCSS will look for a "
+                    + "config_ucss.js file in the current directory.");
     };
 
     // Arguments parsing
