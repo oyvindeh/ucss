@@ -1,14 +1,13 @@
-## , Version 0.4.0-beta
+## 2013.08.16, Version 0.4.0-beta
 
-*   Features
-    - Add option --full to showing full details for all rules.
-    - Remove option --used, which showed all used rules with matches
-      (now covered by --full).
-    - Add number of ignored rules to output summary.
+*   Features:
+    - Add option --full to show full details for all rules.
+    - Remove option --used (functionality covered by --full).
+    - New output report, with more information.
 
-*   Other:
+*   Refactoring:
     - Refactored the result object. This has implications for custom
-      output functions.
+      output functions, as well as library use.
     - Add CSS selector position(s) in source file to result object.
 
 ## 2013.08.12, Version 0.3.2-beta
