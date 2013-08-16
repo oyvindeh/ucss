@@ -167,7 +167,7 @@ contain two functions, named "logger" and "result".
 module.exports = {
     ...,
     "output": {
-        "logger": function(res, originalUrl, loggedIn) {
+        "logger": function(response, originalUrl, loggedIn) {
             // Do some logging here, e.g. using console.log.
         },
         "result": function(result) {
@@ -181,8 +181,8 @@ module.exports = {
 ```
 
 #### Logging
-The "logger" function is called every time there is a response to a request. It
-takes three parameters: "res" is a response object, as returned by
+The "logger" function is called every time there is a response to a HTTP
+request. It takes three parameters: "res" is a response object, as returned by
 [request](https://github.com/mikeal/request). "originalUrl" is a string that
 points to the HTML instance being visited. "loggedIn" is a boolean that is true
 if uCSS has sent an authentication cookie in the request header.
