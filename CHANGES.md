@@ -1,3 +1,8 @@
+## 2013.08.16, Version 0.4.1-beta
+
+*   Bugs:
+    - Updated help text, which had wrong name for the config file.
+
 ## 2013.08.16, Version 0.4.0-beta
 
 *   Features:
