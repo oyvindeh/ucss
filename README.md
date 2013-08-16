@@ -216,7 +216,7 @@ This function can also whatever you want, e.g. write the result to a file.
 #### Some pages are not reachable by crawler
 Some pages are not accessible when crawling:
 * Pages that are only accessible by posting a form will not be checked. You may
-add them to pages.include if they reachable without posting data.
+add them to pages.include if they are reachable without posting data.
 * All parameters in links are normally stripped away when crawling, which may
 have side effects for the rendering of some pages. If you want an URL to be
 visited with specific parameters, you have to include it in pages.include.
