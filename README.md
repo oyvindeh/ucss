@@ -88,7 +88,7 @@ There are several things you can do with a config file, that you cannot do with
 command line arguments.
 
 uCSS follows links by default. But there may be specific files, or whole
-subdomains, that you don't want to check. Those can be listed inside
+subdomains, that you don't want to check. These can be listed inside
 pages.exclude. If you want to exclude a whole subdomain, use a wildcard ("*")
 at the end of the url (please see [example config
 file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
