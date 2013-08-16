@@ -39,16 +39,23 @@ buster.testCase("uCSS (using http)", {
         var css = ["http://127.0.0.1:9988/rules1.css",
                    "http://127.0.0.1:9988/rules2.css"];
 
-        var expected = {};
-        expected.used = {};
-        expected.used[".bar"] = 1;
-        expected.used[".baz"] = 0;
-        expected.used[".foo"] = 1;
-        expected.duplicates = {};
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 2,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
 
         lib.analyze(pages, css, null, null, function(result) {
-            assert.equals(result.used, expected.used);
-            assert.equals(result.duplicates, expected.duplicates);
+            assert.match(result, expected);
             done();
         });
     },
@@ -74,13 +81,23 @@ buster.testCase("uCSS (using http)", {
             }
         };
 
-        var expected = {};
-        expected[".bar"] = 2;
-        expected[".baz"] = 0;
-        expected[".foo"] = 2;
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 2, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 2,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
 
         lib.analyze(pages, css, context, null, function(result) {
-            assert.equals(result.used, expected);
+            assert.match(result, expected);
             done();
         });
     }

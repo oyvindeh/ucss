@@ -20,7 +20,8 @@ to use it in other contexts as well.
 
 Want to contribute? Please at the bottom.
 
-Please note: uCSS is currently in beta.
+Please note: uCSS is currently in beta. There will be bugs, docs may be
+outdated, and functionality may change.
 
 ### Installation
 
@@ -38,7 +39,7 @@ Options:
   --html, -h        HTML to load (local file or URL).
   --css, -c         CSS to load (local file or URL).
   --config, -g      Config file to use.
-  --used, -u        Show number of matches for each rule.
+  --full, -f        Show full report, with details for each rule.
   --nosummary, -n   Do not output summary.
   --duplicates, -d  Show duplicates.
 

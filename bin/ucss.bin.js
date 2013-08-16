@@ -57,14 +57,14 @@ function main() {
                 alias : 'g',
                 description : 'Config file to use.'
             },
-            used: {
-                alias : 'u',
+            full: {
+                alias : 'f',
                 description :
-                    'Show number of matches for each rule.'
+                    'Show full report, with details for each rule.'
             },
             nosummary: {
                 alias : 'n',
-                description : 'Do not output summary, only list of unused rules.'
+                description : 'Do not output summary, only list of rules.'
             },
             duplicates: {
                 alias : 'd',
@@ -80,8 +80,8 @@ function main() {
     if(undefined === argv.config) {
         argv.config = true;
     }
-    if(undefined === argv.used) {
-        argv.used = false;
+    if(undefined === argv.full) {
+        argv.full = false;
     }
     if(undefined === argv.duplicates) {
         argv.duplicates = false;
@@ -140,7 +140,7 @@ function main() {
     if (typeof resultHandler === "undefined") {
         done = function(result) {
             require('../lib/helpers/output').standard(
-                result, argv.used, summary, argv.duplicates);
+                result, argv.full, summary, argv.duplicates);
             process.exit(0);
         };
     } else {
