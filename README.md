@@ -18,7 +18,7 @@ uCSS is written for [Node](http://www.nodejs.org/). It can be used both as a
 library and as a command line tool. With a little tweaking, it should be easy
 to use it in other contexts as well.
 
-Want to contribute? Please at the bottom.
+Want to contribute? Please see at the bottom.
 
 Please note: uCSS is currently in beta. There will be bugs, docs may be
 outdated, and functionality may change.

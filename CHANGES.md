@@ -1,14 +1,14 @@
 ## 2013.08.16, Version 0.4.0-beta
 
 *   Features:
-    - Add option --full to show full details for all rules.
-    - Remove option --used (functionality covered by --full).
+    - Added option --full, to show full details for all rules.
+    - Removed option --used (functionality is covered by --full).
     - New output report, with more information.
 
 *   Refactoring:
-    - Refactored the result object. This has implications for custom
+    - Result object has new format. This has implications for custom
       output functions, as well as library use.
-    - Add CSS selector position(s) in source file to result object.
+    - Added CSS selector position(s) in source file to result object.
 
 ## 2013.08.12, Version 0.3.2-beta
 
