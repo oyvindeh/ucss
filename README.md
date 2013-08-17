@@ -73,14 +73,24 @@ For advanced usage, please see the sections about config files.
 ### Usage (as library)
 
 ```
-var css = ".foo {} .bar {} .baz {}";
-var html = "<html><head></head><body class='foo'></body></html>";
-var whitelist = [".baz"];
-var auth = null;
-ucss.analyze(css, html, whitelist, auth, function(result) {
-    require('../lib/helpers/output').standard(
-        result, false, false, false);
-    };);
+// css can be an array of strings, file paths, or URLs
+var css = [".foo {} .bar {} .baz {}"];
+
+// html can be an array of strings, file paths, or URLs
+var html = ["<html><head></head><body class='foo'></body></html>"];
+
+var context = {
+    whitelist: [".baz"], // CSS selectors to ignore
+    auth: null, // For login (please se example elsewhere)
+    timeout: 400 // Request timeout (defaults to 400ms)
+};
+var logger = null; // Function for logging HTTP requests
+
+// Do the magic
+ucss.analyze(html, css, context, logger, function(result) {
+    // Do something to the result object
+    console.log(result);
+);
 ```
 
 ### Setting up a config file
