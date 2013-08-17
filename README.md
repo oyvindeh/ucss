@@ -53,9 +53,10 @@ $ ucss -h http://example.com/foo.html -c http://example.com/foo.css
 Note that if you use a selector both inside and outside a media query, it will
 be counted as a duplicate.
 ```
-To output duplicates as well as all used and unused rules, you can do
+To output a full report, with all rules, as well as duplicates and ignored
+selectors, you can do:
 ```
-$ ucss -d -u -h foo.html -c foo.css
+$ ucss -f -h foo.html -c foo.css
 ```
 As you can see in the examples above, files can be stored locally as well as on
 the web.
