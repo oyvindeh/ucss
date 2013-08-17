@@ -53,8 +53,8 @@ $ ucss -h http://example.com/foo.html -c http://example.com/foo.css
 Note that if you use a selector both inside and outside a media query, it will
 be counted as a duplicate.
 ```
-To output a full report, with all rules, as well as duplicates and ignored
-selectors, you can do:
+To output a full report, with all found selectors and an overview of duplicates
+and ignored ones, you can do:
 ```
 $ ucss -f -h foo.html -c foo.css
 ```
