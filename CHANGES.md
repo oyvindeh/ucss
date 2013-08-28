@@ -1,3 +1,8 @@
+## 2013.08.28, Version 0.4.2-beta
+
+*   Bugs:
+    - Whitelisted rules not output correctly (#25).
+
 ## 2013.08.16, Version 0.4.1-beta
 
 *   Bugs:

@@ -1,4 +1,4 @@
-## uCSS (v0.4.1-beta)
+## uCSS (v0.4.2-beta)
 Crawl website to find unused CSS selectors, as well as duplicate selectors.
 
 Basic features:
@@ -154,6 +154,10 @@ you've asked for a list of duplicates, that will be printed as well.
 
 Lastly, a summary will be printed. This contains the total amount of CSS
 selectors found, and how many used, unused and duplicates there were.
+
+Using the --full option, you will get a more detailed and colorful output, with
+all rules being listed with number of matches, in addition to number of
+duplicates in CSS and details about ignored and whitelisted rules.
 
 If the output doesn't suit your needs, and you know some JavaScript, you may
 customize it.
