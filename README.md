@@ -53,9 +53,10 @@ $ ucss -h http://example.com/foo.html -c http://example.com/foo.css
 Note that if you use a selector both inside and outside a media query, it will
 be counted as a duplicate.
 ```
-To output duplicates as well as all used and unused rules, you can do
+To output a full report, with all found selectors and an overview of duplicates
+and ignored ones, you can do:
 ```
-$ ucss -d -u -h foo.html -c foo.css
+$ ucss -f -h foo.html -c foo.css
 ```
 As you can see in the examples above, files can be stored locally as well as on
 the web.
@@ -73,14 +74,24 @@ For advanced usage, please see the sections about config files.
 ### Usage (as library)
 
 ```
-var css = ".foo {} .bar {} .baz {}";
-var html = "<html><head></head><body class='foo'></body></html>";
-var whitelist = [".baz"];
-var auth = null;
-ucss.analyze(css, html, whitelist, auth, function(result) {
-    require('../lib/helpers/output').standard(
-        result, false, false, false);
-    };);
+// css can be an array of strings, file paths, or URLs
+var css = [".foo {} .bar {} .baz {}"];
+
+// html can be an array of strings, file paths, or URLs
+var html = ["<html><head></head><body class='foo'></body></html>"];
+
+var context = {
+    whitelist: [".baz"], // CSS selectors to ignore
+    auth: null, // For login (please se example elsewhere)
+    timeout: 400 // Request timeout (defaults to 400ms)
+};
+var logger = null; // Function for logging HTTP requests
+
+// Do the magic
+ucss.analyze(html, css, context, logger, function(result) {
+    // Do something to the result object
+    console.log(result);
+);
 ```
 
 ### Setting up a config file
@@ -220,7 +231,7 @@ This function can also whatever you want, e.g. write the result to a file.
 #### Some pages are not reachable by crawler
 Some pages are not accessible when crawling:
 * Pages that are only accessible by posting a form will not be checked. You may
-add them to pages.include if they reachable without posting data.
+add them to pages.include if they are reachable without posting data.
 * All parameters in links are normally stripped away when crawling, which may
 have side effects for the rendering of some pages. If you want an URL to be
 visited with specific parameters, you have to include it in pages.include.
