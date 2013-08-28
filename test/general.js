@@ -174,29 +174,33 @@ buster.testCase("uCSS", {
         var expected = {
             selectors: {
                 "*": {
-                    "matches_html": 9, "occurences_css": 1 },
+                    "matches_html": 9, "occurences_css": 1, whitelisted: false },
                 ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
+                    "matches_html": 1, "occurences_css": 1, whitelisted: false },
                 ".bar": {
-                    "matches_html": 1, "occurences_css": 2 },
+                    "matches_html": 1, "occurences_css": 2, whitelisted: false },
                 ".foo .bar": {
-                    "matches_html": 0, "occurences_css": 1 },
+                    "matches_html": 0, "occurences_css": 1, whitelisted: false },
                 ".bar #baz": {
-                    "matches_html": 1, "occurences_css": 1 },
+                    "matches_html": 1, "occurences_css": 1, whitelisted: false },
                 ".qux": {
-                    "matches_html": 1, "occurences_css": 1 },
+                    "matches_html": 1, "occurences_css": 1, whitelisted: false },
                 ".quux": {
-                    "matches_html": 0, "occurences_css": 1 },
+                    "matches_html": 0, "occurences_css": 1, whitelisted: false },
                 "span[dir=\"ltr\"]": {
-                    "matches_html": 1, "occurences_css": 1 },
+                    "matches_html": 1, "occurences_css": 1, whitelisted: false },
                 ".bar span[dir=\"ltr\"]": {
-                    "matches_html": 1, "occurences_css": 1 },
+                    "matches_html": 1, "occurences_css": 1, whitelisted: false },
                 ".foo span[dir=\"ltr\"]": {
-                    "matches_html": 0, "occurences_css": 1 }
+                    "matches_html": 0, "occurences_css": 1, whitelisted: false },
+                ".foo .qux .bar": {
+                    "matches_html": 0, "occurences_css": 1, whitelisted: true },
+                ".foo .qux .bar .baz": {
+                    "matches_html": 0, "occurences_css": 1, whitelisted: true }
             },
             total_used: 7,
-            total_unused: 5,
-            total_ignored: 8,
+            total_unused: 3,
+            total_ignored: 10,
             total_duplicates: 1
         };
 
