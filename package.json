@@ -7,7 +7,7 @@
     ],
     "name": "ucss",
     "description": "Find unused CSS rules",
-    "version": "0.4.2-beta",
+    "version": "0.4.3-beta",
     "homepage": "https://github.com/operasoftware/ucss",
     "repository": {
         "type": "git",

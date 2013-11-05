@@ -1,4 +1,4 @@
-## uCSS (v0.4.2-beta)
+## uCSS (v0.4.3-beta)
 Crawl website to find unused CSS selectors, as well as duplicate selectors.
 
 Basic features:

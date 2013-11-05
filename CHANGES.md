@@ -1,3 +1,8 @@
+## 2013.10.05, Version 0.4.3-beta
+
+*   Bugs:
+    - #26: Skip mailto:url
+
 ## 2013.08.28, Version 0.4.2-beta
 
 *   Bugs:
