@@ -1,15 +1,17 @@
 ## uCSS (v0.4.3-beta)
 Crawl website to find unused CSS selectors, as well as duplicate selectors.
 
-Basic features:
+### Features
+Features of uCSS include:
 * Find unused CSS selectors, given a HTML code base.
 * Find duplicate CSS selectors.
 * Count matches for each rule.
 * Follows links (crawl), within the given domain.
+* Give information about server responses, redirects, etc. while crawling, allowing you to find e.g. dead links.
 
-But wait, there's more! By setting up a config file, uCSS can also:
+By setting up a config file, uCSS can also:
 * Do login, and visit pages both as a logged in and logged out user.
-* Exclude specific pages and/or subdomains (when crawling).
+* Exclude specific pages and/or subdomains.
 * Visit specific pages instead of, or in addition to, crawling.
 * White list CSS rules to be ignored (e.g. those toggled by JavaScript).
 * Customizable output.
@@ -23,9 +25,18 @@ Want to contribute? Please see at the bottom.
 Please note: uCSS is currently in beta. There will be bugs, docs may be
 outdated, and functionality may change.
 
+#### What uCSS can't do
+uCSS does NOT:
+* Capture rules that are switched on using JavaScript after page load.
+* Remove unused CSS.
+* Look for style sheet URLs, internal style sheets, or inline styles in HTML
+  code.
+
+These features may, or may not, be added in the future.
+
 ### Installation
 
-`npm install ucss`
+`npm install ucss -g`
 
 ### Usage (command line)
 
@@ -241,14 +252,6 @@ checked. You may add them to pages.include.
 #### At-rules
 All at-rules are ignored, except @media: All the content inside media queries
 is read as if there were no media query.
-
-### What uCSS don't do
-uCSS does NOT:
-* Look for style sheet URLs, internal style sheets, or inline styles in HTML
-  code.
-* Capture rules that are switched on using JavaScript after page load.
-
-These features may, or may not, be added in the future.
 
 ### I want to contribute!
 
