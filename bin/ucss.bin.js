@@ -139,7 +139,7 @@ function main() {
     var done;
     if (typeof resultHandler === "undefined") {
         done = function(result) {
-            require('../lib/helpers/output').standard(
+            require('../lib/helpers/output').report(
                 result, argv.full, summary, argv.duplicates);
             process.exit(0);
         };
