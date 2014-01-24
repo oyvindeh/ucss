@@ -62,9 +62,9 @@ function main() {
                 description :
                     'Show full report, with details for each rule.'
             },
-            nosummary: {
-                alias : 'n',
-                description : 'Do not output summary, only list of rules.'
+            silent: {
+                alias : 's',
+                description : 'Only output list of rules. Nice if you need to pipe the output somewhere.'
             },
             duplicates: {
                 alias : 'd',
@@ -87,9 +87,9 @@ function main() {
         argv.duplicates = false;
     }
 
-    var summary = false;
-    if(undefined === argv.nosummary) {
-        summary = true;
+    var silent = true;
+    if(undefined === argv.silent) {
+        silent = false;
     }
 
     // Either HTML and CSS arguments, or config file, is required
@@ -132,7 +132,7 @@ function main() {
     }
 
     // Set up logger (custom, or default)
-    if (typeof logger === "undefined") {
+    if (typeof logger === "undefined" && !silent) {
         logger = require('../lib/helpers/output').logger;
     }
 
@@ -140,7 +140,7 @@ function main() {
     if (typeof resultHandler === "undefined") {
         done = function(result) {
             require('../lib/helpers/output').report(
-                result, argv.full, summary, argv.duplicates);
+                result, argv.full, silent, argv.duplicates);
             process.exit(0);
         };
     } else {
