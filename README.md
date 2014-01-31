@@ -1,5 +1,5 @@
 ## uCSS (v0.4.3-beta)
-Crawl website to find unused CSS selectors, as well as duplicate selectors.
+uCSS is made for crawling (large) websites to find unused CSS selectors.
 
 ### Features
 Features of uCSS include:
@@ -17,8 +17,7 @@ By setting up a config file, uCSS can also:
 * Customizable output.
 
 uCSS is written for [Node](http://www.nodejs.org/). It can be used both as a
-library and as a command line tool. With a little tweaking, it should be easy
-to use it in other contexts as well.
+library and as a command line tool.
 
 Want to contribute? Please see at the bottom.
 
@@ -28,15 +27,17 @@ outdated, and functionality may change.
 #### What uCSS can't do
 uCSS does NOT:
 * Capture rules that are switched on using JavaScript after page load.
-* Remove unused CSS.
 * Look for style sheet URLs, internal style sheets, or inline styles in HTML
   code.
+* Remove unused CSS. If you need to automatically strip away unused CSS from your favourite CSS library, you may find [UnCSS](https://github.com/giakki/uncss) helpful.
 
 These features may, or may not, be added in the future.
 
 ### Installation
 
 `npm install ucss -g`
+
+If you use [Grunt](http://gruntjs.com/), check out [grunt-ucss](https://github.com/ullmark/grunt-ucss).
 
 ### Usage (command line)
 
@@ -51,7 +52,7 @@ Options:
   --css, -c         CSS to load (local file or URL).
   --config, -g      Config file to use.
   --full, -f        Show full report, with details for each rule.
-  --nosummary, -n   Do not output summary.
+  --silent, -s      Only output list of rules. Nice if you need to pipe the output somewhere.
   --duplicates, -d  Show duplicates.
 
 Either a config file, or HTML and CSS files are required. If no arguments are
