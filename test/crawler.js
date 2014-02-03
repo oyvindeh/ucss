@@ -174,6 +174,8 @@ buster.testCase("uCSS crawler", {
         var http = require("http");
 
         this.server = http.createServer(function (req, res) {
+            res.setHeader("content-type", "text/html");
+
             if (req.url in pageSetOne) {
                 res.end(pageSetOne[req.url]);
             } else {
@@ -183,6 +185,8 @@ buster.testCase("uCSS crawler", {
         }).listen(9988, "0.0.0.0");
 
         this.anotherServer = http.createServer(function (req, res) {
+            res.setHeader("content-type", "text/html");
+
             if (req.url in pageSetTwo) {
                 res.end(pageSetTwo[req.url]);
             } else {
