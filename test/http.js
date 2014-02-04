@@ -26,6 +26,18 @@ buster.testCase("uCSS (using http)", {
                 // HTML, but wrong content type
                 res.setHeader("content-type", "application/pdf");
                 res.end("<html><head></head><body class='bar'></body></html>");
+            } else if ("/hasHeader.html" === req.url) {
+                if (req.headers['accept-language'] === "nb-no") {
+                    res.end("<html lang='nb'><head></head><body class='foo'></body></html>");
+                } else {
+                    res.end("<html lang='en'><head></head><body class='bar'></body></html>");
+                }
+            } else if ("/hasHeader.css" === req.url) {
+                if (req.headers['accept-language'] === "nb-no") {
+                    res.end("[lang='nb'] {} .foo {}");
+                } else {
+                    res.end("[lang='en'] {} .bar {}");
+                }
             } else {
                 res.writeHead(404);
                 res.end();
@@ -158,6 +170,34 @@ buster.testCase("uCSS (using http)", {
         };
 
         lib.analyze(pages, css, null, null, function(result) {
+            assert.match(result, expected);
+            done();
+        });
+    },
+
+    "Can use headers": function(done) {
+        var pages = {
+            include: ["http://127.0.0.1:9988/hasHeader.html"]
+        };
+        var css = ["http://127.0.0.1:9988/hasHeader.css"];
+
+        var context = {};
+        context.headers = { "accept-language": "nb-no"};
+
+        var expected = {
+            selectors: {
+                "[lang='nb']": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 }
+            },
+            total_used: 2,
+            total_unused: 0,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
+
+        lib.analyze(pages, css, context, null, function(result) {
             assert.match(result, expected);
             done();
         });

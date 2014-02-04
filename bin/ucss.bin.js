@@ -110,13 +110,14 @@ function main() {
     }
 
     // Read from config, if it was found
-    var css, pages, whitelist, auth, timeout, logger, resultHandler;
+    var css, pages, whitelist, auth, headers, timeout, logger, resultHandler;
     if (config) {
         css = config.css;
         pages = config.pages;
         whitelist = config.whitelist;
         auth = config.auth;
         timeout = config.timeout;
+        headers = config.headers;
 
         if (config.output) {
             if (undefined !== config.output.logger) {
@@ -152,6 +153,7 @@ function main() {
     var context = {
         whitelist: whitelist,
         auth: auth,
+        headers: headers,
         timeout: timeout
     };
 
