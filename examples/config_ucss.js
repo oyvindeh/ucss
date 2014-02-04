@@ -12,6 +12,7 @@ module.exports = {
             "http://localhost:8001/unlinked_articles/2"
         ]
     },
+    "headers": { "Accept-Language": "nb-no" }, // (Optional) Headers to send to server.
     "css": [ // (Required) List of CSS files to check.
         "base.css"
     ],
