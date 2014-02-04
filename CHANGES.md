@@ -1,3 +1,28 @@
+## 2014.02.04, Version 0.4.4-beta
+
+*   Features:
+    - #30: Option for setting User agent header.
+      Any header can now be set in configuration.
+
+*   Bugs:
+    - #32: Stops unexpectedly without any error message.
+    - #29: Follows links to binaries.
+      Now checks content type of response.
+
+*   Other:
+    - Better error handling and reporting (#9), including:
+      - Warning at the end if any resources did not load.
+      - Timeouts.
+    - Increased default timeout from 4 seconds to 10 seconds.
+    - "nosummary" option renamed to "silent".
+
+*   Refactoring that has implications for customization:
+    - Added error message parameter to logger.
+    - Renamed output.standard to output.report, and changed/renamed the
+      "summary" parameter to "silent".
+    - Add load_error property to the result object, with a list of all errors
+      on loading CSS and HTML.
+
 ## 2013.10.05, Version 0.4.3-beta
 
 *   Bugs:
