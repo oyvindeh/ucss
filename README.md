@@ -250,6 +250,8 @@ have side effects for the rendering of some pages. If you want an URL to be
 visited with specific parameters, you have to include it in pages.include.
 * When crawling, pages that are not linked to in other pages will not be
 checked. You may add them to pages.include.
+* Style sheets are only fetched as a non-logged in user.
+
 
 #### At-rules
 All at-rules are ignored, except @media: All the content inside media queries
