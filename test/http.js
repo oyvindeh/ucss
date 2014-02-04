@@ -154,7 +154,7 @@ buster.testCase("uCSS (using http)", {
             include: ["http://127.0.0.1:9988/markup1.html",
                       "http://127.0.0.1:9988/document.pdf"]
         };
-        var css = ["http://127.0.0.1:9988/rules1.css"]
+        var css = ["http://127.0.0.1:9988/rules1.css"];
 
         var expected = {
             selectors: {
