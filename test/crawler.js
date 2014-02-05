@@ -542,5 +542,60 @@ buster.testCase("uCSS crawler", {
             assert.match(result, expected);
             done();
         });
-    }
+    },
+
+    "only loads html, not binaries": function(done) {
+        var pages = {
+            include: ["http://127.0.0.1:9988/markup1.html",
+                      "http://127.0.0.1:9988/document.pdf"]
+        };
+        var css = ["http://127.0.0.1:9988/rules1.css"];
+
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
+
+        lib.analyze(pages, css, null, null, function(result) {
+            assert.match(result, expected);
+            done();
+        });
+    },
+
+    "// supports @import": function(done) {
+        var pages = {
+            include: ["http://127.0.0.1:9988/markup1.html",
+                      "http://127.0.0.1:9988/markup2.html"]
+        };
+        var css = ["@import url('http://127.0.0.1:9988/rules1.css');",
+                   "@import url('http://127.0.0.1:9988/rules2.css');"];
+
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 2,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
+
+        lib.analyze(pages, css, null, null, function(result) {
+            assert.match(result, expected);
+            done();
+        });
+    },
 });
