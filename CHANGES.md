@@ -1,3 +1,9 @@
+## 2014.02.07, Version 0.4.5-beta
+
+*   Bugs:
+    - Fix so that links pointing to URLs with other protocols than http(s) are
+      not followed.
+
 ## 2014.02.04, Version 0.4.4-beta
 
 *   Features:
