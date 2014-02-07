@@ -126,6 +126,14 @@ var pageSetOne = {
             "    <a href='no_links.html?bar=1'>markup1</a>",
             "  </body>",
             "</html>"].join(""),
+    "/non_http_links.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='foo'>",
+            "    <a href='mailto:example@example.com'>markup1</a>",
+            "  </body>",
+            "</html>"].join(""),
     "/no_links.html":
             ["<html>",
             "  <head>",
@@ -598,4 +606,30 @@ buster.testCase("uCSS crawler", {
             done();
         });
     },
+
+    // TODO: This always passes. It shouldn't.
+    "// skips protocols that are not http(s)": function(done) {
+        var pages = {
+            crawl: ["http://127.0.0.1:9988/non_http_links.html"]
+        };
+        var css = ["http://127.0.0.1:9988/rules1.css"];
+
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
+
+        lib.analyze(pages, css, null, null, function(result) {
+            assert.match(result, expected);
+            done();
+        });
+    }
 });

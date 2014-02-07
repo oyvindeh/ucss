@@ -146,5 +146,5 @@ buster.testCase("uCSS (using http)", {
             assert.match(result, expected);
             done();
         });
-    },
+    }
 });
