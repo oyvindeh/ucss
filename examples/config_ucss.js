@@ -1,25 +1,32 @@
 module.exports = {
     "pages": { // (Required) Pages to check. Crawl or include is required.
-        "crawl": "http://localhost:8000/", // (Optional, if "include" is given).
-                                           // Starting point for crawler.
+        "crawl": "http://localhost/", // (Optional, if "include" is given).
+                                      // Starting point for crawler.
         "exclude": [ // (Optional) List of HTML files/URLs to check.
-            "http://localhost:8000/admin/*",
-            "http://localhost:8000/foo/"
+            "http://localhost/some_page_to_exclude ", // Exclude this specific
+                                                      // page.
+            "http://localhost/admin/*", // Exclude all admin pages.
+            "http://localhost/products/*" // Exclude all product pages. No
+                                          // need to check lots of similar
+                                          // pages. Add a few selected ones in
+                                          // the 'include' list below instad.
         ],
-        "include": [ // (Optional, if "crawl" is given).
-                     // List of HTML files/URLs to check.
-            "http://localhost:8001/unlinked_articles/1",
-            "http://localhost:8001/unlinked_articles/2"
+        "include": [ // (Optional, if "crawl" is given) List of HTML 
+                     // files/URLs to check.
+            "http://localhost/unlinkedpage",
+            "http://localhost/products/foo" // Add product from excluded
+                                            // subdomain.
         ]
     },
-    "headers": { "Accept-Language": "nb-no" }, // (Optional) Headers to send to server.
+    "headers": { "Accept-Language": "nb-no" }, // (Optional) Headers to send
+                                               // to server.
     "css": [ // (Required) List of CSS files to check.
         "base.css"
     ],
     "whitelist": [".foo", ".bar"], // (Optional) List of CSS rules to ignore,
                                    // e.g. ones added by JavaScript.
-    "timeout": 4000, // (Optional) Timeout for HTTP requests.
-                     // (default is 4000ms).
+    "timeout": 4000, // (Optional) Timeout for HTTP requests. (default is 
+                     // 4000ms).
     "auth": { // (Optional) Authentication information.
               // Please see docs for more info.
         "username": "foo",
