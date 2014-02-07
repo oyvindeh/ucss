@@ -27,7 +27,7 @@
         "cssom": "0.2.x",
         "cheerio": "0.10.x",
         "request": "2.10.x",
-        "q": "0.9.x"
+        "q": "1.0.x"
     },
     "devDependencies": {
         "buster": "0.6.x",
