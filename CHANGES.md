@@ -1,6 +1,7 @@
-## 2014.02.07, Version 0.4.5-beta
+## 2014.02.07, Version 0.4.6-beta
 
 *   Bugs:
+    - Fix bug where crawler reached maximum call stack size on large sites.
     - Fix so that links pointing to URLs with other protocols than http(s) are
       not followed.
 
