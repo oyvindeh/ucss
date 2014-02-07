@@ -15,7 +15,7 @@ module.exports = {
                      // files/URLs to check.
             "http://localhost/unlinkedpage",
             "http://localhost/products/foo" // Add product from excluded
-                                            // subdomain.
+                                            // subfolder.
         ]
     },
     "headers": { "Accept-Language": "nb-no" }, // (Optional) Headers to send

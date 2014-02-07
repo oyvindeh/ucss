@@ -11,7 +11,7 @@ Features of uCSS include:
 
 By setting up a config file, uCSS can also:
 * Do login, and visit pages both as a logged in and logged out user.
-* Exclude specific pages and/or subdomains.
+* Exclude specific pages and/or subfolders.
 * Visit specific pages instead of, or in addition to, crawling.
 * White list CSS rules to be ignored (e.g. those toggled by JavaScript).
 * Customizable output.
@@ -111,15 +111,15 @@ There are several things you can do with a config file, that you cannot do with
 command line arguments.
 
 uCSS follows links by default. But there may be specific files, or whole
-subdomains, that you don't want to check. These can be listed inside
-pages.exclude. If you want to exclude a whole subdomain, use a wildcard ("*")
+subfolders, that you don't want to check. These can be listed inside
+pages.exclude. If you want to exclude a whole subfolder, use a wildcard ("*")
 at the end of the url (please see [example config
 file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
 
 In other cases, you may want to visit just a single file, or there are files that
 the crawler cannot reach (e.g. because they are not linked to). Those can be
 added to pages.include. Also, if you want to visit certain pages under an
-excluded subdomain, you can add those to pages.include. Note that pages.include
+excluded subfolder, you can add those to pages.include. Note that pages.include
 does not support wildcards.
 
 In addition to managing what pages to visit (and not to visit), you can check

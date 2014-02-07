@@ -93,24 +93,24 @@ var pageSetOne = {
             "    <a href='not_existing.html'>not_existing.html</a>",
             "  </body>",
             "</html>"].join(""),
-    "/subdomain_links.html":
+    "/subfolder_links.html":
             ["<html>",
             "  <head>",
             "  </head>",
             "  <body class='foo bar'>",
             "    <a href='no_links.html'>no_links.html</a>",
-            "    <a href='/subdomain/doc1.html'>doc1.html</a>",
-            "    <a href='http://127.0.0.1:9988/subdomain/doc2.html'>doc3.html</a>",
+            "    <a href='/subfolder/doc1.html'>doc1.html</a>",
+            "    <a href='http://127.0.0.1:9988/subfolder/doc2.html'>doc3.html</a>",
             "  </body>",
             "</html>"].join(""),
-    "/subdomain/doc1.html":
+    "/subfolder/doc1.html":
             ["<html>",
             "  <head>",
             "  </head>",
             "  <body class='foo'>",
             "  </body>",
             "</html>"].join(""),
-    "/subdomain/doc2.html":
+    "/subfolder/doc2.html":
             ["<html>",
             "  <head>",
             "  </head>",
@@ -409,10 +409,10 @@ buster.testCase("uCSS crawler", {
         });
     },
 
-    "handles exclude of subdomain": function(done) {
+    "handles exclude of subfolder": function(done) {
         var pages = {
-            crawl: ["http://127.0.0.1:9988/subdomain_links.html"],
-            exclude: ["http://127.0.0.1:9988/subdomain/*"]
+            crawl: ["http://127.0.0.1:9988/subfolder_links.html"],
+            exclude: ["http://127.0.0.1:9988/subfolder/*"]
         };
         var css = ["http://127.0.0.1:9988/rules1.css"];
 
