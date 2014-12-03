@@ -2,7 +2,7 @@ module.exports = {
     "pages": { // (Required) Pages to check. Crawl or include is required.
         "crawl": "http://localhost/", // (Optional, if "include" is given).
                                       // Starting point for crawler.
-        "exclude": [ // (Optional) List of HTML files/URLs to check.
+        "exclude": [ // (Optional) List of HTML files/URLs to skip.
             "http://localhost/some_page_to_exclude ", // Exclude this specific
                                                       // page.
             "http://localhost/admin/*", // Exclude all admin pages.
