@@ -1,5 +1,5 @@
 {
-    "author": "Øyvind Håkestad <oyvindeh@opera.com> (https://github.com/oyvindeh)",
+    "author": "Øyvind Håkestad <oyvindeh@fastmail.fm> (https://github.com/oyvindeh)",
     "contributors": [
         "Chris Adams <chris@improbable.org> (https://github.com/acdha)",
         "Hans S. Tømmerholt <hanst@opera.com> (https://github.com/hanssto)",
@@ -8,10 +8,10 @@
     "name": "ucss",
     "description": "Find unused CSS rules",
     "version": "0.4.6-beta",
-    "homepage": "https://github.com/operasoftware/ucss",
+    "homepage": "https://github.com/oyvindeh/ucss",
     "repository": {
         "type": "git",
-        "url": "git@github.com:operasoftware/ucss"
+        "url": "git@github.com:oyvindeh/ucss"
     },
     "main": "./lib/ucss.js",
     "bin": {
