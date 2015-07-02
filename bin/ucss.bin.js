@@ -94,9 +94,9 @@ function main() {
 
     // Either HTML and CSS arguments, or config file, is required
     var config = null;
-    var htmlSet = typeof argv.html === "string";
-    var cssSet  = typeof argv.css  === "string";
-    if (htmlSet && cssSet) {
+    var htmlIsSet = typeof argv.html === "string";
+    var cssIsSet  = typeof argv.css  === "string";
+    if (htmlIsSet && cssIsSet) {
         // Do stuff with html & css
         argv.config = false;
     } else if (typeof argv.config  === "string") {
