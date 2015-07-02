@@ -6,6 +6,9 @@ if (typeof require !== "undefined") {
     var lib = require("../lib/ucss");
 }
 
+var assert = buster.referee.assert;
+var refute = buster.referee.refute;
+
 
 buster.testCase("uCSS (using http)", {
     setUp: function () {
