@@ -2,7 +2,7 @@ This code is offered under the Open Source [BSD license](http://www.opensource.o
 
 # BSD License
 
-Copyright © 2015, Øyvind Håkestad
+Copyright © 2015, Øyvind Håkestad  
 Copyright © 2012, Opera Software
 All rights reserved.
 
