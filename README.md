@@ -103,7 +103,7 @@ var logger = null; // Function for logging HTTP requests
 ucss.analyze(html, css, context, logger, function(result) {
     // Do something to the result object
     console.log(result);
-);
+});
 ```
 
 ### Setting up a config file
