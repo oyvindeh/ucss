@@ -31,6 +31,14 @@ var pageSetOne = {
             "    <a href='markup1.html'>markup1</a>",
             "  </body>",
             "</html>"].join(""),
+    "/markup3.html":
+            ["<html>",
+            "  <head>",
+            "  </head>",
+            "  <body class='bar'>",
+            "    <a href='markup1.html'>markup1</a>",
+            "  </body>",
+            "</html>"].join(""),
     "/external_links.html":
             ["<html>",
             "  <head>",
@@ -38,6 +46,8 @@ var pageSetOne = {
             "  <body class='bar'>",
             "    <a href='http://127.0.0.1:9989/index.html'>index.html</a>",
             "    <a href='http://127.0.0.1:9988/markup1.html'>markup1</a>",
+            "    <a href='//127.0.0.1:9989/anotherpage.html'>anotherpage.html</a>",
+            "    <a href='//127.0.0.1:9988/markup3.html'>markup3.html</a>",
             "    <a href='/markup2.html'>markup2</a>",
             "  </body>",
             "</html>"].join(""),
@@ -169,7 +179,8 @@ var pageSetOne = {
 
 
 var pageSetTwo = {
-    "/index.html": "<html><head></head><body class='baz'></body></html>"
+    "/index.html": "<html><head></head><body class='baz'></body></html>",
+    "/anotherpage.html": "<html><head></head><body class='qux'></body></html>",
 };
 
 /*buster.assertions.add("ding", {
@@ -241,17 +252,22 @@ buster.testCase("uCSS crawler", {
         var pages = {
             crawl: ["http://127.0.0.1:9988/external_links.html"]
         };
-        var css = ["http://127.0.0.1:9988/rules1.css"];
+        var css = ["http://127.0.0.1:9988/rules2.css"];
 
         var expected = {
             selectors: {
                 ".foo": {
                     "matches_html": 1, "occurences_css": 1 },
                 ".bar": {
-                    "matches_html": 2, "occurences_css": 1 }
+                    "matches_html": 3, "occurences_css": 1 },
+                ".baz": {
+                    "matches_html": 0, "occurences_css": 1 },
+                ".qux": {
+                    "matches_html": 0, "occurences_css": 1 }
+
             },
             total_used: 2,
-            total_unused: 0,
+            total_unused: 2,
             total_ignored: 0,
             total_duplicates: 0
         };
