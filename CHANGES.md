@@ -1,3 +1,14 @@
+## 2015.28.08, Version 0.4.7-beta
+
+*   Bugs:
+    - #37: Fix bug where relative protocol URIs caused crawler to escape to
+      other domains.
+    - #40: Fix length check of array for load errors.
+    - Fix bug where load error warnings where not shown for local files.
+
+*   Other:
+    - Update licence information.
+
 ## 2014.02.07, Version 0.4.6-beta
 
 *   Bugs:

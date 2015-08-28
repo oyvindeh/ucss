@@ -7,7 +7,7 @@
     ],
     "name": "ucss",
     "description": "Find unused CSS rules",
-    "version": "0.4.6-beta",
+    "version": "0.4.7-beta",
     "homepage": "https://github.com/oyvindeh/ucss",
     "repository": {
         "type": "git",

@@ -1,4 +1,4 @@
-## uCSS (v0.4.3-beta)
+## uCSS (beta)
 uCSS is made for crawling (large) websites to find unused CSS selectors.
 
 ### Features
@@ -125,7 +125,7 @@ does not support wildcards.
 In addition to managing what pages to visit (and not to visit), you can check
 pages both as a regular visitor and as a logged in user. This is done by
 specifying a function that performs a log in, and then returns a session cookie
-for uCSS to use for identifying itself to the server. You can also set headers 
+for uCSS to use for identifying itself to the server. You can also set headers
 to send to the server.
 
 Furthermore, you can create a white list of selectors to be ignored. This is
