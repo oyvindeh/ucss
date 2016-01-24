@@ -36,5 +36,8 @@
     "license": "BSD",
     "engines": {
         "node": ">=0.6"
+    },
+    "scripts": {
+        "test": "node run-tests.js"
     }
 }
