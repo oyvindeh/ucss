@@ -371,6 +371,27 @@ buster.testCase("uCSS crawler", {
         });
     },
 
+    "handles regex excludes": function(done) {
+        var excludePatern = /relative[2-5]/;
+        var pages = {
+            crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
+            exclude: [excludePatern]
+        };
+        var css = ["http://127.0.0.1:9988/rules3.css"];
+        var visitedPages = [];
+        var logger = function(result, requestedPage) {
+            visitedPages.push(requestedPage);
+        };
+        lib.analyze(pages, css, null, logger, function(result) {
+            var matches = visitedPages.filter(function(Url){
+                return excludePatern.test(Url);
+            });
+            // make sure we have no matches
+            assert.equals(matches.length, 0);
+            done();
+        });
+    },
+
     "handles dead links": function(done) {
         var pages = {
             crawl: ["http://127.0.0.1:9988/deadlink.html"]
