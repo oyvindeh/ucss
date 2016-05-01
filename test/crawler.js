@@ -380,10 +380,12 @@ buster.testCase("uCSS crawler", {
             exclude: [excludePattern]
         };
         var css = ["http://127.0.0.1:9988/rules3.css"];
+
         var visitedPages = [];
         var logger = function(result, requestedPage) {
             visitedPages.push(requestedPage);
         };
+
         lib.analyze(pages, css, null, logger, function(result) {
             var matches = visitedPages.filter(function(url){
                 return excludePattern.test(url);
@@ -620,6 +622,37 @@ buster.testCase("uCSS crawler", {
         });
     },
 
+    "skips protocols that are not http(s)": function(done) {
+        var pages = {
+            crawl: ["http://127.0.0.1:9988/non_http_links.html"]
+        };
+        var css = ["http://127.0.0.1:9988/rules1.css"];
+
+        var expected = {
+            selectors: {
+                ".foo": {
+                    "matches_html": 1, "occurences_css": 1 },
+                ".bar": {
+                    "matches_html": 0, "occurences_css": 1 }
+            },
+            total_used: 1,
+            total_unused: 1,
+            total_ignored: 0,
+            total_duplicates: 0
+        };
+
+        var visitedPages = [];
+        var logger = function(result, requestedPage) {
+            visitedPages.push(requestedPage);
+        };
+
+        lib.analyze(pages, css, null, logger, function(result) {
+            // Should count given html and css page, but not mailto link.
+            assert.equals(visitedPages.length, 2);
+            done();
+        });
+    },
+
     "// supports @import": function(done) {
         var pages = {
             include: ["http://127.0.0.1:9988/markup1.html",
@@ -638,32 +671,6 @@ buster.testCase("uCSS crawler", {
                     "matches_html": 0, "occurences_css": 1 }
             },
             total_used: 2,
-            total_unused: 1,
-            total_ignored: 0,
-            total_duplicates: 0
-        };
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
-
-    // TODO: This always passes. It shouldn't.
-    "// skips protocols that are not http(s)": function(done) {
-        var pages = {
-            crawl: ["http://127.0.0.1:9988/non_http_links.html"]
-        };
-        var css = ["http://127.0.0.1:9988/rules1.css"];
-
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".bar": {
-                    "matches_html": 0, "occurences_css": 1 }
-            },
-            total_used: 1,
             total_unused: 1,
             total_ignored: 0,
             total_duplicates: 0
