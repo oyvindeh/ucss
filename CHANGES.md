@@ -1,3 +1,11 @@
+## 2016.05.01, Version 0.4.8
+
+*   Features:
+    - Support for regular expressions in list of pages to exclude.
+
+*   Other:
+    - Update dependencies
+
 ## 2015.28.08, Version 0.4.7-beta
 
 *   Bugs:
