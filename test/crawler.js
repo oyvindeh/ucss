@@ -372,10 +372,10 @@ buster.testCase("uCSS crawler", {
     },
 
     "handles regex excludes": function(done) {
-        var excludePatern = /relative[2-5]/;
+        var excludePattern = /relative[2-5]/;
         var pages = {
             crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
-            exclude: [excludePatern]
+            exclude: [excludePattern]
         };
         var css = ["http://127.0.0.1:9988/rules3.css"];
         var visitedPages = [];
@@ -383,8 +383,8 @@ buster.testCase("uCSS crawler", {
             visitedPages.push(requestedPage);
         };
         lib.analyze(pages, css, null, logger, function(result) {
-            var matches = visitedPages.filter(function(Url){
-                return excludePatern.test(Url);
+            var matches = visitedPages.filter(function(url){
+                return excludePattern.test(url);
             });
             // make sure we have no matches
             assert.equals(matches.length, 0);
