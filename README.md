@@ -115,12 +115,13 @@ subfolders, that you don't want to check. These can be listed inside
 pages.exclude. If you want to exclude a whole subfolder, use a wildcard ("*")
 at the end of the url (please see [example config
 file](https://github.com/operasoftware/ucss/blob/master/examples/config_ucss.js)).
+You may also use regular expressions.
 
 In other cases, you may want to visit just a single file, or there are files that
 the crawler cannot reach (e.g. because they are not linked to). Those can be
 added to pages.include. Also, if you want to visit certain pages under an
 excluded subfolder, you can add those to pages.include. Note that pages.include
-does not support wildcards.
+does not support wildcards, nor regular expressions.
 
 In addition to managing what pages to visit (and not to visit), you can check
 pages both as a regular visitor and as a logged in user. This is done by
