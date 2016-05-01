@@ -372,6 +372,8 @@ buster.testCase("uCSS crawler", {
     },
 
     "handles regex excludes": function(done) {
+        // TODO: Review if this test should be rewritten to be similar to the
+        // other exclude tests, for consistency.
         var excludePattern = /relative[2-5]/;
         var pages = {
             crawl: ["http://127.0.0.1:9988/path1/relative_paths.html"],
