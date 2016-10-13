@@ -1,10 +1,10 @@
 /* global assert:true */
 
-var fs = require("fs");
+var fs = require('fs');
 
-if (typeof require !== "undefined") {
-    var buster = require("buster");
-    var lib = require("../lib/ucss");
+if (typeof require !== 'undefined') {
+  var buster = require('buster');
+  var lib = require('../lib/ucss');
 }
 
 var assert = buster.referee.assert;
@@ -17,200 +17,200 @@ var refute = buster.referee.refute;
  * As uCSS does not have its own selector engine, this is not meant as a
  * complete CSS selector test suite.
  */
-buster.testCase("CSS Selectors:", {
-    setUp: function () {
-    },
+buster.testCase('CSS Selectors:', {
+  setUp: function () {
+  },
 
-    tearDown: function () {
-    },
+  tearDown: function () {
+  },
 
-    "Class": function(done) {
-        var pages = {
-            include: ["<html><head></head><body class='foo'></body></html>"]
-        };
-        var css = ".foo {}";
+  'Class': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo'></body></html>"]
+    };
+    var css = '.foo {}';
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Id": function(done) {
-        var pages = {
-            include: ["<html><head></head><body id='foo'></body></html>"]
-        };
-        var css = "#foo {}";
+  'Id': function (done) {
+    var pages = {
+      include: ["<html><head></head><body id='foo'></body></html>"]
+    };
+    var css = '#foo {}';
 
-        var expected = {
-            selectors: {
-                "#foo": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
-
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
-
-    "All": function(done) {
-        var pages = {
-            include: ["<html><head></head><body><div></div></body></html>"]
-        };
-        var css = "* {}";
-
-        var expected = {
-            selectors: {
-                "*": {
-                    "matches_html": 4, "occurences_css": 1 }
-            }
-        };
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
-
-    "Element": function(done) {
-        var pages = {
-            include: ["<html><head></head><body><div></div></body></html>"]
-        };
-        var css = "div {}";
-
-        var expected = {
-            selectors: {
-                "div": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
-
-    "Element, element": function(done) {
-        var pages = {
-            include: [fs.readFileSync("fixtures/markup.html").toString()]
-        };
-        var css = ".foo, .bar { color: red; }";
+    var expected = {
+      selectors: {
+        '#foo': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".bar": {
-                    "matches_html": 1, "occurences_css": 1 }
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-            }
-        };
+  'All': function (done) {
+    var pages = {
+      include: ['<html><head></head><body><div></div></body></html>']
+    };
+    var css = '* {}';
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    var expected = {
+      selectors: {
+        '*': {
+          'matches_html': 4, 'occurences_css': 1 }
+      }
+    };
 
-    "Element + element": function(done) {
-        var pages = {
-            include: [fs.readFileSync("fixtures/markup.html").toString()]
-        };
-        var css = ".foo + .bar { color: red; }";
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-        var expected = {
-            selectors: {
-                ".foo + .bar": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+  'Element': function (done) {
+    var pages = {
+      include: ['<html><head></head><body><div></div></body></html>']
+    };
+    var css = 'div {}';
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    var expected = {
+      selectors: {
+        'div': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-    "[attribute=value]": function(done) {
-        var pages = {
-            include: ["<html><head></head><body><div dir='rtl'></div></body></html>"]
-        };
-        var css = "div[dir='rtl'] {}";
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-        var expected = {
-            selectors: {
-                "div[dir='rtl']": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
-
-    "Element1~element2": function(done) {
-        var pages = {
-            include: ["<html><head></head><body><div></div><br/><p><br/><div></div><br/></body></html>"]
-        };
-        var css = "div~br {}";
-
-        var expected = {
-            selectors: {
-                "div~br": {
-                    "matches_html": 2, "occurences_css": 1 }
-            }
-        };
-
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+  'Element, element': function (done) {
+    var pages = {
+      include: [fs.readFileSync('fixtures/markup.html').toString()]
+    };
+    var css = '.foo, .bar { color: red; }';
 
 
-    "handles pseudo elements": function(done) {
-        var pages = {
-            include: ["<html><head></head><body class='foo'></body></html>"]
-        };
-        var css = [".foo::link{} .bar:lang(nb){} .foo::link{}",
-                  ".foo{} .foo{} .bar{} .baz:after{} input:invalid{}"].join("");
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.bar': {
+          'matches_html': 1, 'occurences_css': 1 }
 
-        var expected = {
-            selectors: {
-                ".bar": {
-                    "matches_html": 0, "occurences_css": 1 },
-                ".bar:lang(nb)": {
-                    "matches_html": 0, "occurences_css": 1 },
-                ".baz:after": {
-                    "matches_html": 0, "occurences_css": 1 },
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 2 },
-                ".foo::link": {
-                    "matches_html": 1, "occurences_css": 2 },
-                "input:invalid": {
-                    "matches_html": 0, "occurences_css": 1 }
-            }
-        };
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    }
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
+
+  'Element + element': function (done) {
+    var pages = {
+      include: [fs.readFileSync('fixtures/markup.html').toString()]
+    };
+    var css = '.foo + .bar { color: red; }';
+
+    var expected = {
+      selectors: {
+        '.foo + .bar': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
+
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
+
+  '[attribute=value]': function (done) {
+    var pages = {
+      include: ["<html><head></head><body><div dir='rtl'></div></body></html>"]
+    };
+    var css = "div[dir='rtl'] {}";
+
+    var expected = {
+      selectors: {
+        "div[dir='rtl']": {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
+
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
+
+  'Element1~element2': function (done) {
+    var pages = {
+      include: ['<html><head></head><body><div></div><br/><p><br/><div></div><br/></body></html>']
+    };
+    var css = 'div~br {}';
+
+    var expected = {
+      selectors: {
+        'div~br': {
+          'matches_html': 2, 'occurences_css': 1 }
+      }
+    };
+
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
+
+
+  'handles pseudo elements': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo'></body></html>"]
+    };
+    var css = ['.foo::link{} .bar:lang(nb){} .foo::link{}',
+                  '.foo{} .foo{} .bar{} .baz:after{} input:invalid{}'].join('');
+
+    var expected = {
+      selectors: {
+        '.bar': {
+          'matches_html': 0, 'occurences_css': 1 },
+        '.bar:lang(nb)': {
+          'matches_html': 0, 'occurences_css': 1 },
+        '.baz:after': {
+          'matches_html': 0, 'occurences_css': 1 },
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 2 },
+        '.foo::link': {
+          'matches_html': 1, 'occurences_css': 2 },
+        'input:invalid': {
+          'matches_html': 0, 'occurences_css': 1 }
+      }
+    };
+
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  }
 });
 
 
@@ -219,183 +219,183 @@ buster.testCase("CSS Selectors:", {
  *
  * The goal for now is to not crash when these are encountered.
  */
-buster.testCase("CSS @-rules:", {
-    setUp: function () {
-    },
+buster.testCase('CSS @-rules:', {
+  setUp: function () {
+  },
 
-    tearDown: function () {
-    },
+  tearDown: function () {
+  },
 
-    "Nested selectors (@media)": function(done) {
-        var pages = {
-            include: [fs.readFileSync("fixtures/markup.html").toString()]
-        };
-        var css = [".foo { color: red; } ",
-                   "@media all and (min-width: 500px) {",
-                     ".bar { background: blue; }",
-                   " }"].join("");
+  'Nested selectors (@media)': function (done) {
+    var pages = {
+      include: [fs.readFileSync('fixtures/markup.html').toString()]
+    };
+    var css = ['.foo { color: red; } ',
+                   '@media all and (min-width: 500px) {',
+                     '.bar { background: blue; }',
+                   ' }'].join('');
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".bar": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.bar': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Selectors succeding nested selectors (@media)": function(done) {
-        var pages = {
-            include: [fs.readFileSync("fixtures/markup.html").toString()]
-        };
-        var css = [".foo { color: red; } ",
-                   "@media all and (min-width: 500px) ",
-                     "{ .bar { background: blue; } ",
-                   "} .qux { float: left; }"].join("");
+  'Selectors succeding nested selectors (@media)': function (done) {
+    var pages = {
+      include: [fs.readFileSync('fixtures/markup.html').toString()]
+    };
+    var css = ['.foo { color: red; } ',
+                   '@media all and (min-width: 500px) ',
+                     '{ .bar { background: blue; } ',
+                   '} .qux { float: left; }'].join('');
 
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".bar": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".qux": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.bar': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.qux': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Ignores @font-face": function(done) {
-        var pages = {
-            include: ["<html><head></head><body class='foo'></body></html>"]
-        };
-        var css = ["@font-face {font-family: 'MyWebFont'; ",
+  'Ignores @font-face': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo'></body></html>"]
+    };
+    var css = ["@font-face {font-family: 'MyWebFont'; ",
                    "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
                    "format('embedded-opentype'), url('webfont.woff') ",
                    "format('woff'), url('webfont.ttf') format('truetype'), ",
-                   "url('webfont.svg#svgFontName') format('svg');}"].join("");
+                   "url('webfont.svg#svgFontName') format('svg');}"].join('');
 
-        var expected = {
-            selectors: {
-                "@font-face": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true }
-            }
-        };
+    var expected = {
+      selectors: {
+        '@font-face': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Ignores @keyframe": function(done) {
-        var pages = {
-            include: ["<html><head></head><body class='foo'></body></html>"]
-        };
-        var css = ["@-webkit-keyframes progress-bar-stripes{",
-                     "from{background-position:40px 0}",
-                     "to{background-position:0 0}",
-                   "}@-moz-keyframes progress-bar-stripes{",
-                     "from{background-position:40px 0}",
-                     "to{background-position:0 0}",
-                   "}@-ms-keyframes progress-bar-stripes{",
-                     "from{background-position:40px 0}",
-                     "to{background-position:0 0}",
-                   "}@-o-keyframes progress-bar-stripes{",
-                     "from{background-position:0 0}",
-                     "to{background-position:40px 0}",
-                   "}@keyframes progress-bar-stripes{",
-                     "from{background-position:40px 0}",
-                     "to{background-position:0 0}}"].join("");
+  'Ignores @keyframe': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo'></body></html>"]
+    };
+    var css = ['@-webkit-keyframes progress-bar-stripes{',
+                     'from{background-position:40px 0}',
+                     'to{background-position:0 0}',
+                   '}@-moz-keyframes progress-bar-stripes{',
+                     'from{background-position:40px 0}',
+                     'to{background-position:0 0}',
+                   '}@-ms-keyframes progress-bar-stripes{',
+                     'from{background-position:40px 0}',
+                     'to{background-position:0 0}',
+                   '}@-o-keyframes progress-bar-stripes{',
+                     'from{background-position:0 0}',
+                     'to{background-position:40px 0}',
+                   '}@keyframes progress-bar-stripes{',
+                     'from{background-position:40px 0}',
+                     'to{background-position:0 0}}'].join('');
 
-        var expected = {
-            selectors: {
-                "@-webkit-keyframes progress-bar-stripes": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true },
-                "@-moz-keyframes progress-bar-stripes": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true },
-                "@-ms-keyframes progress-bar-stripes": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true },
-                "@-o-keyframes progress-bar-stripes": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true },
-                "@keyframes progress-bar-stripes": {
-                    "matches_html": 0, "occurences_css": 1, ignored: true }
-            },
-            total_used: 0,
-            total_ignored: 5
-        };
+    var expected = {
+      selectors: {
+        '@-webkit-keyframes progress-bar-stripes': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true },
+        '@-moz-keyframes progress-bar-stripes': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true },
+        '@-ms-keyframes progress-bar-stripes': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true },
+        '@-o-keyframes progress-bar-stripes': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true },
+        '@keyframes progress-bar-stripes': {
+          'matches_html': 0, 'occurences_css': 1, ignored: true }
+      },
+      total_used: 0,
+      total_ignored: 5
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Handles @supports": function(done) {
-            var pages = {
-                include: ["<html><head></head><body class='foo baz'></body></html>"]
-            };
-            var css = [".foo { background: blue } ",
-                   "@supports (box-shadow: 2px 2px 2px black) { ",
-                   ".bar { box-shadow: 2px 2px 2px black; }} ",
-                   "@-prefix-supports (box-shadow: 2px 2px 2px black) { ",
-                   ".bar { box-shadow: 2px 2px 2px black; }} ",
-                   ".baz { background: red }"].join("");
+  'Handles @supports': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo baz'></body></html>"]
+    };
+    var css = ['.foo { background: blue } ',
+                   '@supports (box-shadow: 2px 2px 2px black) { ',
+                   '.bar { box-shadow: 2px 2px 2px black; }} ',
+                   '@-prefix-supports (box-shadow: 2px 2px 2px black) { ',
+                   '.bar { box-shadow: 2px 2px 2px black; }} ',
+                   '.baz { background: red }'].join('');
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".baz": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.baz': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    },
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
 
-    "Handles @document": function(done) {
-        var pages = {
-            include: ["<html><head></head><body class='foo baz'></body></html>"]
-        };
-        var css = [".foo { background: blue } ",
-                   "@document url(http://www.example.com/), ",
-                     "url-prefix(http://www.example.com/Style/), ",
+  'Handles @document': function (done) {
+    var pages = {
+      include: ["<html><head></head><body class='foo baz'></body></html>"]
+    };
+    var css = ['.foo { background: blue } ',
+                   '@document url(http://www.example.com/), ',
+                     'url-prefix(http://www.example.com/Style/), ',
                      "domain(example.com),  regexp('https:.*') { ",
-                       "body { color: red; background: blue; }}",
-                   "@-prefix-document url(http://www.example.com/), ",
-                     "url-prefix(http://www.example.com/Style/), ",
+                       'body { color: red; background: blue; }}',
+                   '@-prefix-document url(http://www.example.com/), ',
+                     'url-prefix(http://www.example.com/Style/), ',
                      "domain(example.com),  regexp('https:.*') { ",
-                       "body { color: red; background: blue; }}",
-                   ".baz { background: red }"].join("");
+                       'body { color: red; background: blue; }}',
+                   '.baz { background: red }'].join('');
 
-        var expected = {
-            selectors: {
-                ".foo": {
-                    "matches_html": 1, "occurences_css": 1 },
-                ".baz": {
-                    "matches_html": 1, "occurences_css": 1 }
-            }
-        };
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 },
+        '.baz': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
+    };
 
-        lib.analyze(pages, css, null, null, function(result) {
-            assert.match(result, expected);
-            done();
-        });
-    }
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  }
 });
