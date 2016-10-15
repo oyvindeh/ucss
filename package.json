@@ -23,15 +23,15 @@
     ],
     "dependencies": {
         "optimist": "0.6.x",
-        "async": "0.9.x",
+        "async": "2.1.x",
         "cssom": "0.3.x",
-        "cheerio": "0.20.x",
-        "request": "2.72.x",
+        "cheerio": "0.22.x",
+        "request": "2.75.x",
         "q": "1.4.x"
     },
     "devDependencies": {
         "buster": "0.7.x",
-        "sinon": "1.14.x"
+        "sinon": "1.17.x"
     },
     "license": "BSD",
     "engines": {
