@@ -62,6 +62,22 @@ var pageSetOne = {
     "    <a href='../path2/relative4.html'>markup1</a>",
     '  </body>',
     '</html>'].join(''),
+  '/fragments.html': [
+    '<html>',
+    '  <head>',
+    '  </head>',
+    '  <body>',
+    "    <a href='/has_no_links.html#frag1'>link with fragment</a>",
+    "    <a href='/has_no_links.html#frag2'>link with another fragment</a>",
+    '  </body>',
+    '</html>'].join(''),
+  '/has_no_links.html': [
+    '<html>',
+    '  <head>',
+    '  </head>',
+    "  <body class='foo'>",
+    '  </body>',
+    '</html>'].join(''),
   '/path1/relative1.html': [
     '<html>',
     '  <head>',
@@ -674,6 +690,24 @@ buster.testCase('uCSS crawler', {
       total_unused: 1,
       total_ignored: 0,
       total_duplicates: 0
+    };
+
+    lib.analyze(pages, css, null, null, function (result) {
+      assert.match(result, expected);
+      done();
+    });
+  },
+  'removes URL fragments': function (done) {
+    var pages = {
+      crawl: ['http://127.0.0.1:9988/fragments.html']
+    };
+    var css = '.foo {}';
+
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 1, 'occurences_css': 1 }
+      }
     };
 
     lib.analyze(pages, css, null, null, function (result) {
