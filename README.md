@@ -4,7 +4,7 @@ uCSS is made for crawling (large) websites to find unused CSS selectors.
 ### Features
 Features of uCSS include:
 * Find unused CSS selectors, given a HTML code base.
-* Find duplicate CSS selectors.
+* Find duplicate CSS selectors (also when no HTML is given).
 * Count matches for each rule.
 * Follows links (crawl), within the given domain.
 * Give information about server responses, redirects, etc. while crawling, allowing you to find e.g. dead links.
@@ -53,10 +53,10 @@ Options:
   --config, -g      Config file to use.
   --full, -f        Show full report, with details for each rule.
   --silent, -s      Only output list of rules. Nice if you need to pipe the output somewhere.
-  --duplicates, -d  Show duplicates.
+  --duplicates, -d  Show duplicates. If only CSS is given, this is enabled by default.
 
-Either a config file, or HTML and CSS files are required. If no arguments are
-specified, uCSS will look for a config_ucss.js file in the current directory.
+Either a config file or a CSS file is required. If no HTML is given, uCSS will only look for duplicate CSS.
+If no arguments are specified, uCSS will assume there is a config_ucss.js file in the current directory.
 ```
 So, to check a web page you could write
 ```
