@@ -33,9 +33,10 @@ function openConfig (filename) {
 function main () {
   var showHelp = function () {
     optimist.showHelp();
-    console.log('Either a config file, or HTML and CSS files are required. '
-                    + 'If no arguments are\nspecified, uCSS will look for a '
-                    + 'config_ucss.js file in the current directory.');
+    console.log('Either a config file or a CSS file is required. '
+                + 'If no HTML is given, uCSS will only look for duplicate CSS.'
+                + '\nIf no arguments are specified, uCSS will assume there is a '
+                + 'config_ucss.js file in the current directory.');
   };
 
     // Arguments parsing
@@ -68,7 +69,7 @@ function main () {
           },
           duplicates: {
             alias: 'd',
-            description: 'Show duplicates.'
+            description: 'Show duplicates. If only CSS is given, this is enabled by default.'
           }
         }).argv;
 
@@ -92,11 +93,10 @@ function main () {
     silent = false;
   }
 
-    // Either HTML and CSS arguments, or config file, is required
+  // CSS or config file is required
   var config = null;
-  var htmlIsSet = typeof argv.html === 'string';
   var cssIsSet = typeof argv.css === 'string';
-  if (htmlIsSet && cssIsSet) {
+  if (cssIsSet) {
         // Do stuff with html & css
     argv.config = false;
   } else if (typeof argv.config === 'string') {
@@ -113,7 +113,7 @@ function main () {
   var css, pages, whitelist, auth, headers, timeout, logger, resultHandler;
   if (config) {
     css = config.css;
-    pages = config.pages;
+    pages = config.pages || null;
     whitelist = config.whitelist;
     auth = config.auth;
     timeout = config.timeout;
@@ -129,7 +129,12 @@ function main () {
     }
   } else { // No config, using CSS and HTML arguments
     css = argv.css;
-    pages = { 'crawl': argv.html };
+
+    if (argv.html) {
+      pages = { 'crawl': argv.html };
+    } else {
+      pages = null;
+    }
   }
 
     // Set up logger (custom, or default)
@@ -140,8 +145,11 @@ function main () {
   var done;
   if (typeof resultHandler === 'undefined') {
     done = function (result) {
+      var gotHtml = pages ? true : false;
+
       require('../lib/helpers/output').report(
-                result, argv.full, silent, argv.duplicates);
+        result, argv.full, silent, argv.duplicates, gotHtml);
+
       process.exit(0);
     };
   } else {

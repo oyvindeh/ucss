@@ -25,19 +25,29 @@ buster.testCase('uCSS', {
     var expected = {};
 
     lib.analyze(pages, css, null, null, function (result) {
-      assert.equals(result, expected);
+      assert.match(result, expected);
       done();
     });
   },
 
-  'handles empty markup': function (done) {
-    var pages = {};
-    var css = '.foo {}';
+  'finds duplicate CSS rules when no markup given': function (done) {
+    var css = '.foo {} .bar {} .foo {}';
 
-    var expected = {};
+    var expected = {
+      selectors: {
+        '.foo': {
+          'matches_html': 0, 'occurences_css': 2 },
+        '.bar': {
+          'matches_html': 0, 'occurences_css': 1 }
+      },
+      total_used: 0,
+      total_unused: 2,
+      total_ignored: 0,
+      total_duplicates: 1
+    };
 
-    lib.analyze(pages, css, null, null, function (result) {
-      assert.equals(result, expected);
+    lib.analyze(null, css, null, null, function (result) {
+      assert.match(result, expected);
       done();
     });
   },
