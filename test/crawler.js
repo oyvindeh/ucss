@@ -15,166 +15,166 @@ var pageSetOne = {
   '/rules2.css': '.foo {} .bar {} .baz {} .qux {}',
   '/rules3.css': '.foo {} .bar {} .baz {} .qux {} .quux {}',
   '/markup1.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            "    <a href='markup2.html'>markup2</a>",
-            "    <a href='markup1.html'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   "    <a href='markup2.html'>markup2</a>",
+   "    <a href='markup1.html'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/markup2.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            "    <a href='markup1.html'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   "    <a href='markup1.html'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/markup3.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            "    <a href='markup1.html'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   "    <a href='markup1.html'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/external_links.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            "    <a href='http://127.0.0.1:9989/index.html'>index.html</a>",
-            "    <a href='http://127.0.0.1:9988/markup1.html'>markup1</a>",
-            "    <a href='//127.0.0.1:9989/anotherpage.html'>anotherpage.html</a>",
-            "    <a href='//127.0.0.1:9988/markup3.html'>markup3.html</a>",
-            "    <a href='/markup2.html'>markup2</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   "    <a href='http://127.0.0.1:9989/index.html'>index.html</a>",
+   "    <a href='http://127.0.0.1:9988/markup1.html'>markup1</a>",
+   "    <a href='//127.0.0.1:9989/anotherpage.html'>anotherpage.html</a>",
+   "    <a href='//127.0.0.1:9988/markup3.html'>markup3.html</a>",
+   "    <a href='/markup2.html'>markup2</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/path1/relative_paths.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            '  <body>',
-            "    <a href='http://127.0.0.1:9988/path1/relative1.html'>index.html</a>",
-            "    <a href='../relative2.html'>markup1</a>",
-            "    <a href='/relative3.html'>markup1</a>",
-            "    <a href='../path2/relative4.html'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   '  <body>',
+   "    <a href='http://127.0.0.1:9988/path1/relative1.html'>index.html</a>",
+   "    <a href='../relative2.html'>markup1</a>",
+   "    <a href='/relative3.html'>markup1</a>",
+   "    <a href='../path2/relative4.html'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/path1/relative1.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   '  </body>',
+   '</html>'].join(''),
   '/relative2.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   '  </body>',
+   '</html>'].join(''),
   '/relative3.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='baz'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='baz'>",
+   '  </body>',
+   '</html>'].join(''),
   '/path2/relative4.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='qux'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='qux'>",
+   '  </body>',
+   '</html>'].join(''),
   '/not_linked_to.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='quux'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='quux'>",
+   '  </body>',
+   '</html>'].join(''),
   '/deadlink.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            "    <a href='markup1.html'>markup1.html</a>",
-            "    <a href='not_existing.html'>not_existing.html</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   "    <a href='markup1.html'>markup1.html</a>",
+   "    <a href='not_existing.html'>not_existing.html</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/subfolder_links.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo bar'>",
-            "    <a href='no_links.html'>no_links.html</a>",
-            "    <a href='/subfolder/doc1.html'>doc1.html</a>",
-            "    <a href='http://127.0.0.1:9988/subfolder/doc2.html'>doc3.html</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo bar'>",
+   "    <a href='no_links.html'>no_links.html</a>",
+   "    <a href='/subfolder/doc1.html'>doc1.html</a>",
+   "    <a href='http://127.0.0.1:9988/subfolder/doc2.html'>doc3.html</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/subfolder/doc1.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   '  </body>',
+   '</html>'].join(''),
   '/subfolder/doc2.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   '  </body>',
+   '</html>'].join(''),
   '/links_with_parameters.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            "    <a href='no_links.html?foo=1'>markup1</a>",
-            "    <a href='no_links.html?bar=1'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   "    <a href='no_links.html?foo=1'>markup1</a>",
+   "    <a href='no_links.html?bar=1'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/non_http_links.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo'>",
-            "    <a href='mailto:example@example.com'>markup1</a>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo'>",
+   "    <a href='mailto:example@example.com'>markup1</a>",
+   '  </body>',
+   '</html>'].join(''),
   '/no_links.html':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   '  </body>',
+   '</html>'].join(''),
   '/no_links.html?foo=1':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   '  </body>',
+   '</html>'].join(''),
   '/no_links.html?bar=1':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='bar'>",
-            '  </body>',
-            '</html>'].join(''),
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='bar'>",
+   '  </body>',
+   '</html>'].join(''),
   '/has_parameters.html?foo=1':
-            ['<html>',
-            '  <head>',
-            '  </head>',
-            "  <body class='foo bar'>",
-            '  </body>',
-            '</html>'].join('')
+  ['<html>',
+   '  <head>',
+   '  </head>',
+   "  <body class='foo bar'>",
+   '  </body>',
+   '</html>'].join('')
 };
 
 
@@ -184,11 +184,11 @@ var pageSetTwo = {
 };
 
 /* buster.assertions.add("ding", {
-    assert: function (result, expected) {
-        result == expected;
-    },
-    assertMessage: "Expected ${1}, got ${0}."
-});*/
+   assert: function (result, expected) {
+   result == expected;
+   },
+   assertMessage: "Expected ${1}, got ${0}."
+   });*/
 
 
 buster.testCase('uCSS crawler', {
@@ -372,8 +372,8 @@ buster.testCase('uCSS crawler', {
   },
 
   'handles regex excludes': function (done) {
-        // TODO: Review if this test should be rewritten to be similar to the
-        // other exclude tests, for consistency.
+    // TODO: Review if this test should be rewritten to be similar to the
+    // other exclude tests, for consistency.
     var excludePattern = /relative[2-5]/;
     var pages = {
       crawl: ['http://127.0.0.1:9988/path1/relative_paths.html'],
@@ -390,7 +390,7 @@ buster.testCase('uCSS crawler', {
       var matches = visitedPages.filter(function (url) {
         return excludePattern.test(url);
       });
-            // make sure we have no matches
+      // make sure we have no matches
       assert.equals(matches.length, 0);
       done();
     });
@@ -599,7 +599,7 @@ buster.testCase('uCSS crawler', {
   'only loads html, not binaries': function (done) {
     var pages = {
       include: ['http://127.0.0.1:9988/markup1.html',
-                      'http://127.0.0.1:9988/document.pdf']
+                'http://127.0.0.1:9988/document.pdf']
     };
     var css = ['http://127.0.0.1:9988/rules1.css'];
 
@@ -647,7 +647,7 @@ buster.testCase('uCSS crawler', {
     };
 
     lib.analyze(pages, css, null, logger, function (result) {
-            // Should count given html and css page, but not mailto link.
+      // Should count given html and css page, but not mailto link.
       assert.equals(visitedPages.length, 2);
       done();
     });
@@ -656,10 +656,10 @@ buster.testCase('uCSS crawler', {
   '// supports @import': function (done) {
     var pages = {
       include: ['http://127.0.0.1:9988/markup1.html',
-                      'http://127.0.0.1:9988/markup2.html']
+                'http://127.0.0.1:9988/markup2.html']
     };
     var css = ["@import url('http://127.0.0.1:9988/rules1.css');",
-                   "@import url('http://127.0.0.1:9988/rules2.css');"];
+               "@import url('http://127.0.0.1:9988/rules2.css');"];
 
     var expected = {
       selectors: {

@@ -26,7 +26,7 @@ buster.testCase('uCSS (using http)', {
       } else if ('/rules2.css' === req.url) {
         res.end('.baz {}');
       } else if ('/document.pdf' === req.url) {
-                // HTML, but wrong content type
+        // HTML, but wrong content type
         res.setHeader('content-type', 'application/pdf');
         res.end("<html><head></head><body class='bar'></body></html>");
       } else if ('/hasHeader.html' === req.url) {
@@ -37,10 +37,10 @@ buster.testCase('uCSS (using http)', {
         }
       } else if ('/hasHeader.css' === req.url) {
         if (req.headers['accept-language'] === 'nb-no') {
-            res.end("[lang='nb'] {} .foo {}");
-          } else {
-            res.end("[lang='en'] {} .bar {}");
-          }
+          res.end("[lang='nb'] {} .foo {}");
+        } else {
+          res.end("[lang='en'] {} .bar {}");
+        }
       } else {
         res.writeHead(404);
         res.end();
@@ -55,10 +55,10 @@ buster.testCase('uCSS (using http)', {
   'can load and process resources': function (done) {
     var pages = {
       include: ['http://127.0.0.1:9988/markup1.html',
-                      'http://127.0.0.1:9988/markup2.html']
+                'http://127.0.0.1:9988/markup2.html']
     };
     var css = ['http://127.0.0.1:9988/rules1.css',
-                   'http://127.0.0.1:9988/rules2.css'];
+               'http://127.0.0.1:9988/rules2.css'];
 
     var expected = {
       selectors: {
@@ -81,15 +81,15 @@ buster.testCase('uCSS (using http)', {
     });
   },
 
-    // Doesn't do actual login, but checks that occurences are doubled, since
-    // every page is checked twice (once with cookie set, and once without).
+  // Doesn't do actual login, but checks that occurences are doubled, since
+  // every page is checked twice (once with cookie set, and once without).
   "finds unused rules in several files (with 'login')": function (done) {
     var pages = {
       include: ['http://127.0.0.1:9988/markup1.html',
-                      'http://127.0.0.1:9988/markup2.html']
+                'http://127.0.0.1:9988/markup2.html']
     };
     var css = ['http://127.0.0.1:9988/rules1.css',
-                  'http://127.0.0.1:9988/rules2.css'];
+               'http://127.0.0.1:9988/rules2.css'];
 
     var context = {
       auth: {

@@ -39,39 +39,39 @@ function main () {
                 + 'config_ucss.js file in the current directory.');
   };
 
-    // Arguments parsing
+  // Arguments parsing
   var argv = optimist.usage('Check if CSS selectors matches anything in given HTML.\n'
                             + 'Usage: $0 [OPTION]...')
-        .options({
-          help: {
-            description: 'This help text.'
-          },
-          html: {
-            alias: 'h',
-            description: 'HTML to load (local file or URL).'
-          },
-          css: {
-            alias: 'c',
-            description: 'CSS to load (local file or URL).'
-          },
-          config: {
-            alias: 'g',
-            description: 'Config file to use.'
-          },
-          full: {
-            alias: 'f',
-            description:
-                    'Show full report, with details for each rule.'
-          },
-          silent: {
-            alias: 's',
-            description: 'Only output list of rules. Nice if you need to pipe the output somewhere.'
-          },
-          duplicates: {
-            alias: 'd',
-            description: 'Show duplicates. If only CSS is given, this is enabled by default.'
-          }
-        }).argv;
+      .options({
+        help: {
+          description: 'This help text.'
+        },
+        html: {
+          alias: 'h',
+          description: 'HTML to load (local file or URL).'
+        },
+        css: {
+          alias: 'c',
+          description: 'CSS to load (local file or URL).'
+        },
+        config: {
+          alias: 'g',
+          description: 'Config file to use.'
+        },
+        full: {
+          alias: 'f',
+          description:
+          'Show full report, with details for each rule.'
+        },
+        silent: {
+          alias: 's',
+          description: 'Only output list of rules. Nice if you need to pipe the output somewhere.'
+        },
+        duplicates: {
+          alias: 'd',
+          description: 'Show duplicates. If only CSS is given, this is enabled by default.'
+        }
+      }).argv;
 
   if (argv.help) {
     showHelp();
@@ -97,19 +97,19 @@ function main () {
   var config = null;
   var cssIsSet = typeof argv.css === 'string';
   if (cssIsSet) {
-        // Do stuff with html & css
+    // Do stuff with html & css
     argv.config = false;
   } else if (typeof argv.config === 'string') {
-        // Use config file
+    // Use config file
     config = openConfig(argv.config);
   } else if (argv.config === true) {
-        // Search for config.json
+    // Search for config.json
     config = openConfig(process.cwd() + '/config_ucss.js');
   } else {
     showHelp();
   }
 
-    // Read from config, if it was found
+  // Read from config, if it was found
   var css, pages, whitelist, auth, headers, timeout, logger, resultHandler;
   if (config) {
     css = config.css;
@@ -137,7 +137,7 @@ function main () {
     }
   }
 
-    // Set up logger (custom, or default)
+  // Set up logger (custom, or default)
   if (typeof logger === 'undefined' && !silent) {
     logger = require('../lib/helpers/output').logger;
   }
@@ -155,8 +155,6 @@ function main () {
   } else {
     done = resultHandler;
   }
-
-    // Custom output function
 
   var context = {
     whitelist: whitelist,

@@ -107,7 +107,7 @@ buster.testCase('uCSS', {
       include: ["<html><head></head><body class='foo'></body></html>"]
     };
     var css = ['.foo {} .bar{} .foo{} .foo{}',
-                   '.bar{} .baz{}'];
+               '.bar{} .baz{}'];
 
     var expected = {
       selectors: {
@@ -226,7 +226,7 @@ buster.testCase('uCSS', {
   'finds unused rules in several files': function (done) {
     var pages = {
       include: [fs.readFileSync('fixtures/markup.html').toString(),
-                      fs.readFileSync('fixtures/markup2.html').toString()]
+                fs.readFileSync('fixtures/markup2.html').toString()]
     };
     var css = fs.readFileSync('fixtures/rules.css').toString();
 

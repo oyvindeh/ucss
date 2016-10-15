@@ -187,7 +187,7 @@ buster.testCase('CSS Selectors:', {
       include: ["<html><head></head><body class='foo'></body></html>"]
     };
     var css = ['.foo::link{} .bar:lang(nb){} .foo::link{}',
-                  '.foo{} .foo{} .bar{} .baz:after{} input:invalid{}'].join('');
+               '.foo{} .foo{} .bar{} .baz:after{} input:invalid{}'].join('');
 
     var expected = {
       selectors: {
@@ -231,9 +231,9 @@ buster.testCase('CSS @-rules:', {
       include: [fs.readFileSync('fixtures/markup.html').toString()]
     };
     var css = ['.foo { color: red; } ',
-                   '@media all and (min-width: 500px) {',
-                     '.bar { background: blue; }',
-                   ' }'].join('');
+               '@media all and (min-width: 500px) {',
+               '.bar { background: blue; }',
+               ' }'].join('');
 
     var expected = {
       selectors: {
@@ -255,9 +255,9 @@ buster.testCase('CSS @-rules:', {
       include: [fs.readFileSync('fixtures/markup.html').toString()]
     };
     var css = ['.foo { color: red; } ',
-                   '@media all and (min-width: 500px) ',
-                     '{ .bar { background: blue; } ',
-                   '} .qux { float: left; }'].join('');
+               '@media all and (min-width: 500px) ',
+               '{ .bar { background: blue; } ',
+               '} .qux { float: left; }'].join('');
 
 
     var expected = {
@@ -282,10 +282,10 @@ buster.testCase('CSS @-rules:', {
       include: ["<html><head></head><body class='foo'></body></html>"]
     };
     var css = ["@font-face {font-family: 'MyWebFont'; ",
-                   "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
-                   "format('embedded-opentype'), url('webfont.woff') ",
-                   "format('woff'), url('webfont.ttf') format('truetype'), ",
-                   "url('webfont.svg#svgFontName') format('svg');}"].join('');
+               "src: url('webfont.eot'); src: url('webfont.eot?#iefix') ",
+               "format('embedded-opentype'), url('webfont.woff') ",
+               "format('woff'), url('webfont.ttf') format('truetype'), ",
+               "url('webfont.svg#svgFontName') format('svg');}"].join('');
 
     var expected = {
       selectors: {
@@ -305,20 +305,20 @@ buster.testCase('CSS @-rules:', {
       include: ["<html><head></head><body class='foo'></body></html>"]
     };
     var css = ['@-webkit-keyframes progress-bar-stripes{',
-                     'from{background-position:40px 0}',
-                     'to{background-position:0 0}',
-                   '}@-moz-keyframes progress-bar-stripes{',
-                     'from{background-position:40px 0}',
-                     'to{background-position:0 0}',
-                   '}@-ms-keyframes progress-bar-stripes{',
-                     'from{background-position:40px 0}',
-                     'to{background-position:0 0}',
-                   '}@-o-keyframes progress-bar-stripes{',
-                     'from{background-position:0 0}',
-                     'to{background-position:40px 0}',
-                   '}@keyframes progress-bar-stripes{',
-                     'from{background-position:40px 0}',
-                     'to{background-position:0 0}}'].join('');
+               'from{background-position:40px 0}',
+               'to{background-position:0 0}',
+               '}@-moz-keyframes progress-bar-stripes{',
+               'from{background-position:40px 0}',
+               'to{background-position:0 0}',
+               '}@-ms-keyframes progress-bar-stripes{',
+               'from{background-position:40px 0}',
+               'to{background-position:0 0}',
+               '}@-o-keyframes progress-bar-stripes{',
+               'from{background-position:0 0}',
+               'to{background-position:40px 0}',
+               '}@keyframes progress-bar-stripes{',
+               'from{background-position:40px 0}',
+               'to{background-position:0 0}}'].join('');
 
     var expected = {
       selectors: {
@@ -348,11 +348,11 @@ buster.testCase('CSS @-rules:', {
       include: ["<html><head></head><body class='foo baz'></body></html>"]
     };
     var css = ['.foo { background: blue } ',
-                   '@supports (box-shadow: 2px 2px 2px black) { ',
-                   '.bar { box-shadow: 2px 2px 2px black; }} ',
-                   '@-prefix-supports (box-shadow: 2px 2px 2px black) { ',
-                   '.bar { box-shadow: 2px 2px 2px black; }} ',
-                   '.baz { background: red }'].join('');
+               '@supports (box-shadow: 2px 2px 2px black) { ',
+               '.bar { box-shadow: 2px 2px 2px black; }} ',
+               '@-prefix-supports (box-shadow: 2px 2px 2px black) { ',
+               '.bar { box-shadow: 2px 2px 2px black; }} ',
+               '.baz { background: red }'].join('');
 
     var expected = {
       selectors: {
@@ -374,15 +374,15 @@ buster.testCase('CSS @-rules:', {
       include: ["<html><head></head><body class='foo baz'></body></html>"]
     };
     var css = ['.foo { background: blue } ',
-                   '@document url(http://www.example.com/), ',
-                     'url-prefix(http://www.example.com/Style/), ',
-                     "domain(example.com),  regexp('https:.*') { ",
-                       'body { color: red; background: blue; }}',
-                   '@-prefix-document url(http://www.example.com/), ',
-                     'url-prefix(http://www.example.com/Style/), ',
-                     "domain(example.com),  regexp('https:.*') { ",
-                       'body { color: red; background: blue; }}',
-                   '.baz { background: red }'].join('');
+               '@document url(http://www.example.com/), ',
+               'url-prefix(http://www.example.com/Style/), ',
+               "domain(example.com),  regexp('https:.*') { ",
+               'body { color: red; background: blue; }}',
+               '@-prefix-document url(http://www.example.com/), ',
+               'url-prefix(http://www.example.com/Style/), ',
+               "domain(example.com),  regexp('https:.*') { ",
+               'body { color: red; background: blue; }}',
+               '.baz { background: red }'].join('');
 
     var expected = {
       selectors: {

@@ -16,21 +16,21 @@ var pageSet = {
   '/rules1.css': '.logged-in {} .logged-out {} .foo {}',
   '/markup1.html': {
     'logged-out':
-            ['<html>',
-             '  <head>',
-             '  </head>',
-             "  <body class='foo'>",
-             "  <p class='logged-out'>You are logged in</p>",
-             '  </body>',
-             '</html>'].join(''),
+    ['<html>',
+     '  <head>',
+     '  </head>',
+     "  <body class='foo'>",
+     "  <p class='logged-out'>You are logged in</p>",
+     '  </body>',
+     '</html>'].join(''),
     'logged-in':
-            ['<html>',
-             '  <head>',
-             '  </head>',
-             "  <body class='foo'>",
-             "    <p class='logged-in'>You are not logged in</p>",
-             '  </body>',
-             '</html>'].join('')
+    ['<html>',
+     '  <head>',
+     '  </head>',
+     "  <body class='foo'>",
+     "    <p class='logged-in'>You are not logged in</p>",
+     '  </body>',
+     '</html>'].join('')
   }
 };
 
