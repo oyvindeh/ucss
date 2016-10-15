@@ -62,22 +62,6 @@ var pageSetOne = {
     "    <a href='../path2/relative4.html'>markup1</a>",
     '  </body>',
     '</html>'].join(''),
-  '/fragments.html': [
-    '<html>',
-    '  <head>',
-    '  </head>',
-    '  <body>',
-    "    <a href='/has_no_links.html#frag1'>link with fragment</a>",
-    "    <a href='/has_no_links.html#frag2'>link with another fragment</a>",
-    '  </body>',
-    '</html>'].join(''),
-  '/has_no_links.html': [
-    '<html>',
-    '  <head>',
-    '  </head>',
-    "  <body class='foo'>",
-    '  </body>',
-    '</html>'].join(''),
   '/path1/relative1.html': [
     '<html>',
     '  <head>',
@@ -104,6 +88,22 @@ var pageSetOne = {
     '  <head>',
     '  </head>',
     "  <body class='qux'>",
+    '  </body>',
+    '</html>'].join(''),
+  '/fragments.html': [
+    '<html>',
+    '  <head>',
+    '  </head>',
+    '  <body>',
+    "    <a href='/has_no_links.html#frag1'>link with fragment</a>",
+    "    <a href='/has_no_links.html#frag2'>link with another fragment</a>",
+    '  </body>',
+    '</html>'].join(''),
+  '/has_no_links.html': [
+    '<html>',
+    '  <head>',
+    '  </head>',
+    "  <body class='foo'>",
     '  </body>',
     '</html>'].join(''),
   '/not_linked_to.html': [
@@ -383,6 +383,36 @@ buster.testCase('uCSS crawler', {
 
     lib.analyze(pages, css, null, null, function (result) {
       assert.match(result, expected);
+      done();
+    });
+  },
+
+  'handles regex excludes in paths': function (done) {
+    // TODO: Review if this test should be rewritten to be similar to the
+    // other exclude tests, for consistency.
+    var excludePattern = /http:\/\/127\.0\.0\.1:9988\/.+\/relative.*/;
+    var pages = {
+      crawl: ['http://127.0.0.1:9988/path1/relative_paths.html'],
+      exclude: [excludePattern]
+    };
+    var css = ['http://127.0.0.1:9988/rules2.css'];
+
+    // .foo {} .bar {} .baz {} .qux {}
+    var actualVisitedPages = [];
+    var logger = function (result, requestedPage) {
+      actualVisitedPages.push(requestedPage);
+    };
+
+    var shouldBeVisitedPages = [
+      'http://127.0.0.1:9988/rules2.css',
+      'http://127.0.0.1:9988/path1/relative_paths.html',
+      'http://127.0.0.1:9988/relative2.html',
+      'http://127.0.0.1:9988/relative3.html'
+    ];
+
+    lib.analyze(pages, css, null, logger, function (result) {
+      // make sure we have no matches
+      assert.equals(actualVisitedPages, shouldBeVisitedPages);
       done();
     });
   },
