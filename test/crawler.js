@@ -499,7 +499,7 @@ buster.testCase('uCSS crawler', {
     });
   },
 
-  'handles exclude of subfolder': function (done) {
+  'handles exclude of subfolder using wildcard': function (done) {
     var pages = {
       crawl: ['http://127.0.0.1:9988/subfolder_links.html'],
       exclude: ['http://127.0.0.1:9988/subfolder/*']
