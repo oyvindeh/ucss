@@ -1,10 +1,24 @@
+## 2016.10.16, Version 0.5.0
+
+*   Features:
+    - Make HTML optional, which allows finding duplicates in CSS (#33).
+
+*   Bugs:
+    - Strip URL fragments to avoid multiple visits to the same URL (#46).
+    - Improve RegEx matching in excluded URLs.
+
+*   Other:
+    - Update dependencies.
+    - Add RegEx example in example config.
+    - Various refactorings.
+
 ## 2016.05.01, Version 0.4.8
 
 *   Features:
     - Support for regular expressions in list of pages to exclude.
 
 *   Other:
-    - Update dependencies
+    - Update dependencies.
 
 ## 2015.28.08, Version 0.4.7-beta
 
